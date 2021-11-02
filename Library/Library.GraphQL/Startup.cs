@@ -37,18 +37,17 @@ namespace Library.GraphQL {
             services
                 .AddGraphQLServer()
                 .AddQueryType<Query>();
-
-            services.AddCors(option =>
-            {
-                option.AddPolicy("allowedOrigin",
-                    builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
+
+                app.UsePlayground(new PlaygroundOptions {
+                    QueryPath = "/api",
+                    Path = "/playground"
+                });
             }
 
             app.UseRouting()
