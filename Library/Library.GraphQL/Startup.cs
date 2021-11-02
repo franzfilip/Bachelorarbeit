@@ -29,17 +29,10 @@ namespace Library.GraphQL {
 
             services.AddControllers();
 
-            //services.AddDbContextPool<LibraryContext>(item => item.UseSqlServer(Configuration.GetConnectionString("LibraryDB")));
             services.AddPooledDbContextFactory<LibraryContext>(item =>
                 item.UseSqlServer(Configuration.GetConnectionString("LibraryDB")));
 
             services.AddScoped<IBookService, BookService>();
-            //services.AddScoped<Query>();
-
-            //services.AddGraphQL(c => SchemaBuilder.New().AddServices(c).AddType<BookType>()
-            //    .AddQueryType<Query>()
-            //    .AddMutationType<Mutation>()
-            //    .Create());
 
             services
                 .AddGraphQLServer()
@@ -50,26 +43,14 @@ namespace Library.GraphQL {
                 option.AddPolicy("allowedOrigin",
                     builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
-
-            //services.AddSwaggerGen(c => {
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Library.GraphQL", Version = "v1" });
-            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Library.GraphQL v1"));
-                //app.UsePlayground(new PlaygroundOptions
-                //{
-                //    QueryPath = "/api",
-                //    Path = "/playground"
-                //});
             }
 
-            //app.UseGraphQL("/api");
             app.UseRouting()
                 .UseEndpoints(endpoints =>
                 {
@@ -77,10 +58,6 @@ namespace Library.GraphQL {
                 });
 
             app.UseAuthorization();
-
-            //app.UseEndpoints(endpoints => {
-            //    endpoints.MapControllers();
-            //});
         }
     }
 }

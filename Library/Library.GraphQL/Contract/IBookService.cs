@@ -10,6 +10,6 @@ namespace Library.GraphQL.Contract {
         public Task<IEnumerable<Book>> GetAll();
         public Task<Book> Add(Book book);
         public Task<Book> Update(Book book);
-        public Task Remove(int íd);
+        public Task Remove(int id);
     }
 }
