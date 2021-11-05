@@ -19,12 +19,12 @@ namespace Library.GraphQL.Services {
 
         public async Task<IEnumerable<Book>> GetAll()
         {
-            return await _context.Books.ToListAsync();
+            return await _context.Books.Include(b => b.Authors).ToListAsync();
         }
 
         public async Task<Book> Add(Book book)
         {
-             await _context.Books.AddAsync(book);
+            await _context.Books.AddAsync(book);
             await _context.SaveChangesAsync();
             return book;
         }

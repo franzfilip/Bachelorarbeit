@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Library.Datamodel;
 using Library.GraphQL.Contract;
 
-namespace Library.GraphQL.Querys {
-    public class Query
+namespace Library.GraphQL.QueryTypes {
+    public class BookQuery
     {
         private readonly IBookService bookService;
 
-        public Query(IBookService bs)
+        public BookQuery(IBookService bs)
         {
             bookService = bs;
         }

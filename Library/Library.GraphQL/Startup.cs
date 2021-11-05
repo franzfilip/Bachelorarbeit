@@ -12,7 +12,7 @@ using Library.EF;
 using Library.GraphQL.Contract;
 using Library.GraphQL.GraphQLTypes;
 using Library.GraphQL.Mutations;
-using Library.GraphQL.Querys;
+using Library.GraphQL.QueryTypes;
 using Library.GraphQL.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,10 +33,12 @@ namespace Library.GraphQL {
                 item.UseSqlServer(Configuration.GetConnectionString("LibraryDB")));
 
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IAuthorService, AuthorService>();
 
             services
                 .AddGraphQLServer()
-                .AddQueryType<Query>();
+                .AddQueryType<BookQuery>()
+                .AddType<AuthorQuery>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
