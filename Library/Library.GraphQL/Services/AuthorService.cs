@@ -6,6 +6,7 @@ using Library.Datamodel;
 using Library.EF;
 using Library.GraphQL.Contract;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Library.GraphQL.Services {
     public class AuthorService: IAuthorService
@@ -17,42 +18,37 @@ namespace Library.GraphQL.Services {
             _context = dbContextFactory.CreateDbContext();
         }
 
-
-        public async Task<IEnumerable<Author>> GetAll()
-        {
-            return await _context.Authors.ToListAsync();
+        public async Task<IEnumerable<Author>> GetAllAsync() {
+            return await QueryWithIncludes().ToListAsync();
         }
 
-        public async Task<Author> Add(Author author)
-        {
-            await _context.AddAsync(author);
+        public async Task<Author> GetByIdAsync(int id) {
+            return await QueryWithIncludes().FirstAsync(b => b.Id == id);
+        }
+
+        public async Task<Author> AddAsync(Author author) {
+            await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
             return author;
         }
 
-        public async Task<Author> Update(Author author)
-        {
+        public async Task<Author> UpdateAsync(Author author) {
             _context.Entry(author).State = EntityState.Modified;
-
-            try {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException) {
-                if (!await EntityExistsAsync(author.Id)) {
-                    return null;
-                }
-                throw;
-            }
+            await _context.SaveChangesAsync();
             return author;
         }
 
-        public Task Remove(int id)
-        {
-            throw new NotImplementedException();
+        public async Task RemoveAsync(int id) {
+            var author = await _context.Authors.FindAsync(id);
+            _context.Entry(author).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
 
-        private async Task<bool> EntityExistsAsync(long id) {
+        public async Task<bool> EntityExistsAsync(int id) {
             return await _context.Authors.AnyAsync(l => l.Id == id);
         }
+
+        private IIncludableQueryable<Author, List<Book>> QueryWithIncludes()
+            => _context.Authors.Include(b => b.Books) as IIncludableQueryable<Author, List<Book>>;
     }
 }
