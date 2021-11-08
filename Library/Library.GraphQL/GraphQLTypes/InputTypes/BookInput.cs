@@ -19,5 +19,5 @@ namespace Library.GraphQL.GraphQLTypes.InputTypes {
     //        base.Configure(descriptor);
     //    }
     //}
-    public record BookCreateType(String Title, ICollection<int> Authors);
+    public record BookCreate(string Title, ICollection<int> Authors);
 }

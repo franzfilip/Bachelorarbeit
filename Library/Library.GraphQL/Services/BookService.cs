@@ -28,18 +28,32 @@ namespace Library.GraphQL.Services {
             return await QueryWithIncludes().FirstAsync(b => b.Id == id);
         }
 
-        public async Task<Book> AddAsync(Book author)
+        public async Task<Book> AddAsync(Book book)
         {
-            await _context.Books.AddAsync(author);
+            await _context.Books.AddAsync(book);
             await _context.SaveChangesAsync();
-            return author;
+            return book;
         }
 
-        public async Task<Book> UpdateAsync(Book author)
+        public async Task<Book> AddWithAuthorsAsync(string title, ICollection<int> authorsToAdd)
         {
-            _context.Entry(author).State = EntityState.Modified;
+            var authors = await _context.Authors.Where(a => authorsToAdd.Any(id => id == a.Id)).ToListAsync();
+            Book book = new Book
+            {
+                Title = title,
+                Authors = authors
+            };
+            await _context.Books.AddAsync(book);
             await _context.SaveChangesAsync();
-            return author;
+            return book;
+        }
+
+        public async Task<Book> UpdateAsync(Book book)
+        {
+            //TODO updating with author FK does not work, so it will probably fail in Add() too
+            _context.Entry(book).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return book;
         }
 
         public async Task RemoveAsync(int id)

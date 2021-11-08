@@ -19,20 +19,23 @@ namespace Library.GraphQL.MutationTypes {
             _bookService = bookService;
         }
 
-        public async Task<Book> CreateBook(Book input)
+        public async Task<Book> CreateBook(BookCreate input)
         {
-            //var book2 = new Book()
-            //{
-            //    Title = book.
-            //}
-            //await _bookService.AddAsync(book);
-            return new Book();
+            if (input.Authors is null)
+            {
+                return await _bookService.AddAsync(new Book
+                {
+                    Title = input.Title
+                });
+            }
+
+            return await _bookService.AddWithAuthorsAsync(input.Title, input.Authors);
         }
 
-        public async Task<Book> Update(BookCreateType input) {
-            //await _bookService.UpdateAsync(book);
-            return new Book();
+        public async Task<Book> UpdateBook(Book input)
+        {
+            return await _bookService.UpdateAsync(input);
         }
-        //public async Task Delete(int id) => await _bookService.RemoveAsync(id);
+        public async Task Delete(int id) => await _bookService.RemoveAsync(id);
     }
 }
