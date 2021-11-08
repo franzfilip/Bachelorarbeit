@@ -26,10 +26,10 @@ namespace Library.GraphQL.Services {
             return await QueryWithIncludes().FirstAsync(b => b.Id == id);
         }
 
-        public async Task<Author> AddAsync(Author book) {
-            await _context.Authors.AddAsync(book);
+        public async Task<Author> AddAsync(Author author) {
+            await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
-            return book;
+            return author;
         }
 
         public async Task<Author> UpdateAsync(Author author) {
