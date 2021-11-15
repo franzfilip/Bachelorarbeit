@@ -36,7 +36,7 @@ APIs sind wie User Interfaces - nur mit anderen Nutzern im Fokus. David Berlind 
 
 APIs sind also wie UIs für die Interaktion mit Benutzern gedacht.
 Der wesentliche Unterschied zwischen UI-Schnittstellen und einer API liegt aber an der Art der Nutzer die auf das Interface zugreifen.
-Bei UIs spricht man von einem \textit{human-readable-interface}, das bedeutet das ein Menschlicher User mit dem System interagiert.
+Bei UIs spricht man von einem \textit{human-readable-interface}, das bedeutet das ein menschlicher User mit dem System interagiert.
 Bei einer API spricht man von einem \textit{machine-readable-interface}, also von einer Schnittstelle die für die Kommunikation zwischen Maschinen gedacht ist.
 
 \subsection{Abstraktes Beispiel API}
@@ -54,7 +54,7 @@ Damit dieser Zugriff der unterschiedlichen Systeme (hier Menschen) auf die Post 
  \item Das zu versendende Objekt (Brief, Paket, etc.) muss an einem Sammelposten der Post abgegeben werden
  \item Das Objekt ist dabei mit einer Empfängeradresse und einer Absenderadresse zu versehen, zusätzlich muss eine Briefmarke gekauft werden
 \end{itemize}
-Das stellt die Art des Services dar und legt somit fest was über die API versendet wird. Zudem wird die Repräsentation des der API definiert, also in welcher Form der Service im System des Servicenutzers integiert wird.
+Das stellt die Art des Services dar und legt somit fest was über die API versendet wird. Zudem wird die Repräsentation der API definiert, also in welcher Form der Service im System des Servicenutzers integiert wird.
 Der Briefkasten / Sammelposten ist dabei die eigentliche Schnittstelle - also die API. Die Zustellung ist dabei Implementierungsdetail, der Weg vom Sammelposten der Post über die Verteilerzentren und mit dem Briefträger zum Empfänger.
 Dieses Implementierungsdetail kann beliebig angepasst werden, die Zustellung kann beispielsweise über den Land- oder Luftweg erfolgen. Der Benutzer welcher den Brief versendet hat ist davon nicht betroffen.
 
@@ -64,7 +64,7 @@ Bei REST werden Daten als Ressourcen gesehen und in einem spezifischen Format ü
 \newline
 
 
-Deswegen ist JSON besser als XML für den Datenaustausch mittels einer API geeignet:
+Deswegen ist JSON besser als XML für den Austausch einfacher Daten mittels einer API geeignet:
 \begin{itemize}
     \item JSON wurde speziell für den leichtgewichtigen Datenaustausch konzipiert.
     \item JSON ist schneller als XML
@@ -72,25 +72,131 @@ Deswegen ist JSON besser als XML für den Datenaustausch mittels einer API geeig
 \end{itemize}
 
 Zum Vergleich hier ein Buch welches in JSON und XML repräsentiert wird:
-% \begin{JavaScript}
-% {
-%     "isbn": "978-3551555557",
-%     "title": "Harry Potter und der Orden des Phönix",
-%     "releaseDate": "2003-11-15T00:00:00.000Z"
-% }
-% \end{JavaScript}
+\begin{JsCode}
+{
+    "isbn": "978-3551555557",
+    "title": "Harry Potter und der Orden des Phönix",
+    "releaseDate": "2003-11-15T00:00:00.000Z"
+}
+\end{JsCode}
 
-\section{Erklärung GraphQL}
+\begin{XmlCode}
+<book>
+    <isbn name="isbn" type="string">978-3551555557</isbn>
+    <title name="title" type="string">Harry Potter und der Orden des Phönix</title>
+    <releaseDate name="isbn" type="dateTime">2003-11-15T00:00:00.000Z</releaseDate>
+</book>
+\end{XmlCode}
 
-placeholder
-\pagebreak
-\section{Unterschiede zwischen GraphQL und REST}
+Wie in den obigen Code Beispielen ersichtlich produziert JSON (134 Bytes) wesentlich weniger Daten als XML(238 Bytes).
+Man kann zusammengefasst also sagen, wenn es um die reine Datenübertragunsrate geht, ist JSON deutlich leichtgewichtiger und damit auch performanter.
 
-placeholder
-\pagebreak
+\subsection{REST-Bedingungen}
+Die Begriffe Web und HTTP müssen von REST unterschieden werden da REST lediglich einen Architekturstil beschreibt. Das Web hingegen besteht aus mehreren Architekturstilen und nutzt als Standargkommunikationsprotokoll HTTP. HTTP ist als
+REST-konforme Implementierung zu erachten.
 
-placeholder
-\pagebreak
+\begin{enumerate}
+    \item \textbf{Einheitliche Schnittstelle: }
+    Jeder REST-Client der auf den Server zugreift muss auf dieselbe Art und Weise zugreifen.
+    Dabei ist es egal ob der Client ein Browser, eine Desktop-Applikation oder eine mobile Anwendung ist.
+    Dabei kommt hier HTTP mit der Verwendung einer URI - Unique Resource Identifier, welche dann eine URL ist wie zum Beispiel: \textit{https://api.twitter.com} ist zu tragen.
+    Desweiteren müssen Anfragen autark sein - der Client überträgt alle Informationen, die der Server für die Abarbeitung der Anfrage benötigt, mit.
+    Zudem wird die Implementierung von dem Service der sie zur Verfügung stellt entkoppelt, man kann also die Implementierung beliebig weiterentwickeln oder austauschen.
+    \item \textbf{Client-Server Architektur: }
+    Durch das Client-Server Prinzip werden verteilte Systeme beschrieben, die mittels netzwerkbasierter Kommunikation miteinander kommunizieren.
+    In der REST-Architektur sind der Client und der Server klar voneinander abgetrennt.
+    Damit ist es möglich beide Komponenten unabhängig voneinander weiterzuentwickeln, ohne dabei Einfluss auf die jeweils andere Kompnente zu haben
+    \item \textbf{Zustandslosigkeit (Stateless): }
+    Zustandlosigkeit bedeutet, dass der Client alle Informationen die der Server benötigt mitsendet.
+    Das resultiert darin, dass der Server keine Overhad Daten des Clients speichern muss um zukünfige Anfragen abarbeiten zu können.
+    Dadurch ist es auch möglich eine Lastverteilung (also mehrere Serverinstanzen nebeneinander laufen zu lassen) zu realisieren. Dies wiederum erleichtert die Skalierbarkeit des Servers.
+    \item \textbf{Schichtsystem: }
+    Geschichtete Systeme sind Systeme die aus mehreren hierarchischen angeordneten Schichten bestehen. Ein geschichtetes System wäre in .NET beispielsweise so umzusetzen:
+    \begin{itemize}
+        \item Controller (Leitet die Anfrage an die Logik weiter)
+        \item Business-Logik (Setzt die geforderte Aktion um)
+        \item Datenbankzugriff
+    \end{itemize}
+    Durch dieses Schichtsystem werden die Abhängikeiten im System reduziert und die Austauschbarkeit der einzelnen Komponenten erleichtert.
+    \item \textbf{Zwischenspeicher (Cache): }
+    Um wiederkehrende Anfragen performanter abwickeln zu können, kann dem Server mithilfe des \textit{Cache-Control-Headers} mitgeteilt werden, ob die angefragten Daten zwischengespeichert werden sollen.
+    Zusätzlich muss definiert werden wielange dieser Cache gültig ist. Nach Ablauf der Gültigkeit werden die Daten erneut vom Server geladen.
+    Durch das Zwischenspeichern von Daten wird die Performanz des Servers gesteigert. Ein Nachteil besteht dahingehend, dass dem Client womöglich nicht immer die aktuellsten Daten zur Verfügung stehen.
+    \item \textbf{Code auf Anfrage: }
+    Hierbei handelt es sich um eine optionale Bedingung, die Code-Snippets für die lokale Ausführung an den Client senden kann. Beispielsweise als JavaScript-Code innerhalb einer HTML-Antwort.
+\end{enumerate}
+
+\subsection{Kommunikation mit dem Server}
+Die Kommunikation zwischen Server und Client wird bei einer RESTful-API mittels HTTP und dessen Methoden realisert.
+Um CRUD (Create, Read, Update, Delete) Operationen auf Ressourcen abzusetzen werden folgende Methoden verwendet:
+\begin{enumerate}
+    \item \textbf{GET: }Wird als lesender Zugriff auf eine Ressource verwendet.
+    \item \textbf{PUT: }Wird verwendet um eine Ressource zu aktualisieren.
+    \item \textbf{POST: }Wird verwendet um eine neue Ressource zu erstellen.
+    \item \textbf{DELETE: }Wird für das Löschen einer Ressource verwendet.
+\end{enumerate}
+
+Zusätzlich wird dem Client mittels HTTP-Statuscodes mitgeteilt ob die Anfrage erfolgreich war oder fehlgeschlagen ist. Beispielsweise werden hier Statuscodes angeführt die an den Client zurückgesendet werden:
+\begin{itemize}
+    \item \textbf{Erfolgreich:} 200
+    \item \textbf{Anfrage fehlerhaft:} 400
+    \item \textbf{Server interner Fehler:} 500
+\end{itemize}
+
+\section{GraphQL}
+2015 veröffentlichte Facebook unter der MIT-Lizenz GraphQL. GraphQL ist die Spezifikation einer plattformunabhängigen Query-Sprache. GraphQL dient als Übersetzer der Kommunikation zwischen Client und Server.
+Die Kommunikation erfolgt wie bei REST über ein Request-Response-Schema.
+Der wesentliche Unterschied zu REST-APIs besteht darin, dass GraphQL genau einen Endpunkt, anstatt für jede Ressource einen eigenen Endpunkt, zur Verfügung zu stellt.
+Desweiteren werden nur POST-Anfragen von GraphQL akzeptiert, diese können lesend (Query) oder schreibend (Mutation) sein.
+
+\subsection{Entwurfsprinzipien}
+GraphQL definiert keine Implementierungsdetails sondern diese Entwurfsprinzipien:
+\begin{enumerate}
+    \item \textbf{Produktzentriert:}
+    Die Anforderungen der Clients (Darstellung der Daten) stehen im Mittelpunkt. GraphQL bietet mit der Abfragesprache dem Client die Möglichkeit genau die Daten abzufragen, die er tatsächlich benötigt. Die Hierarchie der
+    Abfrage wird dabei durch eine Menge ineinander geschachtelter Felder abgebildet.
+    \item \textbf{Hierarchisch:}
+    Jede Anfrage ist wie die Daten die er anfordert geformt.
+    Das bedeutet, dass der Client die Daten genau in dem Format erhält wie in der Anfrage spezifiziert. Das ist ein intuitiver Weg für den Client um seine Datenanforderungen zu definieren.
+    \item \textbf{Strenge Typisierung:}
+    Jeder GraphQL-Service definiert ein für das System spezifisches Typ-System. Anfragen werden im Kontext dieses Typ-Systems ausgeführt.
+    Mit Tools wie zum Beispiel GraphiQL kann man vor Ausführung der Anfrage sicherstellen, dass sie syntaktisch und semantisch korrekt sind.
+    \item \textbf{Benutzerdefinierte Antwort:}
+    Durch das Typ-System veröffentlicht der GraphQLService die Möglichkeiten, die ein Client hat um auf die dahinterliegenden Daten zuzugreifen.
+    Der Client ist dafür verantwortlich genau zu spezifizieren wie er diese Möglichkeiten nutzen will.
+    Bei einer normalen REST-API liefert ein Endpunkt jene Daten einer Ressource zurück welche vom Server definiert wurden.
+    Bei GraphQL werden hingegen genau jene Daten einer Ressource zurückgegeben, die vom Client in seiner Anfrage definiert wurden.
+    \item \textbf{Introspektion:}
+    Das Typ-System eines GraphQL-Services kann direkt mit der GraphQL-Abfragesprache abgefragt werden. Diese Abfragen werden für die Erstellung von Tools für GraphQL benötigt.
+\end{enumerate}
+
+\section{GraphQL vs. REST}
+\subsection{Endpunkte}
+Eine REST-API bietet für jede Ressource verschiedene Endpunkte an um CRUD Operationen für die jeweilige Ressource auszuführen. GraphQL hingegen bietet nur einen
+Endpunkt. An diesem kann der Client eine Abfrage mit einer Query oder einer Mutation senden um auf die jeweilige Ressource zuzugreifen.
+
+\subsection{Over-fetching und Under-fetching}
+Als Over-fetching wird das Laden von zuvielen oder nicht benötigten Daten bezeichnet.
+Under-fetching bedeutet, dass man mehr Daten benötigt als der Server dem Client zurückgibt. Dieses Problem tritt bei REST-APIs auf die viele verschiedene Clients mit Daten versorgen müssen (beispielsweise eine Desktop-Applikation, eine Mobile-Anwendung
+und ein Web-Client). Grundsätzlich wollen alle drei Clients diesselbe Ressourcen abfragen, mit dem Unterschied, dass die Mobile Anwendung beispielsweise nicht alle Daten
+benötigt. Die Desktop-Applikation möchte aber alle Daten einer Ressource bekommen
+um diese darzustellen. Eine Lösung dafür wäre beispielsweise einen Endpunkt für jeden
+Client zu definieren um die für ihn benötigen Daten zur Verfügung zu stellen. Dies resultiert aber in mehr Programmieraufwand und damit auch einer höheren Komplexität
+der Anwendung.
+\newline
+
+Dieses Problem kann bei GraphQL nicht auftreten da der Client in seiner Anfrage genau die Daten definiert die er braucht.
+
+\subsection{Was ist für welches Szenario besser geeignet?}
+Möchte man ein System entwickeln auf welches verschiedene Clients (die verschiedene Anforderungen an die Ressourcen haben) zugreifen, dann ist GraphQL die bessere
+Wahl. Würde man dieses System mit einer REST-API umsetzen, müsste man entweder
+Probleme mit Under-fetching und Over-fetching in Kauf nehmen, oder für jeden Client eine eigene Route definieren. GraphQL ist in diesem Szenario deshalb als besser zu
+erachten, weil man sich mit der einmaligen Implementierung des Schemas zusätzliche
+Routendefinitionen erspart. Dadurch hat man automatisch weniger Entwicklungsaufwand und generell weniger Komplexität.
+\newline
+
+
+Verfolgt man aber das Ziel ein System zu entwickeln, welches keine komplexen Daten enthält und beispielsweise nur mit einem Web-Client kommuniziert, ist eine REST-API die bessere Wahl.
 
 \chapter{GraphQL}
 
