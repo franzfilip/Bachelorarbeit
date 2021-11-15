@@ -21,7 +21,7 @@ placeholder
 \pagebreak
 
 \chapter{Grundlagen}
-\section{Erklärung API}
+\section{API}
 
 Der Begriff API steht für Application Programming Interface (auf Deutsch Anwendungs-Programmier-Schnittstelle).
 Die Grundlagen heutiger APIs wurden 1952 von David Wheeler, einem Informatikprofessor an der Universität Cambrigde, in einem Leitfaden verfasst.
@@ -58,7 +58,7 @@ Das stellt die Art des Services dar und legt somit fest was über die API versen
 Der Briefkasten / Sammelposten ist dabei die eigentliche Schnittstelle - also die API. Die Zustellung ist dabei Implementierungsdetail, der Weg vom Sammelposten der Post über die Verteilerzentren und mit dem Briefträger zum Empfänger.
 Dieses Implementierungsdetail kann beliebig angepasst werden, die Zustellung kann beispielsweise über den Land- oder Luftweg erfolgen. Der Benutzer welcher den Brief versendet hat ist davon nicht betroffen.
 
-\section{Erklärung REST-API}
+\section{REST-API}
 REST steht für Representational State Transfer \cite{wheeler1952use}. REST ist dabei aber keine konkrete Technologie oder ein Standard. REST beschreibt einen Architekturstil welcher im Jahr 2000 von Roy Fielding konzipiert wurde.
 Bei REST werden Daten als Ressourcen gesehen und in einem spezifischen Format übertragen. Ursprünglich wurde von Fielding dabei XML verwendet. XML wird aber in den letzten Jahren verstärkt durch JSON abgelöst.
 \newline
@@ -89,17 +89,21 @@ Zum Vergleich hier ein Buch welches in JSON und XML repräsentiert wird:
 \end{XmlCode}
 
 Wie in den obigen Code Beispielen ersichtlich produziert JSON (134 Bytes) wesentlich weniger Daten als XML(238 Bytes).
-Man kann zusammengefasst also sagen, wenn es um die reine Datenübertragunsrate geht, ist JSON deutlich leichtgewichtiger und damit auch performanter.
+Man kann zusammengefasst also sagen, wenn es rein um die Datenübertragung geht, ist JSON deutlich leichtgewichtiger und damit auch performanter.
 
 \subsection{REST-Bedingungen}
-Die Begriffe Web und HTTP müssen von REST unterschieden werden da REST lediglich einen Architekturstil beschreibt. Das Web hingegen besteht aus mehreren Architekturstilen und nutzt als Standargkommunikationsprotokoll HTTP. HTTP ist als
+Die Begriffe Web und HTTP müssen von REST unterschieden werden, da REST lediglich einen Architekturstil beschreibt. Das Web hingegen besteht aus mehreren Architekturstilen und nutzt als Standargkommunikationsprotokoll HTTP. HTTP ist als
 REST-konforme Implementierung zu erachten.
+\newline
+
+
+REST hat folgende architektonische Bedingungen:
 
 \begin{enumerate}
     \item \textbf{Einheitliche Schnittstelle: }
     Jeder REST-Client der auf den Server zugreift muss auf dieselbe Art und Weise zugreifen.
     Dabei ist es egal ob der Client ein Browser, eine Desktop-Applikation oder eine mobile Anwendung ist.
-    Dabei kommt hier HTTP mit der Verwendung einer URI - Unique Resource Identifier, welche dann eine URL ist wie zum Beispiel: \textit{https://api.twitter.com} ist zu tragen.
+    Dabei kommt hier HTTP mit der Verwendung einer URI - \textit{Unique Resource Identifier}, welche dann eine URL ist wie zum Beispiel: \textit{https://api.twitter.com}, zu tragen.
     Desweiteren müssen Anfragen autark sein - der Client überträgt alle Informationen, die der Server für die Abarbeitung der Anfrage benötigt, mit.
     Zudem wird die Implementierung von dem Service der sie zur Verfügung stellt entkoppelt, man kann also die Implementierung beliebig weiterentwickeln oder austauschen.
     \item \textbf{Client-Server Architektur: }
@@ -144,6 +148,10 @@ Zusätzlich wird dem Client mittels HTTP-Statuscodes mitgeteilt ob die Anfrage e
 \end{itemize}
 
 \section{GraphQL}
+Die Informationen für dieses und das folgende Kapitel wurden aus diesen Quellen bezogen \cite{kress2020graphql, graphqlOnline, dgraphOnline, rakutenGraphQLVsRest}
+\newline
+
+
 2015 veröffentlichte Facebook unter der MIT-Lizenz GraphQL. GraphQL ist die Spezifikation einer plattformunabhängigen Query-Sprache. GraphQL dient als Übersetzer der Kommunikation zwischen Client und Server.
 Die Kommunikation erfolgt wie bei REST über ein Request-Response-Schema.
 Der wesentliche Unterschied zu REST-APIs besteht darin, dass GraphQL genau einen Endpunkt, anstatt für jede Ressource einen eigenen Endpunkt, zur Verfügung zu stellt.
