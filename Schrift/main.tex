@@ -1,0 +1,226 @@
+\documentclass[bachelor, german ]{hgbthesis}
+%\usepackage{natbib}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{literatur.bib}
+% \usepackage[a4paper,left=25mm,right=25mm,top=25mm,bottom=25mm]{geometry}
+\usepackage{hgblistings}
+\usepackage{color}
+
+\begin{document}
+\tableofcontents
+\chapter{Einleitung}
+
+\section{Motivation}
+placeholder
+\pagebreak
+
+\section{Zielsetzung}
+placeholder
+\pagebreak
+
+\chapter{Grundlagen}
+\section{Erklärung API}
+
+Der Begriff API steht für Application Programming Interface (auf Deutsch Anwendungs-Programmier-Schnittstelle).
+Die Grundlagen heutiger APIs wurden 1952 von David Wheeler, einem Informatikprofessor an der Universität Cambrigde, in einem Leitfaden verfasst.
+Dieser Leitfaden beschreibt das Extrahieren einer Sub-Routinen-Bibliothek mit einheitlichem dokumentierten Zugriff. \cite{wheeler1952use}
+Ira Cotton und Frank Greatorex erwähnten den Begriff erstmalig auf der Fall Joint Computer Con.\cite{cotton1968data}
+Dabei erweiterten sie den Leitfaden von David Wheeler um einen wesentlichen Punkt: Der konzeptionellen Trennung der Schnittstelle und Implementierung der Sub-Routinen-Bibliothek.
+Somit kann die Implementierung auf die die Schnittstelle zugreift ohne Einfluss auf die Benutzer ausgetauscht werden.\cite{kress2020graphql}
+
+\begin{quote}
+APIs sind wie User Interfaces - nur mit anderen Nutzern im Fokus. David Berlind \cite{berlind2017apis}
+\end{quote}
+
+APIs sind also wie UIs für die Interaktion mit Benutzern gedacht.
+Der wesentliche Unterschied zwischen UI-Schnittstellen und einer API liegt aber an der Art der Nutzer die auf das Interface zugreifen.
+Bei UIs spricht man von einem \textit{human-readable-interface}, das bedeutet das ein Menschlicher User mit dem System interagiert.
+Bei einer API spricht man von einem \textit{machine-readable-interface}, also von einer Schnittstelle die für die Kommunikation zwischen Maschinen gedacht ist.
+
+\subsection{Abstraktes Beispiel API}
+Ein abstraktes Beispiel für eine API wäre beispielsweise die Post. Angenommen eine Person will einen Brief an eine andere Person senden, um diese Person zum Essen einzuladen. Was passiert ist dann folgendes:
+\begin{itemize}
+ \item Person 1 verfasst eine Nachricht und packt diesen in einen Briefumschlag
+ \item Der Briefumschlag wird mit einer Briefmarke und der Adresse des Empfängers und des Absenders versehen
+ \item Der Brief wird nun an die Post übergeben
+ \item Die Post kümmert sich um die Zustellung des Briefes
+ \item Person 2 erhält den Brief
+\end{itemize}
+
+Damit dieser Zugriff der unterschiedlichen Systeme (hier Menschen) auf die Post funktioniert muss eine genaue Definition des Service vorliegen. Die genaue Spezifikation des Service ist dabei folgende:
+\begin{itemize}
+ \item Das zu versendende Objekt (Brief, Paket, etc.) muss an einem Sammelposten der Post abgegeben werden
+ \item Das Objekt ist dabei mit einer Empfängeradresse und einer Absenderadresse zu versehen, zusätzlich muss eine Briefmarke gekauft werden
+\end{itemize}
+Das stellt die Art des Services dar und legt somit fest was über die API versendet wird. Zudem wird die Repräsentation des der API definiert, also in welcher Form der Service im System des Servicenutzers integiert wird.
+Der Briefkasten / Sammelposten ist dabei die eigentliche Schnittstelle - also die API. Die Zustellung ist dabei Implementierungsdetail, der Weg vom Sammelposten der Post über die Verteilerzentren und mit dem Briefträger zum Empfänger.
+Dieses Implementierungsdetail kann beliebig angepasst werden, die Zustellung kann beispielsweise über den Land- oder Luftweg erfolgen. Der Benutzer welcher den Brief versendet hat ist davon nicht betroffen.
+
+\section{Erklärung REST-API}
+REST steht für Representational State Transfer \cite{wheeler1952use}. REST ist dabei aber keine konkrete Technologie oder ein Standard. REST beschreibt einen Architekturstil welcher im Jahr 2000 von Roy Fielding konzipiert wurde.
+Bei REST werden Daten als Ressourcen gesehen und in einem spezifischen Format übertragen. Ursprünglich wurde von Fielding dabei XML verwendet. XML wird aber in den letzten Jahren verstärkt durch JSON abgelöst.
+\newline
+
+
+Deswegen ist JSON besser als XML für den Datenaustausch mittels einer API geeignet:
+\begin{itemize}
+    \item JSON wurde speziell für den leichtgewichtigen Datenaustausch konzipiert.
+    \item JSON ist schneller als XML
+    \item JSON hat weniger Overhead als XML da XML deklarativ ist und somit wesentlich mehr Daten als JSON beinhaltet
+\end{itemize}
+
+Zum Vergleich hier ein Buch welches in JSON und XML repräsentiert wird:
+% \begin{JavaScript}
+% {
+%     "isbn": "978-3551555557",
+%     "title": "Harry Potter und der Orden des Phönix",
+%     "releaseDate": "2003-11-15T00:00:00.000Z"
+% }
+% \end{JavaScript}
+
+\section{Erklärung GraphQL}
+
+placeholder
+\pagebreak
+\section{Unterschiede zwischen GraphQL und REST}
+
+placeholder
+\pagebreak
+
+placeholder
+\pagebreak
+
+\chapter{GraphQL}
+
+\section{Interfaces}
+
+\section{Input Typen}
+
+placeholder
+\pagebreak
+
+\section{Parameter}
+
+\section{Skalare}
+
+placeholder
+\pagebreak
+
+\section{Querys}
+
+\subsection{Designempfehlungen}
+
+placeholder
+\pagebreak
+
+\subsection{Verschachtelte Querys}
+
+\subsection{Variablen}
+
+placeholder
+\pagebreak
+
+\subsection{Fragmentierung}
+
+\subsection{Aliase}
+
+placeholder
+\pagebreak
+
+\section{Mutationen}
+
+\subsection{Designempfehlungen}
+
+placeholder
+\pagebreak
+
+\section{Bekannte Probleme}
+
+\subsection{Authentifizierung, Autorisierung und Rollenmanagement}
+
+placeholder
+\pagebreak
+
+\subsection{1 + n Problem}
+
+\subsection{Subscriptions}
+
+placeholder
+\pagebreak
+
+placeholder
+\pagebreak
+
+\subsection{Fehlermanagement}
+
+placeholder
+\pagebreak
+
+\subsection{Pagination}
+
+\subsection{Caching}
+
+placeholder
+\pagebreak
+
+\chapter{Entwicklung}
+
+\section{Anwendungsszenario}
+
+\section{Architektur}
+
+placeholder
+\pagebreak
+
+placeholder
+\pagebreak
+
+\section{Entwurf Schema}
+
+placeholder
+\pagebreak
+
+\section{Umsetzung GraphQL mit .NET}
+
+\subsection{Verwendete Bibliotheken}
+
+placeholder
+\pagebreak
+
+\subsection{Entity Framework}
+
+placeholder
+\pagebreak
+
+placeholder
+\pagebreak
+
+\subsection{Umsetzung Authentifizierung, Autorisierung, Rollenmanagement}
+
+placeholder
+\pagebreak
+
+\subsection{Umsetzung Subscriptions}
+
+placeholder
+\pagebreak
+
+\subsection{Umsetzung 1 + n Problem}
+
+placeholder
+\pagebreak
+
+\subsection{Umsetzung Pagination}
+
+\chapter{Conclusio}
+
+\section{Fazit}
+
+\section{Ausblick}
+
+\printbibliography
+
+
+\end{document}
