@@ -17,6 +17,7 @@ using Library.GraphQL.MutationTypes;
 using Library.GraphQL.QueryTypes;
 using Library.GraphQL.Services;
 using Microsoft.EntityFrameworkCore;
+using Library.GraphQL.Mapping;
 
 namespace Library.GraphQL {
     public class Startup {
@@ -36,6 +37,7 @@ namespace Library.GraphQL {
 
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IAuthorService, AuthorService>();
+            services.AddScoped<BookMapper>();
 
             services
                 .AddGraphQLServer()
