@@ -9,7 +9,7 @@ namespace Library.GraphQL.Contract {
         public Task<TEntity> GetByIdAsync(int id);
         public Task<TEntity> AddAsync(TEntity entity);
         public Task<TEntity> UpdateAsync(TEntity entity);
-        public Task RemoveAsync(int id);
+        public Task<bool> RemoveAsync(int id);
         public Task<bool> EntityExistsAsync(int id);
     }
 }

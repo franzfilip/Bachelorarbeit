@@ -38,10 +38,10 @@ namespace Library.GraphQL.Services {
             return author;
         }
 
-        public async Task RemoveAsync(int id) {
+        public async Task<bool> RemoveAsync(int id) {
             var author = await _context.Authors.FindAsync(id);
             _context.Entry(author).State = EntityState.Deleted;
-            await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> EntityExistsAsync(int id) {
