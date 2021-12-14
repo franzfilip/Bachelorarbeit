@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Types;
 using Library.Datamodel;
 using Library.GraphQL.Contract;
@@ -18,7 +19,9 @@ namespace Library.GraphQL.QueryTypes {
             _bookService = bs;
         }
 
+        [Authorize]
         public async Task<IEnumerable<Book>> Books() => await _bookService.GetAllAsync();
+        [Authorize(Roles = new[] {"Admin"})]
         public async Task<Book> Book(int id) => await _bookService.GetByIdAsync(id);
     }
 }

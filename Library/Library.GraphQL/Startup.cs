@@ -19,6 +19,9 @@ using Library.GraphQL.Services;
 using Microsoft.EntityFrameworkCore;
 using Library.GraphQL.Mapping;
 using Library.GraphQL.TokenAuth;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Library.GraphQL {
     public class Startup {
@@ -34,6 +37,22 @@ namespace Library.GraphQL {
             services.AddControllers();
 
             services.Configure<TokenSettings>(Configuration.GetSection("JWT"));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options => {
+                    var tokenSettings = Configuration
+                    .GetSection("JWT").Get<TokenSettings>();
+                    options.TokenValidationParameters = new TokenValidationParameters {
+                        ValidIssuer = tokenSettings.Issuer,
+                        ValidateIssuer = true,
+                        ValidAudience = tokenSettings.Audience,
+                        ValidateAudience = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.Key)),
+                        ValidateIssuerSigningKey = true
+                    };
+                });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
 
             services.AddPooledDbContextFactory<LibraryContext>(item =>
                 item.UseSqlServer(Configuration.GetConnectionString("LibraryDB")));
@@ -52,9 +71,8 @@ namespace Library.GraphQL {
                 .AddTypeExtension<BookMutation>()
                 .AddTypeExtension<LoginMutation>()
                 .AddType<BookType>()
-                //.AddType<BookCreateType>()
-                //.AddType<BookUpdateType>()
-                .AddType<AuthorType>();
+                .AddType<AuthorType>()
+                .AddAuthorization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,13 +86,16 @@ namespace Library.GraphQL {
                 });
             }
 
-            app.UseRouting()
-                .UseEndpoints(endpoints =>
-                {
+            app
+            .UseAuthentication()
+            .UseAuthorization()
+            .UseRouting()
+                .UseEndpoints(endpoints => {
                     endpoints.MapGraphQL();
+                    endpoints.MapControllers();
                 });
 
-            app.UseAuthorization();
+            
         }
     }
 }

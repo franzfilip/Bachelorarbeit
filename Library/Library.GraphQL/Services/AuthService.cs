@@ -34,13 +34,13 @@ namespace Library.GraphQL.Contract {
                 claims.Add(new Claim("Email", user.Email));
                 if (user.Roles?.Count > 0) {
                     foreach (var role in user.Roles) {
-                        claims.Add(new Claim(ClaimTypes.Role, role.Name));
+                        claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
                     }
                 }
 
                 var jwtSecurityToken = new JwtSecurityToken(
                     issuer: _tokenSettings.Issuer,
-                    //audience: _tokenSettings.Audience,
+                    audience: _tokenSettings.Audience,
                     expires: DateTime.Now.AddMinutes(30),
                     signingCredentials: credentials,
                     claims: claims

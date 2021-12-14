@@ -11,6 +11,6 @@ namespace Library.Datamodel {
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public List<Role> Roles { get; set; }
+        public ICollection<Role> Roles { get; set; }
     }
 }
