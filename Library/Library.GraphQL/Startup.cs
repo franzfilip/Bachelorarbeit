@@ -18,6 +18,7 @@ using Library.GraphQL.QueryTypes;
 using Library.GraphQL.Services;
 using Microsoft.EntityFrameworkCore;
 using Library.GraphQL.Mapping;
+using Library.GraphQL.TokenAuth;
 
 namespace Library.GraphQL {
     public class Startup {
@@ -32,11 +33,14 @@ namespace Library.GraphQL {
 
             services.AddControllers();
 
+            services.Configure<TokenSettings>(Configuration.GetSection("JWT"));
+
             services.AddPooledDbContextFactory<LibraryContext>(item =>
                 item.UseSqlServer(Configuration.GetConnectionString("LibraryDB")));
 
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IAuthorService, AuthorService>();
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<BookMapper>();
 
             services
@@ -46,6 +50,7 @@ namespace Library.GraphQL {
                 .AddTypeExtension<AuthorQuery>()
                 .AddMutationType(d => d.Name("Mutation"))
                 .AddTypeExtension<BookMutation>()
+                .AddTypeExtension<LoginMutation>()
                 .AddType<BookType>()
                 //.AddType<BookCreateType>()
                 //.AddType<BookUpdateType>()
