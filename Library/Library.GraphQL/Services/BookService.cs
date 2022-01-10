@@ -23,7 +23,7 @@ namespace Library.GraphQL.Services {
         }
 
         public async Task<Book> GetByIdAsync(int id) {
-            return await QueryWithIncludes().FirstAsync(b => b.Id == id);
+            return await QueryWithIncludes().FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task<Book> AddAsync(Book entity) {

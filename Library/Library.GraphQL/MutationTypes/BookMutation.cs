@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Types;
 using Library.Datamodel;
 using Library.GraphQL.Contract;
@@ -20,14 +21,17 @@ namespace Library.GraphQL.MutationTypes {
             _bookMapper = bookMapper;
         }
 
+        [Authorize(Roles = new[] { "Admin", "Librarian" })]
         public async Task<Book> CreateBook(BookCreate input) {
             return await _bookService.AddAsync(await _bookMapper.MapBookCreateToBook(input));
         }
 
+        [Authorize(Roles = new[] { "Admin", "Librarian" })]
         public async Task<Book> UpdateBook(BookUpdate input) {
             return await _bookService.UpdateAsync(await _bookMapper.MapBookUpdateToBook(input));
         }
 
+        [Authorize(Roles = new[] { "Admin", "Librarian" })]
         public async Task<bool> Delete(int id) => await _bookService.RemoveAsync(id);
     }
 }

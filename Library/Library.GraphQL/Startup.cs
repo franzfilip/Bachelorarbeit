@@ -22,6 +22,7 @@ using Library.GraphQL.TokenAuth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Library.GraphQL.Error;
 
 namespace Library.GraphQL {
     public class Startup {
@@ -61,6 +62,7 @@ namespace Library.GraphQL {
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<BookMapper>();
+            services.AddScoped<AuthorMapper>();
 
             services
                 .AddGraphQLServer()
@@ -69,10 +71,13 @@ namespace Library.GraphQL {
                 .AddTypeExtension<AuthorQuery>()
                 .AddMutationType(d => d.Name("Mutation"))
                 .AddTypeExtension<BookMutation>()
+                .AddTypeExtension<AuthorMutation>()
                 .AddTypeExtension<LoginMutation>()
                 .AddType<BookType>()
                 .AddType<AuthorType>()
                 .AddAuthorization();
+
+            services.AddErrorFilter<LibraryErrorFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

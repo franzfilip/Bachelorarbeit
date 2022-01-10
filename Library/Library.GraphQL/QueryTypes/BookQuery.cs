@@ -20,8 +20,18 @@ namespace Library.GraphQL.QueryTypes {
         }
 
         [Authorize]
-        public async Task<IEnumerable<Book>> Books() => await _bookService.GetAllAsync();
-        [Authorize(Roles = new[] {"Admin"})]
-        public async Task<Book> Book(int id) => await _bookService.GetByIdAsync(id);
+        public async Task<IEnumerable<Book>> Books() {
+            return await _bookService.GetAllAsync();
+        }
+
+        [Authorize]
+        public async Task<Book> Book(int id) {
+            var book = await _bookService.GetByIdAsync(id);
+            if(book is not null) {
+                return book;
+            }
+
+            throw new NullReferenceException($"Cannot find Book with ID {id}");
+        }
     }
 }

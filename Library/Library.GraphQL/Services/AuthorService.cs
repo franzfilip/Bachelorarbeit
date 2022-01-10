@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Library.Datamodel;
 using Library.EF;
 using Library.GraphQL.Contract;
+using Library.GraphQL.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
@@ -23,19 +24,37 @@ namespace Library.GraphQL.Services {
         }
 
         public async Task<Author> GetByIdAsync(int id) {
-            return await QueryWithIncludes().FirstAsync(b => b.Id == id);
+            return await QueryWithIncludes().FirstOrDefaultAsync(b => b.Id == id);
         }
 
-        public async Task<Author> AddAsync(Author author) {
+        public async Task<Author> AddAsync(Author entity) {
+            Author author = new Author { FirstName = entity.FirstName, LastName = entity.LastName };
+
+            if (entity.Books is not null) {
+                var books = await _context.Books.Where(a => entity.Books.Contains(a)).ToListAsync();
+                author.Books = new List<Book>();
+                foreach (var book in books) {
+                    author.Books.Add(book);
+                }
+            }
+
             await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
             return author;
         }
 
-        public async Task<Author> UpdateAsync(Author author) {
-            _context.Entry(author).State = EntityState.Modified;
+        public async Task<Author> UpdateAsync(Author entity) {
+
+            var authorToUpdate = await GetByIdAsync(entity.Id);
+            authorToUpdate.FirstName = entity.FirstName;
+            authorToUpdate.LastName = entity.LastName;
+
+            if (authorToUpdate.Books.Count != entity.Books.Count || !authorToUpdate.Books.All(entity.Books.Contains)) {
+                authorToUpdate.Books.UpdateManyToMany(entity.Books, b => b.Id);
+            }
+
             await _context.SaveChangesAsync();
-            return author;
+            return authorToUpdate;
         }
 
         public async Task<bool> RemoveAsync(int id) {
