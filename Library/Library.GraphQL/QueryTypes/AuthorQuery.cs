@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HotChocolate.AspNetCore.Authorization;
+using HotChocolate.Types;
 using Library.Datamodel;
 using Library.GraphQL.Contract;
 
 namespace Library.GraphQL.QueryTypes {
+    [ExtendObjectType(Name = "Query")]
+
     public class AuthorQuery {
         private readonly IAuthorService _authorService;
 

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Types;
 using Library.Datamodel;
 using Library.GraphQL.Contract;
+using Library.GraphQL.DataLoader;
 
 namespace Library.GraphQL.QueryTypes {
     [ExtendObjectType(Name = "Query")]
@@ -24,14 +26,29 @@ namespace Library.GraphQL.QueryTypes {
             return await _bookService.GetAllAsync();
         }
 
-        [Authorize]
-        public async Task<Book> Book(int id) {
-            var book = await _bookService.GetByIdAsync(id);
-            if(book is not null) {
-                return book;
-            }
+        public Book WillFail() {
+            Book b = null;
+            b.Title = "test";
+            return b;
+        }
 
-            throw new NullReferenceException($"Cannot find Book with ID {id}");
+        //[Authorize]
+        //public async Task<Book> Book(int id) {
+        //    var book = await _bookService.GetByIdAsync(id);
+        //    if (book is not null) {
+        //        return book;
+        //    }
+
+        //    throw new NullReferenceException($"Cannot find Book with ID {id}");
+        //}
+
+        [Authorize]
+        public Task<Book> Book(int id, BookByIdDataLoader dataLoader, CancellationToken cancellationToken) {
+            var data = dataLoader.LoadAsync(id, cancellationToken);
+            if (data is null) {
+                throw new NullReferenceException($"Cannot find Book with ID {id}");
+            }
+            return data;
         }
     }
 }

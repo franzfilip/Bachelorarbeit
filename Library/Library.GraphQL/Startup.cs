@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Library.GraphQL.Error;
+using Library.GraphQL.DataLoader;
 
 namespace Library.GraphQL {
     public class Startup {
@@ -58,11 +59,11 @@ namespace Library.GraphQL {
             services.AddPooledDbContextFactory<LibraryContext>(item =>
                 item.UseSqlServer(Configuration.GetConnectionString("LibraryDB")));
 
-            services.AddScoped<IBookService, BookService>();
-            services.AddScoped<IAuthorService, AuthorService>();
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<BookMapper>();
-            services.AddScoped<AuthorMapper>();
+            services.AddTransient<IBookService, BookService>();
+            services.AddTransient<IAuthorService, AuthorService>();
+            services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<BookMapper>();
+            services.AddTransient<AuthorMapper>();
 
             services
                 .AddGraphQLServer()
@@ -73,11 +74,14 @@ namespace Library.GraphQL {
                 .AddTypeExtension<BookMutation>()
                 .AddTypeExtension<AuthorMutation>()
                 .AddTypeExtension<LoginMutation>()
+                .AddDataLoader<BookByIdDataLoader>()
                 .AddType<BookType>()
                 .AddType<AuthorType>()
+                .AddSubscriptionType<BookSubscriptionType>()
                 .AddAuthorization();
 
             services.AddErrorFilter<LibraryErrorFilter>();
+            services.AddInMemorySubscriptions();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,6 +94,8 @@ namespace Library.GraphQL {
                     Path = "/playground"
                 });
             }
+
+            app.UseWebSockets();
 
             app
             .UseAuthentication()

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using HotChocolate;
 using HotChocolate.AspNetCore.Authorization;
+using HotChocolate.Subscriptions;
 using HotChocolate.Types;
 using Library.Datamodel;
 using Library.GraphQL.Contract;
@@ -22,16 +24,36 @@ namespace Library.GraphQL.MutationTypes {
         }
 
         [Authorize(Roles = new[] { "Admin", "Librarian" })]
-        public async Task<Book> CreateBook(BookCreate input) {
-            return await _bookService.AddAsync(await _bookMapper.MapBookCreateToBook(input));
+        public async Task<Book> CreateBook(BookCreate input, [Service] ITopicEventSender sender) {
+            try {
+                var book = await _bookService.AddAsync(await _bookMapper.MapBookCreateToBook(input));
+                await sender.SendAsync("bookAdded", book);
+                return book;
+            }
+            catch (Exception) {
+                throw new GraphQLException("Book could not have been created");
+            }
+
         }
 
         [Authorize(Roles = new[] { "Admin", "Librarian" })]
         public async Task<Book> UpdateBook(BookUpdate input) {
-            return await _bookService.UpdateAsync(await _bookMapper.MapBookUpdateToBook(input));
+            try {
+                return await _bookService.UpdateAsync(await _bookMapper.MapBookUpdateToBook(input));
+            }
+            catch (Exception) {
+                throw new GraphQLException("Book could not have been updated");
+            }
         }
 
         [Authorize(Roles = new[] { "Admin", "Librarian" })]
-        public async Task<bool> Delete(int id) => await _bookService.RemoveAsync(id);
+        public async Task<bool> Delete(int id) {
+            try {
+                return await _bookService.RemoveAsync(id);
+            }
+            catch (Exception) {
+                throw new GraphQLException("Book could not have been deleted");
+            }
+        }
     }
 }

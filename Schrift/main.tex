@@ -212,17 +212,74 @@ Verfolgt man aber das Ziel ein System zu entwickeln, welches keine komplexen Dat
 
 \section{Input Typen}
 
-placeholder
-\pagebreak
+\section{Typ System Schema Definition}
+
+Im GraphQL-Schema werden die Ressourcen, die Relationen zwischen den Ressourcen, die lesenden und schreibenden Operationsmöglichkeiten auf die Ressourcen definiert.
+\newline
+
+Es wird die genaue Datenstruktur definiert mit welcher ein eingehender Request validiert wird.
+Entspricht die im Request enthaltene Query oder Mutation dem Schema so wird der Inhalt an die Implementierung des Schemas für die Verarbeitung weitergeleitet.
+GraphQL zerlegt dafür die Query oder Mutation und gibt sie an den jeweiligen Resolver weiter. Seite 57 und 58
+
+\section{Grundlegendes Schema}
+Das grundlegende Schema bezieht sich auf die Ressourcen und die Relationen dieser Ressourcen zueinander.
+
+\begin{JsCode}
+type Book {
+    id: Int!
+    title: String
+    authors: [Author]
+}
+    
+type Author {
+    id: Int!
+    firstName: String
+    lastName: String
+    books: [Book]
+}
+\end{JsCode}
+
+Im oben angeführten Codebeispiel werden die beiden Objekttypen Author und Book definiert.
+Die Ressource Book enthält dabei die Felder id und title. Desweiteren enthält Book eine Liste von Authoren.
+Die Ressource Author enthält die Felder id, firstName und lastName.
+Außerdem enthält Author eine Liste von Büchern die der Autor geschrieben hat.
+Im Beispiel gilt zu beachten, dass eine Ressource mit dem Schlüsselwort \textit{type} versehen ist.
+Zudem sind die Properties der Ressource immer nach dem Schema <name>: <Datentyp> gegliedert.
+Der Datentyp ist dabei entweder ein Objekt, eine Liste von Objekten oder ein skalarer Datentyp.
+Im Schema werden Relationen von Objekten nicht durch eine Schachtelung dieser in einem einzigen Objekt definiert.
+Bei komplexeren Graphen würde dies zu einer kaum zu lesenden oder adaptierbaren Schemadefinition führen.
+Das Schema besteht somit aus einzelnen, geschlossenen Objekttyp-Definitionen, die einander oder aber ihre Felder referenzieren. Seite 58 und 59
+Ist ein Feld mit ! deklariert so darf dieses nicht null sein.
+
 
 \section{Parameter}
 
 \section{Skalare}
 
-placeholder
-\pagebreak
+Wenn man das Schema als Baumstruktur betrachtet so sind die referenzierten Objekte Verzweigungen des Baumes.
+Die Blätter am Ende des Baumes enthalten die eigentlichen Daten.
+Die Astverzweigungen sind wichtig, denn sie sind die Referenzen die zu den anderen Objekten verweisen.
+Ein Datentyp der nicht mehr weiter vereinfach bar ist wird wie in anderen Programmiersprachen Skalar-Typ genannt.
+Bereits vordefinierte Skalar-Typen von GraphQL sind:
+
+\begin{enumerate}
+    \item Boolean
+    \item Float
+    \item Int
+    \item String
+    \item ID
+\end{enumerate}
+In den meisten sprachspezifischen Implementierungen ist es möglich eigene Skalar-Typen zu definieren. Diese werden verwendet um beispielsweise verschiedene Datumsformate darzustellen.
 
 \section{Querys}
+
+GraphQL erlaubt es den Clients lesend auf die Ressourcen zuzugreifen und genau jene Daten abzufragen welche er benötigt.
+Als Ergebnis auf eine Anfrage werden die Daten genau in dem Format zurückgegeben in welcher die Anfrage erfolgt ist.
+Dafür bietet GraphQL den Eingangspunkt hinter dem sich das komplette zuvor definierte Graphen Schema befindet.
+Um nun auf die Daten zugreifen zu können, muss an den Endpunkt ein in der GraphQL Query Language definiertes Objekt mit den Feldern des Graphen, übergeben werden.
+Um nun auf die im Schema definierten Ressourcen lesend zugreifen zu können muss das Schema um Querys erweitert werden. 
+
+\includegraphics{pics/GraphQL_Query_Schema.png}
 
 \subsection{Designempfehlungen}
 

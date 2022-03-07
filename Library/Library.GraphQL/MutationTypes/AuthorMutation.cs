@@ -18,9 +18,9 @@ namespace Library.GraphQL.MutationTypes {
         }
 
         [Authorize(Roles = new[] { "Admin", "Librarian" })]
-        public async Task<Author> Create(AuthorCreate author) => await _authorService.AddAsync(await _authorMapper.MapAuthorCreateToAuthor(author));
+        public async Task<Author> CreateAuthor(AuthorCreate author) => await _authorService.AddAsync(await _authorMapper.MapAuthorCreateToAuthor(author));
         [Authorize(Roles = new[] { "Admin", "Librarian" })]
-        public async Task<Author> Update(AuthorUpdate author) => await _authorService.UpdateAsync(await _authorMapper.MapAuthorUpdateToAuthor(author));
+        public async Task<Author> UpdateAuthor(AuthorUpdate author) => await _authorService.UpdateAsync(await _authorMapper.MapAuthorUpdateToAuthor(author));
         [Authorize(Roles = new[] { "Admin", "Librarian" })]
         public async Task Delete(int id) => await _authorService.RemoveAsync(id);
     }

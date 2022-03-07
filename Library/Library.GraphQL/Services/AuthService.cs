@@ -41,7 +41,8 @@ namespace Library.GraphQL.Contract {
                 var jwtSecurityToken = new JwtSecurityToken(
                     issuer: _tokenSettings.Issuer,
                     audience: _tokenSettings.Audience,
-                    expires: DateTime.Now.AddMinutes(30),
+                    //expires: DateTime.Now.AddMinutes(30),
+                    expires: DateTime.Now.AddDays(1),
                     signingCredentials: credentials,
                     claims: claims
                 );

@@ -24,7 +24,8 @@ namespace Library.GraphQL.Services {
         }
 
         public async Task<Author> GetByIdAsync(int id) {
-            return await QueryWithIncludes().FirstOrDefaultAsync(b => b.Id == id);
+            return await _context.Authors.FirstOrDefaultAsync(a => a.Id == id);
+            //return await QueryWithIncludes().FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task<Author> AddAsync(Author entity) {
