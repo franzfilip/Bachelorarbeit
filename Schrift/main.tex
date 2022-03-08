@@ -212,17 +212,53 @@ Verfolgt man aber das Ziel ein System zu entwickeln, welches keine komplexen Dat
 
 \section{Input Typen}
 
-\section{Typ System Schema Definition}
+\section{Typ System}
 
-Im GraphQL-Schema werden die Ressourcen, die Relationen zwischen den Ressourcen, die lesenden und schreibenden Operationsmöglichkeiten auf die Ressourcen definiert.
-\newline
+Das GraphQL Typ System beschreibt die Ressourcen und ihre Relationen zueinander auf die ein Client zugreifen kann. Es wird verwendet für die Validierung eingehender Anfragen verwendet.
+Wenn die in der Anfrage enthaltene Query durch das Type System erfolgreich validiert wurde, dann wird die beinhaltete Operation an die Implementierung weitergeleitet.
+GraphQL zerlegt die übergebene Query und gibt sie an den jeweiligen Resolver für die Weiterverarbeitung weiter. 
+Seite 57 und 58 Kress, spec.graphql.org/SchemaDefinition
 
-Es wird die genaue Datenstruktur definiert mit welcher ein eingehender Request validiert wird.
-Entspricht die im Request enthaltene Query oder Mutation dem Schema so wird der Inhalt an die Implementierung des Schemas für die Verarbeitung weitergeleitet.
-GraphQL zerlegt dafür die Query oder Mutation und gibt sie an den jeweiligen Resolver weiter. Seite 57 und 58
+GraphQL beinhaltet eine \textit{IDL Interface description language}, diese wird für die Beschreibung des Typ Systems von einem GraphQL Service verwendet.
+Da ein GraphQL Service in jeder beliebigen Sprache implementierbar sein soll braucht es diese \textit{IDL} um eine sprachunabhängige Basis für die Implementierung zu haben.
 
-\section{Grundlegendes Schema}
-Das grundlegende Schema bezieht sich auf die Ressourcen und die Relationen dieser Ressourcen zueinander.
+\section{Typen}
+In GraphQL existieren 6 Typ Definitionen \textit{Skalare, Interfaces, Object, Input Object, Enum, Union} diese bilden das Rückgrat des Schemas.
+
+\subsection{Skalare}
+
+Wenn man das Schema als Baumstruktur betrachtet so sind die referenzierten Objekte Verzweigungen des Baumes.
+Die Blätter am Ende des Baumes enthalten die eigentlichen Daten.
+Die Astverzweigungen sind wichtig, denn sie sind die Referenzen die zu den anderen Objekten verweisen.
+Ein Datentyp der nicht mehr weiter vereinfach bar ist wird wie in anderen Programmiersprachen Skalar-Typ genannt.
+Bereits vordefinierte Skalar-Typen von GraphQL sind:
+
+\begin{enumerate}
+    \item Boolean
+    \item Float
+    \item Int
+    \item String
+    \item ID
+\end{enumerate}
+In den meisten sprachspezifischen Implementierungen ist es möglich eigene Skalar-Typen zu definieren. Diese werden verwendet um beispielsweise verschiedene Datumsformate darzustellen.
+
+\subsection{Interface}
+\subsection{Object}
+\subsection{Input Object}
+\subsection{Enum}
+\subsection{Union}
+
+\section{Schema}
+Das Schema eines GraphQL Services definiert die Typen und ihre Relationen zueinander. Zudem werden die Wurzelknoten der Eingangspunkte der Operationen (Query, Mutation und Subscription) definiert.
+Dabei gilt zu beachten das ein Schema folgende wesentliche Punkte erfüllen muss:
+Um ein korrektes Schema zu erstellen muss beachtet werden, dass die Typen und Direktiven eindeutig über ihren Namen identifizierbar sind. Außerdem dürfen im Schema definierte Namen nicht mit "__" (doppelter Unterstrich) beginnen.
+Diese sind für das GraphQL Introspektionsystem reserviert. spec.graphl.org/SchemaDefinition
+
+\section{Wurzel Operationen}
+Das Schema definiert die initialen Wurzelknoten der Operationen die es unterstützt (Query, Mutation, Subscription). Dadurch definiert das Schema den Ort im Typ System wo diese Operationen beginnen.
+Query ist aber dabei die einzige Operation welche man zwingend definieren muss. Mutations und Subscriptions sind optional und werden wenn sie nicht definiert werden auch nicht unterstützt.
+Eine Wurzel-Operation muss dabei ein \textit{Object Type} sein. Desweiteren müssen die Objekttypen der Wurzel-Operationen unterscheiden und dürfen nicht diesselben sein. 
+
 
 \begin{JsCode}
 type Book {
@@ -253,23 +289,6 @@ Ist ein Feld mit ! deklariert so darf dieses nicht null sein.
 
 
 \section{Parameter}
-
-\section{Skalare}
-
-Wenn man das Schema als Baumstruktur betrachtet so sind die referenzierten Objekte Verzweigungen des Baumes.
-Die Blätter am Ende des Baumes enthalten die eigentlichen Daten.
-Die Astverzweigungen sind wichtig, denn sie sind die Referenzen die zu den anderen Objekten verweisen.
-Ein Datentyp der nicht mehr weiter vereinfach bar ist wird wie in anderen Programmiersprachen Skalar-Typ genannt.
-Bereits vordefinierte Skalar-Typen von GraphQL sind:
-
-\begin{enumerate}
-    \item Boolean
-    \item Float
-    \item Int
-    \item String
-    \item ID
-\end{enumerate}
-In den meisten sprachspezifischen Implementierungen ist es möglich eigene Skalar-Typen zu definieren. Diese werden verwendet um beispielsweise verschiedene Datumsformate darzustellen.
 
 \section{Querys}
 
