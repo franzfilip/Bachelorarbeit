@@ -1611,7 +1611,15 @@ INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfon
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT C:\Users\Franz-Filip\AppData\Local\MiKTeX\pdftex\config\pdftex.map
 OUTPUT main.toc
+INPUT .\einleitung.tex
+INPUT einleitung.tex
+INPUT .\einleitung.tex
+INPUT einleitung.tex
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmss12.tfm
+INPUT .\grundlagen.tex
+INPUT grundlagen.tex
+INPUT .\grundlagen.tex
+INPUT grundlagen.tex
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri10.tfm
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmss12.tfm
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
@@ -1635,6 +1643,10 @@ INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstm
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstmisc.sty
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstmisc.sty
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstmisc.sty
+INPUT .\graphql.tex
+INPUT graphql.tex
+INPUT .\graphql.tex
+INPUT graphql.tex
 INPUT .\pics\GraphQL_Query_Schema.png
 INPUT .\pics\GraphQL_Query_Schema.png
 INPUT pics\GraphQL_Query_Schema.png
@@ -1642,6 +1654,10 @@ INPUT .\pics\GraphQL_Query_Schema.png
 INPUT .\pics\GraphQL_Query_Schema.png
 INPUT .\pics\GraphQL_Query_Schema.png
 INPUT .\pics\GraphQL_Query_Schema.png
+INPUT .\entwicklung.tex
+INPUT entwicklung.tex
+INPUT .\entwicklung.tex
+INPUT entwicklung.tex
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmcsc10.tfm
 INPUT main.aux
 INPUT .\main.out
