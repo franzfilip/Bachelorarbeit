@@ -1622,7 +1622,6 @@ INPUT grundlagen.tex
 INPUT .\grundlagen.tex
 INPUT grundlagen.tex
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri10.tfm
-INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmss12.tfm
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
@@ -1644,6 +1643,7 @@ INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstm
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstmisc.sty
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstmisc.sty
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstmisc.sty
+INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmss12.tfm
 INPUT .\graphql.tex
 INPUT graphql.tex
 INPUT .\graphql.tex

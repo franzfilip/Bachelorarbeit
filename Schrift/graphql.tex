@@ -192,6 +192,13 @@ In Abbildung 3.1 ist eine Schemadefinition zu sehen welche Objekt-Typen, Input-T
 
 \section{Parameter}
 
+\section{Anfragen}
+Um schreibend oder lesend auf den GraphQL-Service zugreifen zu können muss an den bereitgestellten Endpunkt eine POST-Anfrage mit einer Query geschickt werden.
+Diese Query ist mittels der \textit{GraphQL Query Language GQL} definiert.
+Eine Anfrage welche eine Query beinhaltet, hat zusätzlich noch zwei optionale Parameter: \textit{variables} und \textit{operationName}.
+Der Name einer Operation wird jedoch nur benötigt wenn mehrere Operationen in der Query auszuführen sind.
+% graphql.org/learn/serving-over-http
+
 \section{Querys}
 
 Querys bietet den Clients die Möglichkeit lesend auf die Objekte, welche vom GraphQL-Service verwaltet werden, zuzugreifen.
@@ -202,9 +209,9 @@ In diesem Objekt werden die auszuführenden Funktionen definiert und welche Feld
 Das Ergebnis hat genau jenes Format welches in der Anfrage vom Client definiert wurde.
 % Kress 40-41
 
-\subsection{Verschachtelte Querys}
 Da GraphQL mit einem Graphenschema arbeitet, welche auf den Beziehungen der Knoten zueinander basiert, ist es möglich diese Relationen zu nutzen um Daten über mehrere Objekte hinweg zu sammeln.
 \newline
+
 
 In der folgenden Abbildung ist eine verschachtelte Query zu sehen, welche alle Bücher mit den dazugehörigen Autoren anfordert.
 
@@ -234,6 +241,15 @@ In der folgenden Abbildung ist eine Anfrage zu sehen welche das Buch mit der \te
 \subsection{Aliase}
 
 \section{Mutationen}
+APIs benötigen neben dem lesenden Zugriff auf Daten auch einen schreibenden.
+Dieser wird in GraphQL mittels Mutationen umgesetzt.
+Mutationen kapseln die Implementierungen der Datenbankzugriffsschicht in ein Interface welches die Möglichkeiten zur Manipulation der Daten vorgibt.
+Manipulierende Anfragen können Daten dadurch nur auf jene Art und Weise ändern, wie es in der Applikation vorgesehen ist.
+% Kress 54
+
+% Mutationen ermöglichen es die Zugriffe 
+% Sie werden in der Schemasprache (anderer Begriff ??? -> GDL etc)  mit dem Schlüsselwort mutation definiert.
+
 
 \subsection{Designempfehlungen}
 

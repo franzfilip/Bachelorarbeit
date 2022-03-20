@@ -11,8 +11,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}API}{5}{section.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.1}Abstraktes Beispiel API}{5}{subsection.2.1.1}%
-\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}REST-API}{6}{section.2.2}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.1}REST-Bedingungen}{7}{subsection.2.2.1}%
@@ -59,33 +57,33 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.6}Parameter}{15}{section.3.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.7}Querys}{15}{section.3.7}%
+\contentsline {section}{\numberline {3.7}Anfragen}{15}{section.3.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.1}Verschachtelte Querys}{16}{subsection.3.7.1}%
+\contentsline {section}{\numberline {3.8}Querys}{15}{section.3.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.2}Variablen}{16}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.8.1}Variablen}{16}{subsection.3.8.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.3}Fragmentierung}{17}{subsection.3.7.3}%
+\contentsline {subsection}{\numberline {3.8.2}Fragmentierung}{17}{subsection.3.8.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.4}Aliase}{17}{subsection.3.7.4}%
+\contentsline {subsection}{\numberline {3.8.3}Aliase}{17}{subsection.3.8.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.8}Mutationen}{17}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Mutationen}{17}{section.3.9}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.8.1}Designempfehlungen}{17}{subsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.9.1}Designempfehlungen}{17}{subsection.3.9.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.9}Bekannte Probleme}{18}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Bekannte Probleme}{18}{section.3.10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.1}Authentifizierung, Autorisierung und Rollenmanagement}{18}{subsection.3.9.1}%
+\contentsline {subsection}{\numberline {3.10.1}Authentifizierung, Autorisierung und Rollenmanagement}{18}{subsection.3.10.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.2}1 + n Problem}{19}{subsection.3.9.2}%
+\contentsline {subsection}{\numberline {3.10.2}1 + n Problem}{19}{subsection.3.10.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.3}Subscriptions}{19}{subsection.3.9.3}%
+\contentsline {subsection}{\numberline {3.10.3}Subscriptions}{19}{subsection.3.10.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.4}Fehlermanagement}{21}{subsection.3.9.4}%
+\contentsline {subsection}{\numberline {3.10.4}Fehlermanagement}{21}{subsection.3.10.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.5}Pagination}{22}{subsection.3.9.5}%
+\contentsline {subsection}{\numberline {3.10.5}Pagination}{22}{subsection.3.10.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.6}Caching}{22}{subsection.3.9.6}%
+\contentsline {subsection}{\numberline {3.10.6}Caching}{22}{subsection.3.10.6}%
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Entwicklung}{23}{chapter.4}%
 \defcounter {refsection}{0}\relax 
