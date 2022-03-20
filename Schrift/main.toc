@@ -61,58 +61,56 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.7}Querys}{15}{section.3.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.1}Designempfehlungen}{16}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.1}Verschachtelte Querys}{16}{subsection.3.7.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.2}Verschachtelte Querys}{17}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.2}Variablen}{16}{subsection.3.7.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.3}Variablen}{17}{subsection.3.7.3}%
+\contentsline {subsection}{\numberline {3.7.3}Fragmentierung}{17}{subsection.3.7.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.4}Fragmentierung}{18}{subsection.3.7.4}%
+\contentsline {subsection}{\numberline {3.7.4}Aliase}{17}{subsection.3.7.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.5}Aliase}{18}{subsection.3.7.5}%
+\contentsline {section}{\numberline {3.8}Mutationen}{17}{section.3.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.8}Mutationen}{19}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Designempfehlungen}{17}{subsection.3.8.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.8.1}Designempfehlungen}{19}{subsection.3.8.1}%
+\contentsline {section}{\numberline {3.9}Bekannte Probleme}{18}{section.3.9}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.9}Bekannte Probleme}{20}{section.3.9}%
+\contentsline {subsection}{\numberline {3.9.1}Authentifizierung, Autorisierung und Rollenmanagement}{18}{subsection.3.9.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.1}Authentifizierung, Autorisierung und Rollenmanagement}{20}{subsection.3.9.1}%
+\contentsline {subsection}{\numberline {3.9.2}1 + n Problem}{19}{subsection.3.9.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.2}1 + n Problem}{21}{subsection.3.9.2}%
+\contentsline {subsection}{\numberline {3.9.3}Subscriptions}{19}{subsection.3.9.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.3}Subscriptions}{21}{subsection.3.9.3}%
+\contentsline {subsection}{\numberline {3.9.4}Fehlermanagement}{21}{subsection.3.9.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.4}Fehlermanagement}{23}{subsection.3.9.4}%
+\contentsline {subsection}{\numberline {3.9.5}Pagination}{22}{subsection.3.9.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.5}Pagination}{24}{subsection.3.9.5}%
+\contentsline {subsection}{\numberline {3.9.6}Caching}{22}{subsection.3.9.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.9.6}Caching}{24}{subsection.3.9.6}%
+\contentsline {chapter}{\numberline {4}Entwicklung}{23}{chapter.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Entwicklung}{25}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Anwendungsszenario}{23}{section.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Anwendungsszenario}{25}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Architektur}{23}{section.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Architektur}{25}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Entwurf Schema}{25}{section.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Entwurf Schema}{27}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Umsetzung GraphQL mit .NET}{26}{section.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}Umsetzung GraphQL mit .NET}{28}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Verwendete Bibliotheken}{26}{subsection.4.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.1}Verwendete Bibliotheken}{28}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Entity Framework}{27}{subsection.4.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.2}Entity Framework}{29}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Umsetzung Authentifizierung, Autorisierung, Rollenmanagement}{29}{subsection.4.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.3}Umsetzung Authentifizierung, Autorisierung, Rollenmanagement}{31}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Umsetzung Subscriptions}{30}{subsection.4.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.4}Umsetzung Subscriptions}{32}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Umsetzung 1 + n Problem}{31}{subsection.4.4.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.5}Umsetzung 1 + n Problem}{33}{subsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.4.6}Umsetzung Pagination}{32}{subsection.4.4.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.6}Umsetzung Pagination}{34}{subsection.4.4.6}%
+\contentsline {chapter}{\numberline {5}Conclusio}{33}{chapter.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusio}{35}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Fazit}{33}{section.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Fazit}{35}{section.5.1}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Ausblick}{35}{section.5.2}%
+\contentsline {section}{\numberline {5.2}Ausblick}{33}{section.5.2}%

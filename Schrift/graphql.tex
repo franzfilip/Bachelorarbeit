@@ -183,44 +183,55 @@ Ist ein Feld mit ! deklariert so darf dieses nicht null sein.
 
 \section{Schema Definition}
 
-
-% \includegraphics{pics/schema.png}
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{pics/schema.png}
     \caption{Schemadefinition}
 \end{figure}
 
+In Abbildung 3.1 ist eine Schemadefinition zu sehen welche Objekt-Typen, Input-Typen und die Wurzeloperationen beinhaltet.
 
 \section{Parameter}
 
 \section{Querys}
 
-GraphQL erlaubt es den Clients lesend auf die Ressourcen zuzugreifen und genau jene Daten abzufragen welche er benötigt.
-Als Ergebnis auf eine Anfrage werden die Daten genau in dem Format zurückgegeben in welcher die Anfrage erfolgt ist.
-Dafür bietet GraphQL den Eingangspunkt hinter dem sich das komplette zuvor definierte Graphen Schema befindet.
-Um nun auf die Daten zugreifen zu können, muss an den Endpunkt ein in der GraphQL Query Language definiertes Objekt mit den Feldern des Graphen, übergeben werden.
-Um nun auf die im Schema definierten Ressourcen lesend zugreifen zu können muss das Schema um Querys erweitert werden. 
-
-\includegraphics{pics/GraphQL_Query_Schema.png}
-
-\subsection{Designempfehlungen}
-
-placeholder
-\pagebreak
+Querys bietet den Clients die Möglichkeit lesend auf die Objekte, welche vom GraphQL-Service verwaltet werden, zuzugreifen.
+GraphQL erlaubt es dem Client genau die Daten abzufragen welche er benötigt.
+Um auf eine Ressource zuzugreifen wird ein POST-Request an den Wurzelknoten der GraphQL-Applikation geschickt.
+Dieser POST-Request enthält ein in der \textit{GraphQL Query Language} definiertes Objekt.
+In diesem Objekt werden die auszuführenden Funktionen definiert und welche Felder davon an den Client zu retournieren sind.
+Das Ergebnis hat genau jenes Format welches in der Anfrage vom Client definiert wurde.
+% Kress 40-41
 
 \subsection{Verschachtelte Querys}
+Da GraphQL mit einem Graphenschema arbeitet, welche auf den Beziehungen der Knoten zueinander basiert, ist es möglich diese Relationen zu nutzen um Daten über mehrere Objekte hinweg zu sammeln.
+\newline
+
+In der folgenden Abbildung ist eine verschachtelte Query zu sehen, welche alle Bücher mit den dazugehörigen Autoren anfordert.
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{pics/query_book_with_result.png}
+    \caption{Anfrage aller Bücher mit zugehörigen Autoren}
+\end{figure}
 
 \subsection{Variablen}
+Mit Parametern ist es möglich zusätzliche Daten für spezielle Operationen an den GraphQL-Service zu schicken.
+Diese können aber nur statisch in die query eingetragen werden.
+Deswegen kann eine GraphQL Operation zudem mit Variablen erweitert werden.
+Dadurch hat man verstärkt die Möglichkeit Funktionen wiederzuverwenden.
+Variablen müssen am Anfang einer Operation definiert werden und befinden sich während der Ausführung im Lebensraum der Operation.
+Diese Variablen werden unter anderem für die Filterung der angeforderten Objekte verwendet.
+\newline
 
-placeholder
-\pagebreak
+In der folgenden Abbildung ist eine Anfrage zu sehen welche das Buch mit der \textit{id = 1} anfordert. Dabei wird die id als Variable übergeben.
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{pics/book_request_with_parameter.png}
+    \caption{Anfrage aller Bücher mit zugehörigen Autoren}
+\end{figure}
 
 \subsection{Fragmentierung}
 
 \subsection{Aliase}
-
-placeholder
-\pagebreak
 
 \section{Mutationen}
 
