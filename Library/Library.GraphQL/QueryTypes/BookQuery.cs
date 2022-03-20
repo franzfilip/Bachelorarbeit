@@ -11,7 +11,7 @@ using Library.GraphQL.Contract;
 using Library.GraphQL.DataLoader;
 
 namespace Library.GraphQL.QueryTypes {
-    [ExtendObjectType(Name = "Query")]
+    [ExtendObjectType(typeof(Query))]
     public class BookQuery
     {
         private readonly IBookService _bookService;

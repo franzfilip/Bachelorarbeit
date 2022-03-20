@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HotChocolate.AspNetCore.Authorization;
+using HotChocolate.Types;
 using Library.Datamodel;
 using Library.GraphQL.Contract;
 using Library.GraphQL.GraphQLTypes.InputTypes;
 using Library.GraphQL.Mapping;
 
 namespace Library.GraphQL.MutationTypes {
+    [ExtendObjectType(Name = "Mutation")]
     public class AuthorMutation {
         private readonly IAuthorService _authorService;
         private readonly AuthorMapper _authorMapper;

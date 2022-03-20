@@ -15,6 +15,7 @@ using Library.GraphQL.GraphQLTypes.InputTypes;
 using Library.GraphQL.GraphQLTypes.ObjectTypes;
 using Library.GraphQL.MutationTypes;
 using Library.GraphQL.QueryTypes;
+using Library.GraphQL.SubscriptionTypes;
 using Library.GraphQL.Services;
 using Microsoft.EntityFrameworkCore;
 using Library.GraphQL.Mapping;
@@ -67,17 +68,19 @@ namespace Library.GraphQL {
 
             services
                 .AddGraphQLServer()
-                .AddQueryType(d => d.Name("Query"))
+                .AddQueryType<Query>()
                 .AddTypeExtension<BookQuery>()
                 .AddTypeExtension<AuthorQuery>()
-                .AddMutationType(d => d.Name("Mutation"))
+                .AddMutationType<Mutation>()
                 .AddTypeExtension<BookMutation>()
                 .AddTypeExtension<AuthorMutation>()
                 .AddTypeExtension<LoginMutation>()
+                .AddSubscriptionType<Subscription>()
+                .AddTypeExtension<BookSubscription>()
                 .AddDataLoader<BookByIdDataLoader>()
                 .AddType<BookType>()
                 .AddType<AuthorType>()
-                .AddSubscriptionType<BookSubscriptionType>()
+                .AddType<BookSubscriptionType>()
                 .AddAuthorization();
 
             services.AddErrorFilter<LibraryErrorFilter>();

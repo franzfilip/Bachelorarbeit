@@ -8,8 +8,7 @@ using Library.Datamodel;
 using Library.GraphQL.Contract;
 
 namespace Library.GraphQL.QueryTypes {
-    [ExtendObjectType(Name = "Query")]
-
+    [ExtendObjectType(typeof(Query))]
     public class AuthorQuery {
         private readonly IAuthorService _authorService;
 

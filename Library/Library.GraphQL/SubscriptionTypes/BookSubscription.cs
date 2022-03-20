@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Library.GraphQL.SubscriptionTypes {
-    [ExtendObjectType(Name = "Subscription")]
+    [ExtendObjectType (Name="Subscription")]
     public class BookSubscription {
         [Subscribe]
         [Topic("bookAdded")]
