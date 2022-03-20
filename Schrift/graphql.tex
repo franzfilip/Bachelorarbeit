@@ -14,7 +14,7 @@ Die kumulierten Ergebnisse werden als Antwort an den Client zurückgeschickt.
 
 
 \section{Schema-Definitions-Sprache SDL}
-Da GraphQL laut Spezifikation in jeder beliebigen Sprache implementierbar sein soll wird eine sprachunabhängige Basis für die Definierung des GraphQL-Graphen benötigen.
+Da GraphQL laut Spezifikation in jeder beliebigen Sprache implementierbar sein soll wird eine sprachunabhängige Basis für die Definierung des GraphQL-Graphen benötigt.
 Diese sprachunabhängige Basis wird durch die in der Spezifikation definierte Beschreibungssprache (\textit{SDL}) gegeben. 
 In GraphQL existieren folgende Typ-Definitionen \textit{Skalar, Interface, Object, Input Object, Enum, Union} diese bilden das Rückgrat des Schemas.
 Über diese Typen wird in den nachfolgenden Abschnitten eine genauere Übersicht gegeben.
@@ -22,7 +22,7 @@ In GraphQL existieren folgende Typ-Definitionen \textit{Skalar, Interface, Objec
 \subsection{Skalare}
 
 Ein Datentyp der nicht mehr weiter vereinfachbar ist wird wie in anderen Programmiersprachen Skalar-Typ genannt.
-Skalar-Typen respräsentieren die Blätter, also die primitiven Werte des GraphQL-Typ-Systems. % Kress Seite 60
+Skalar-Typen repräsentieren die Blätter, also die primitiven Werte des GraphQL-Typ-Systems. % Kress Seite 60
 GraphQL-Antworten entsprechen der Form eines hierarchisch aufgebauten Baumes.
 \newline
 Grundsätzlich bestehen die Blätter dieses Baumes aus GraphQL-Skalar-Typen (es ist zudem auch möglich, dass die Blätter aus \textit{Null-Werten} oder \textit{Enum-Typen} bestehen).
@@ -44,7 +44,7 @@ GraphQL beinhaltet folgende vordefinierten Skalar-Typen:
 Im oben angeführten Codebeispiel werden die Felder \textit{id} und \textit{title} definiert.
 Der Name eines Feldes im umgebenden Typ muss dabei eindeutig sein.
 Die Deklaration erfolgt mit dem Namen als auch dem Typ des Feldes welche mit einem Doppelpunkt getrennt sind.
-Das Feld \textit{id} wird dabei als \textit{not null} deklariert.
+Das Feld \textit{id} wird dabei mit dem \textit{!} als \textit{not null} deklariert.
 
 \myparagraph{Benutzerdefinierte Skalare}
 
@@ -52,6 +52,24 @@ Das Feld \textit{id} wird dabei als \textit{not null} deklariert.
 In den meisten sprachspezifischen Implementierungen ist es möglich eigene Skalar-Typen zu definieren. Diese werden verwendet um beispielsweise verschiedene Datumsformate darzustellen.
 
 \subsection{Enum}
+
+Enum-Typen stellen wie Skalare die Blätter des Typ-Baums dar.
+Ein Enum-Feld hält ein spezifisches Element aus einer Menge von möglichen Werten.
+% Abs 3.9 spec.graphql.org
+% gress Seite 60-61
+
+\begin{JsCode}
+enum Category {
+    Fantasy,
+    Adventure,
+    Mystery,
+    Thriller,
+    Romance
+}
+\end{JsCode}
+
+In diesem Beispiel wurde ein Enum \textit{Category} definiert.
+Es gilt zu beachten, dass dieser Typ mit dem Schlüsselwort \textit{enum} definiert werden muss.
 
 \subsection{Objekt}
 Um auf die Blätter des Baumes zuzugreifen werden in GraphQL Objekte als Knoten verwendet.
@@ -88,16 +106,66 @@ Listen werden in der SDL wie im obigen Beispiel ersichtlich mit eckigen Klammern
 
 \subsection{Interface}
 
+Interfaces sind abstrakte Typen welche eine Liste an Feldern definieren.
+GraphQL-Interfaces repräsentieren eine Liste von Felder und deren Argumente.
+Objekte und Interfaces können ein Interface implementieren, dazu muss der Typ, welcher das Interface definieren will, alle Felder des zu implementierenden Interfaces definieren.
+\newline
+% Abschnitt 3.7 spec
+Felder eines Interfaces sind an dieselben Regeln wie ein Objekt gebunden.
+Der Typ eines Feldes kann entweder ein Skalar, Enum, Interface oder Union sein.
+Zudem ist es möglich, dass ein Typ mehrere Interfaces implementiert.
+%gress 65-66
+\newline
 
-\subsection{Input Objekt}
+
+Im folgenden Codebeispiel wird die Definition eines Interfaces veranschaulicht:
+
+\begin{JsCode}
+interface Person {
+    firstName: String
+    lastName: String
+}
+
+type Author implements Person {
+    id: Int!
+    firstName: String
+    lastName: String
+    books: [Book]
+}
+\end{JsCode}
+
+Ein Interface kann nicht alleine verwendet werden, es braucht also eine spezifische Implementierung welche im Beispiel mit \textit{Author} umgesetzt wurde.
+Der Objekt-Typ \textit{Author} hat somit nun alle Felder vom Interface \textit{Person}.
+
+\subsection{Input-Objekt}
+Ein Input-Objekt-Typ ist ein spezieller Objekt-Typ. Ein Input-Objekt hält genauso wie ein Objekt skalare Felder, Enumerationen oder Referenzen.
+Diese referenzierten Objekte müssen aber ebenso Input-Objekte sein. Eine Mischung der Objekt-Typen ist laut Spezifikation nicht erlaubt.
+\newline
+
+
+Im folgenden Beispiel wird ein Input-Objekt für ein Buch realisert:
+\begin{JsCode}
+input AuthorCreateInput {
+  firstName: String
+  lastName: String
+  books: [Int!]
+}
+\end{JsCode}
 
 
 \subsection{Union}
+Union-Typen fügen mehrere Objekte zu einer Gruppe zusammen.
+Diese Typen sind sehr nützlich, wenn beispielsweise eine Query zwei unterschiedliche Objekt-Typen zurückgeben kann, diese aber nicht diesselben Felder besitzen.
+In dieser Query können dann mithilfe von Inline-Fragmenten die spezifischen Felder abgefragt werden.
+
+\begin{JsCode}
+union SearchResult = Author | Buch
+\end{JsCode}
 
 \section{Schema}
 Wenn man das Schema als Baumstruktur betrachtet so sind die referenzierten Objekte Verzweigungen des Baumes.
 Die Blätter am Ende des Baumes enthalten die eigentlichen Daten.
-Die Astverzweigungen sind wichtig, denn sie sind die Referenzen die zu den anderen Objekten verweisen.
+Die Astverzweigungen sind von besonderer Bedeutung, denn sie beinhalten die Referenzen zu den anderen Objekten.
 
 Zudem werden die Wurzelknoten der Eingangspunkte der Operationen (Query, Mutation und Subscription) definiert.
 Um ein korrektes Schema zu erstellen muss beachtet werden, dass die Typen und Direktiven eindeutig über ihren Namen identifizierbar sind. Außerdem dürfen im Schema definierte Namen nicht mit doppeltem Unterstrich beginnen.
@@ -107,36 +175,20 @@ Diese sind für das GraphQL Introspektionsystem reserviert. spec.graphl.org/Sche
 Das Schema definiert die initialen Wurzelknoten der Operationen die es unterstützt (Query, Mutation, Subscription). Dadurch definiert das Schema den Ort im Typ System wo diese Operationen beginnen.
 Query ist aber dabei die einzige Operation welche man zwingend definieren muss. Mutations und Subscriptions sind optional und werden, wenn sie nicht explizit definiert werden, nicht unterstützt.
 Eine Wurzel-Operation muss dabei ein \textit{Object Type} sein. Desweiteren müssen die Objekttypen der Wurzel-Operationen unterscheiden und dürfen nicht diesselben sein. 
+\newline
 
-
-\begin{JsCode}
-type Book {
-    id: Int!
-    title: String
-    authors: [Author]
-}
-    
-type Author {
-    id: Int!
-    firstName: String
-    lastName: String
-    books: [Book]
-}
-\end{JsCode}
-
-% Das Objekt Book enthält dabei die Felder id und title. Desweiteren enthält Book eine Liste von Authoren.
-% Das Objekt Author enthält die Felder id, firstName und lastName.
-% Außerdem enthält Author eine Liste von Büchern die der Autor geschrieben hat.
-% Im Beispiel gilt zu beachten, dass eine Ressource mit dem Schlüsselwort \textit{type} versehen ist.
-% Zudem sind die Properties der Ressource immer nach dem Schema <name>: <Datentyp> gegliedert.
-% Der Datentyp ist dabei entweder ein Objekt, eine Liste von Objekten oder ein skalarer Datentyp.
-% Im Schema werden Relationen von Objekten nicht durch eine Schachtelung dieser in einem einzigen Objekt definiert.
 Bei komplexeren Graphen würde dies zu einer kaum zu lesenden oder adaptierbaren Schemadefinition führen.
 Das Schema besteht somit aus einzelnen, geschlossenen Objekttyp-Definitionen, die einander oder aber ihre Felder referenzieren. Seite 58 und 59
 Ist ein Feld mit ! deklariert so darf dieses nicht null sein.
 
-% \section{Typen}
-% In GraphQL existieren 6 Typ Definitionen \textit{Skalare, Interfaces, Object, Input Object, Enum, Union} diese bilden das Rückgrat des Schemas.
+\section{Schema Definition}
+
+
+% \includegraphics{pics/schema.png}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{pics/schema.png}
+    \caption{Schemadefinition}
+\end{figure}
 
 
 \section{Parameter}

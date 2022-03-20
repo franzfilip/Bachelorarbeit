@@ -1397,6 +1397,7 @@ INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\graphics\grap
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\biblatex.sty
 INPUT .\hgblistings.sty
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\graphics\color.sty
+INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
 INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
@@ -1647,6 +1648,15 @@ INPUT .\graphql.tex
 INPUT graphql.tex
 INPUT .\graphql.tex
 INPUT graphql.tex
+INPUT .\pics\schema.png
+INPUT .\pics\schema.png
+INPUT pics\schema.png
+INPUT .\pics\schema.png
+INPUT .\pics\schema.png
+INPUT .\pics\schema.png
+INPUT .\pics\schema.png
+INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr10.tfm
+INPUT C:\Users\Franz-Filip\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx10.tfm
 INPUT .\pics\GraphQL_Query_Schema.png
 INPUT .\pics\GraphQL_Query_Schema.png
 INPUT pics\GraphQL_Query_Schema.png
