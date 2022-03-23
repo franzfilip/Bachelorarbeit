@@ -57,9 +57,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.6}Parameter}{15}{section.3.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.7}Anfragen}{15}{section.3.7}%
+\contentsline {section}{\numberline {3.7}Lesende und schreibende Zugriffe}{15}{section.3.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.8}Querys}{15}{section.3.8}%
+\contentsline {section}{\numberline {3.8}Querys}{16}{section.3.8}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.8.1}Variablen}{16}{subsection.3.8.1}%
 \defcounter {refsection}{0}\relax 
