@@ -191,18 +191,33 @@ Ist ein Feld mit ! deklariert so darf dieses nicht null sein.
 In Abbildung 3.1 ist eine Schemadefinition zu sehen welche Objekt-Typen, Input-Typen und die Wurzeloperationen beinhaltet.
 
 \section{Parameter}
+Seite 62 Kress
 
-\section{Lesende und schreibende Zugriffe}
+\section{Zugriff auf den GraphQL-Service}
 GraphQL liefert keine Spezifikation über die Netzwerkschicht, sondern lediglich eine Empfehlung \textit{HTTP} zu verwenden.
-Im Gegensatz zu \textit{REST-APIs} welche bei ihrer Umsetzung \textit{HTTP} verwenden, beschränkt sich GraphQL auf lediglich zwei HTTP-Methoden: GET und POST.
+Im Gegensatz zu \textit{REST-APIs} beschränkt sich GraphQL auf lediglich zwei HTTP-Methoden: GET und POST.
 Deswegen ist die Gestaltung und Bennung der Endpunkte nicht so relevant wie bei REST-APIs.
 \newline
+
 Der Unterschied, ob ein Client mittels GET oder POST-Anfrage auf den Service zugreift, besteht darin, dass mittels GET-Anfrage nur lesende Zugriffe möglich sind.
-Also können mit GET-Anfragen nur Querys aber keine Mutations umsetzen werden.
+Also können mit GET-Anfragen nur Querys aber keine Mutations umgesetzt werden.
 Desweiteren müsste man jene Query, welche zum Abfragen der Daten verwendet werden sollte, als URL-Parameter übergeben.
 Somit gilt es auch zu beachten die Sonderzeichen der Query in \textit{ASCII} umzuwandeln.
-Dadurch existiert der Nachteil
+\newline
 
+Wenn man nun also mittels GET-Anfrage eine Query an den GraphQL-Service schickt, resultiert es in dem Nachteil, dass man eine wesentlich schlechtere Übersicht hat. 
+Denn die URL-Encodierung verkompliziert die Anfrage und sorgt für Einschränkungen in der Lesbarkeit.
+Etwaig benötigte Variablen müssten auf dieselbe Art und Weise der Anfrage hinzugefügt werden.
+Problematischer ist dabei aber jedoch, dass einige Browser eine Maximallänge für URIs definiert haben.
+Somit können komplexe Querys nicht funktional sicher über GET-Anfragen abgebildet werden.
+\newline
+
+Aus diesem Grund ist es Standard, dass in GraphQL alle Anfragen per POST-Anfrage abgewickelt werden.
+Diese werden an den einzigen, nach außen freigegebenen Endpunkt gerichtet.
+Da für die Anfragen die POST-Methode verwendet wird, können im Body beliebig viele und komplexe Querys an den Service übergeben werden.
+\newline
+
+Grundsätzlich besteht eine Anfrage an den GraphQL-Service aus der eigentlichen Query und zwei optionalen Parametern: Variablen und der Name der Operation.
 
 
 % Um schreibend oder lesend auf den GraphQL-Service zugreifen zu können muss an den bereitgestellten Endpunkt eine POST-Anfrage mit einer Query geschickt werden.
@@ -237,7 +252,7 @@ In der folgenden Abbildung ist eine verschachtelte Query zu sehen, welche alle B
 
 \subsection{Variablen}
 Mit Parametern ist es möglich zusätzliche Daten für spezielle Operationen an den GraphQL-Service zu schicken.
-Diese können aber nur statisch in die query eingetragen werden.
+Diese können aber nur statisch in die Query eingetragen werden.
 Deswegen kann eine GraphQL Operation zudem mit Variablen erweitert werden.
 Dadurch hat man verstärkt die Möglichkeit Funktionen wiederzuverwenden.
 Variablen müssen am Anfang einer Operation definiert werden und befinden sich während der Ausführung im Lebensraum der Operation.
@@ -251,9 +266,16 @@ In der folgenden Abbildung ist eine Anfrage zu sehen welche das Buch mit der \te
     \caption{Anfrage aller Bücher mit zugehörigen Autoren}
 \end{figure}
 
-\subsection{Fragmentierung}
-
 \subsection{Aliase}
+In GraphQL-Querys ist es möglich, dass mehrere miteinander in Konflikt stehende Parameter übergeben werden.
+Um diesem Problem vorzuwirken besteht die Möglichkeit mit \textit{Aliases} zu arbeiten.
+Mit ihnen ist es möglich die unterschiedlichen Resultate dieser in Konflikt stehenden Argumente zu benennen und damit zu unterscheiden.
+% Kress 46
+
+\subsection{Fragmentierung}
+Fragmente strukturieren und organisieren komplexe Datenanforderungen.
+Es ist außerdem möglich Parameter einzuführen, weiters werden bereits in der Query definierte Variablen in den Fragmenten verwendet.
+
 
 \section{Mutationen}
 APIs benötigen neben dem lesenden Zugriff auf Daten auch einen schreibenden.
@@ -268,34 +290,18 @@ Manipulierende Anfragen können Daten dadurch nur auf jene Art und Weise ändern
 
 \subsection{Designempfehlungen}
 
-placeholder
-\pagebreak
+\subsection{Subscriptions}
+Durch diese spezielle Form der Querys ist es möglich Daten in Echtzeit zu folgen und Updates direkt vom Server zu erhalten wenn gewisse Events ausgelöst wurden.
+Diese Events werden meist durch das Erzeugen, ändern oder löschen von Daten ausgelöst.
 
 \section{Bekannte Probleme}
 
 \subsection{Authentifizierung, Autorisierung und Rollenmanagement}
 
-placeholder
-\pagebreak
-
 \subsection{1 + n Problem}
 
-\subsection{Subscriptions}
-
-placeholder
-\pagebreak
-
-placeholder
-\pagebreak
-
 \subsection{Fehlermanagement}
-
-placeholder
-\pagebreak
 
 \subsection{Pagination}
 
 \subsection{Caching}
-
-placeholder
-\pagebreak
