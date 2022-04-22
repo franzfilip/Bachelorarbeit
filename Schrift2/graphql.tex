@@ -9,8 +9,8 @@ Eine eingehende Anfrage wird durch die im Schema definierte Datenstruktur validi
 Wenn die in der Anfrage enthaltene Query durch das Typ-System erfolgreich validiert wurde, wird die beinhaltete Operation an die Implementierung weitergeleitet.
 Dafür zerlegt GraphQL die übergebene Query und gibt sie an den jeweiligen Resolver weiter. Diese Resolver interagieren mit der Geschäftslogik und füllen die angeforderten Felder mit Daten.
 Die kumulierten Ergebnisse werden als Antwort an den Client zurückgeschickt. 
-% \cite[S. 57-58]{kress2020graphql}
-% , spec.graphql.org/SchemaDefinition
+\cite[S. 57-58]{kress2020graphql}
+\cite[Abs. Schemadefinition]{graphqlOnline}
 
 
 \section{Schema-Definitions-Sprache SDL}
@@ -22,11 +22,11 @@ In GraphQL existieren folgende Typ-Definitionen \textit{Skalar, Interface, Objec
 \subsection{Skalare}
 
 Ein Datentyp der nicht mehr weiter vereinfachbar ist wird wie in anderen Programmiersprachen Skalar-Typ genannt.
-Skalar-Typen repräsentieren die Blätter, also die primitiven Werte des GraphQL-Typ-Systems. % Kress Seite 60
+Skalar-Typen repräsentieren die Blätter, also die primitiven Werte des GraphQL-Typ-Systems. \cite[S. 60]{kress2020graphql}
 GraphQL-Antworten entsprechen der Form eines hierarchisch aufgebauten Baumes.
 \newline
 Grundsätzlich bestehen die Blätter dieses Baumes aus GraphQL-Skalar-Typen (es ist zudem auch möglich, dass die Blätter aus \textit{Null-Werten} oder \textit{Enum-Typen} bestehen).
-%spec.graphql.org /ScalarTypeDefinition
+\cite[Abs. ScalarTypeDefinition]{graphqlOnline}
 GraphQL beinhaltet folgende vordefinierten Skalar-Typen:
 \begin{enumerate}
     \item Boolean
@@ -55,8 +55,8 @@ In den meisten sprachspezifischen Implementierungen ist es möglich eigene Skala
 
 Enum-Typen stellen wie Skalare die Blätter des Typ-Baums dar.
 Ein Enum-Feld hält ein spezifisches Element aus einer Menge von möglichen Werten.
-% Abs 3.9 spec.graphql.org
-% gress Seite 60-61
+\cite[Abs. 3.9]{graphqlOnline}
+\cite[S. 60-61]{kress2020graphql}
 
 \begin{JsCode}
 enum Category {
@@ -72,12 +72,13 @@ In diesem Beispiel wurde ein Enum \textit{Category} definiert.
 Es gilt zu beachten, dass dieser Typ mit dem Schlüsselwort \textit{enum} definiert werden muss.
 
 \subsection{Objekt}
-Um auf die Blätter des Baumes zuzugreifen werden in GraphQL Objekte als Knoten verwendet.
+Um auf die Blätter des Baumes zuzugreifen, werden in GraphQL Objekte als Knoten verwendet.
 Diese Objekte halten dabei eine Liste von Feldern die einen bestimmten Wert lieferen.
 Dabei kann jedes Feld entweder ein Skalar, Enum, Objekt oder Interface sein.
 Laut Spezifikation, sollten Objekte als eine Menge von geordneten Schlüssel-Wert-Paaren serialisiert werden.
 Wobei der Name des Feldes der Schlüssel ist und das Ergebnis der Evaluierung des jeweiligen Feldes den Wert abbildet.
 Um einen Objekt-Typ zu definieren muss das Schlüsselwort \textit{type} verwendet werden.
+\cite[Abs. 3.6]{graphqlOnline}
 
 \begin{JsCode}
 type Book {
@@ -110,11 +111,11 @@ Interfaces sind abstrakte Typen welche eine Liste an Feldern definieren.
 GraphQL-Interfaces repräsentieren eine Liste von Felder und deren Argumente.
 Objekte und Interfaces können ein Interface implementieren, dazu muss der Typ, welcher das Interface definieren will, alle Felder des zu implementierenden Interfaces definieren.
 \newline
-% Abschnitt 3.7 spec
+\cite[Abs. 3.7]{graphqlOnline}
 Felder eines Interfaces sind an dieselben Regeln wie ein Objekt gebunden.
 Der Typ eines Feldes kann entweder ein Skalar, Enum, Interface oder Union sein.
 Zudem ist es möglich, dass ein Typ mehrere Interfaces implementiert.
-%gress 65-66
+\cite[S.65-66]{kress2020graphql}
 \newline
 
 
@@ -166,10 +167,12 @@ union SearchResult = Author | Buch
 Wenn man das Schema als Baumstruktur betrachtet so sind die referenzierten Objekte Verzweigungen des Baumes.
 Die Blätter am Ende des Baumes enthalten die eigentlichen Daten.
 Die Astverzweigungen sind von besonderer Bedeutung, denn sie beinhalten die Referenzen zu den anderen Objekten.
+\cite[S.60]{kress2020graphql}
 
 Zudem werden die Wurzelknoten der Eingangspunkte der Operationen (Query, Mutation und Subscription) definiert.
 Um ein korrektes Schema zu erstellen muss beachtet werden, dass die Typen und Direktiven eindeutig über ihren Namen identifizierbar sind. Außerdem dürfen im Schema definierte Namen nicht mit doppeltem Unterstrich beginnen.
-Diese sind für das GraphQL Introspektionsystem reserviert. spec.graphl.org/SchemaDefinition
+Diese sind für das GraphQL Introspektionsystem reserviert.
+\cite[Abs. 3.3]{graphqlOnline}
 
 \section{Wurzel Operationen}
 Das Schema definiert die initialen Wurzelknoten der Operationen die es unterstützt (Query, Mutation, Subscription). Dadurch definiert das Schema den Ort im Typ System wo diese Operationen beginnen.
@@ -179,7 +182,7 @@ Eine Wurzel-Operation muss dabei ein \textit{Object Type} sein. Desweiteren müs
 
 Bei komplexeren Graphen würde dies zu einer kaum zu lesenden oder adaptierbaren Schemadefinition führen.
 Das Schema besteht somit aus einzelnen, geschlossenen Objekttyp-Definitionen, die einander oder aber ihre Felder referenzieren. Seite 58 und 59
-Ist ein Feld mit ! deklariert so darf dieses nicht null sein.
+Ist ein Feld mit \textit{!} deklariert so darf dieses nicht null sein.
 
 \section{Schema Definition}
 
@@ -233,8 +236,7 @@ Um auf eine Ressource zuzugreifen wird ein POST-Request an den Wurzelknoten der 
 Dieser POST-Request enthält ein in der \textit{GraphQL Query Language} definiertes Objekt.
 In diesem Objekt werden die auszuführenden Funktionen definiert und welche Felder davon an den Client zu retournieren sind.
 Das Ergebnis hat genau jenes Format welches in der Anfrage vom Client definiert wurde.
-% Kress 40-41
-% \parencite[40]{kress2020graphql}
+\cite[S.40-41]{kress2020graphql}
 
 Da GraphQL mit einem Graphenschema arbeitet, welche auf den Beziehungen der Knoten zueinander basiert, ist es möglich diese Relationen zu nutzen um Daten über mehrere Objekte hinweg zu sammeln.
 \newline
@@ -244,7 +246,7 @@ In der folgenden Abbildung ist eine verschachtelte Query zu sehen, welche alle B
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{pics/query_book_with_result.png}
-    \caption{Anfrage aller Bücher mit zugehörigen Autoren}
+    \caption{Anfrage aller Bücher mit zugehörigen Autoren.}
 \end{figure}
 
 \section{Parameter}
@@ -270,7 +272,8 @@ type Book {
 Im oben stehenden Code Beispiel wurde der Objekt-Typ Book um ein Feld \textit{price} erweitert.
 Bei einer Query auf das Feld price des Objekts Book kann ein Argument unit mitgegeben werden um den tatsächlichen Verkaufswert in der richtigen Währung zu bestimmen.
 Dabei wurde ebenfalls ein Standardwert definiert um unit nicht zwingend als Parameter übergeben zu müssen.
-% Seite 62 Kress
+\cite[S.62]{kress2020graphql}
+
 
 \subsection{Variablen}
 Mit Parametern ist es möglich zusätzliche Daten für spezielle Operationen an den GraphQL-Service zu schicken.
@@ -279,13 +282,14 @@ Deswegen kann eine GraphQL Operation zudem mit Variablen erweitert werden.
 Dadurch hat man verstärkt die Möglichkeit Funktionen wiederzuverwenden.
 Variablen müssen am Anfang einer Operation definiert werden und befinden sich während der Ausführung im Lebensraum der Operation.
 Diese Variablen werden unter anderem für die Filterung der angeforderten Objekte verwendet.
+\cite[Abs. 5.8]{graphqlOnline}
 \newline
 
 In der folgenden Abbildung ist eine Anfrage zu sehen welche das Buch mit der \textit{id = 1} anfordert. Dabei wird die id als Variable übergeben.
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{pics/book_request_with_parameter.png}
-    \caption{Anfrage aller Bücher mit zugehörigen Autoren}
+    \caption{Anfrage aller Bücher mit zugehörigen Autoren.}
 \end{figure}
 
 \subsection{Aliase}
@@ -293,6 +297,7 @@ In GraphQL-Querys ist es möglich, dass mehrere miteinander in Konflikt stehende
 Um diesem Problem vorzuwirken besteht die Möglichkeit mit \textit{Aliases} zu arbeiten.
 Mit ihnen ist es möglich die unterschiedlichen Resultate dieser in Konflikt stehenden Argumente zu benennen und damit zu unterscheiden.
 % Kress 46
+\cite[S. 46]{kress2020graphql}
 
 \subsection{Fragmentierung}
 Fragmente strukturieren und organisieren komplexe Datenanforderungen.
@@ -305,6 +310,8 @@ Dieser wird in GraphQL mittels Mutationen umgesetzt.
 Mutationen kapseln die Implementierungen der Datenbankzugriffsschicht in ein Interface welches die Möglichkeiten zur Manipulation der Daten vorgibt.
 Manipulierende Anfragen können Daten dadurch nur auf jene Art und Weise ändern, wie es in der Applikation vorgesehen ist.
 % Kress 54
+\cite[S. 54]{kress2020graphql}
+
 
 % Mutationen ermöglichen es die Zugriffe 
 % Sie werden in der Schemasprache (anderer Begriff ??? -> GDL etc)  mit dem Schlüsselwort mutation definiert.
