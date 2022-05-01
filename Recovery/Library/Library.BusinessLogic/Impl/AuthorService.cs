@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Library.BusinessLogic.Impl {
     public class AuthorService : BaseService<Author>, IAuthorService {
-        public AuthorService(IRepository<Author> repository) : base(repository) {
+        public AuthorService(IAuthorRepository repository) : base(repository) {
         }
     }
 }

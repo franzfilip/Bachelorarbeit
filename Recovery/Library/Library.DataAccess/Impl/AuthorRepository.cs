@@ -19,7 +19,7 @@ namespace Library.DataAccess.Impl {
         }
 
         public override async Task<Author> UpdateAsync(Author author) {
-            var authorToUpdate = await GetFirstAsync(b => b.Id == author.Id);
+            var authorToUpdate = await GetFirstAsync(a => a.Id == author.Id, a => a.Books);
             if (authorToUpdate == null) {
                 throw new ArgumentNullException(nameof(authorToUpdate));
             }
@@ -29,7 +29,7 @@ namespace Library.DataAccess.Impl {
 
             if (author.Books.Count != authorToUpdate.Books.Count || !authorToUpdate.Books.All(author.Books.Contains)) {
                 authorToUpdate.Books.UpdateManyToMany(author.Books, b => b.Id);
-                authorToUpdate.Books = await context.Books.Where(book => book.Authors.Select(a => a.Id).ToList().Contains(book.Id)).ToListAsync();
+                authorToUpdate.Books = await context.Books.Where(book => author.Books.Select(a => a.Id).ToList().Contains(book.Id)).ToListAsync();
             }
 
             return await base.UpdateAsync(authorToUpdate);

@@ -13,13 +13,5 @@ namespace Library.BusinessLogic.Impl {
         public BookService(IBookRepository bookRepository, IBaseService<Author> authorService) : base(bookRepository) {
             this.authorService = authorService;
         }
-
-        public override async Task<Book> AddAsync(Book book) {
-            return await base.AddAsync(book);
-        }
-
-        public override async Task<Book> UpdateAsync(Book book) {
-            return await base.UpdateAsync(book);
-        }
     }
 }
