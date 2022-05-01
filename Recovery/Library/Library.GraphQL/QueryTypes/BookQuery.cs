@@ -5,17 +5,11 @@ using Library.Datamodel;
 namespace Library.GraphQL.QueryTypes {
     [ExtendObjectType(typeof(Query))]
     public class BookQuery {
-        private readonly IBookService bookService;
-
-        public BookQuery(IBookService bookService) {
-            this.bookService = bookService;
-        }
-
-        public async Task<List<Book>> Books() {
+        public async Task<List<Book>> Books([Service] IBookService bookService) {
             return await bookService.GetAsync(includes: book => book.Authors);
         }
 
-        public async Task<Book> BookById(int id) {
+        public async Task<Book> BookById([Service] IBookService bookService, int id) {
             return await bookService.GetFirstAsync(book => book.Id == id, book => book.Authors);
         }
     }

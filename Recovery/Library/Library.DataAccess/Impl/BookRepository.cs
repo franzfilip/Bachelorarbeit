@@ -20,7 +20,8 @@ namespace Library.DataAccess.Impl {
         }
 
         public override async Task<Book> UpdateAsync(Book book) {
-            var bookToUpdate = await GetFirstAsync(b => b.Id == book.Id);
+            var bookToUpdate = await GetFirstAsync(b => b.Id == book.Id, b => b.Authors);
+            //var bookToUpdate = await context.Books.Include(b => b.Authors).FirstOrDefaultAsync(b => b.Id == book.Id);
             if (bookToUpdate == null) {
                 throw new ArgumentNullException(nameof(bookToUpdate));
             }
