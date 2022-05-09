@@ -15,7 +15,7 @@ namespace AutoBetter.BusinessLogic.impl {
         public BaseService(IRepository<TEntity> repository) {
             this.repository = repository;
         }
-        public virtual async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes) {
+        public virtual async Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes) {
             return await repository.GetAsync(filter, includes);
         }
 

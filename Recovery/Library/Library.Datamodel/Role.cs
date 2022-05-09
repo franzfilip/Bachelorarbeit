@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace Library.Datamodel {
     public class Role : BaseEntity {
         public string Name { get; set; }
+        public List<User> Users { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace AutoBetter.DataAccess.impl {
             this.context = contextFactory.CreateDbContext();
         }
 
-        public async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes) {
+        public async Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes) {
             IQueryable<TEntity> query = context.Set<TEntity>();
 
             foreach (var include in includes) {
@@ -27,7 +27,7 @@ namespace AutoBetter.DataAccess.impl {
                 query = query.Where(filter);
             }
 
-            return await query.ToListAsync();
+            return query.AsQueryable();
         }
 
         public async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes) {
@@ -41,7 +41,7 @@ namespace AutoBetter.DataAccess.impl {
                 query = query.Where(filter);
             }
 
-            return await query.FirstOrDefaultAsync();
+            return await query.AsQueryable().FirstOrDefaultAsync();
         }
 
         public virtual async Task<TEntity> AddAsync(TEntity entity) {
