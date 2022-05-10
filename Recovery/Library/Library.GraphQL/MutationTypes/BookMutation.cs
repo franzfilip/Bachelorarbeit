@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HotChocolate.Subscriptions;
 using Library.BusinessLogic;
 using Library.Datamodel;
 using Library.GraphQLTypes.InputTypes;
@@ -13,13 +14,15 @@ namespace Library.GraphQL.MutationTypes {
             this.mapper = mapper;
         }
 
-        public async Task<Book> CreateBook([Service]IBookService bookService, BookCreate input) {
+        public async Task<Book> CreateBook([Service]IBookService bookService, BookCreate input, [Service]ITopicEventSender sender) {
             if(input is null) {
                 throw new ArgumentNullException(nameof(input));
             }
 
             Book book = mapper.Map<Book>(input);
-            return await bookService.AddAsync(book);
+            book = await bookService.AddAsync(book);
+            await sender.SendAsync("bookAdded", book);
+            return book;
         }
 
         public async Task<Book> UpdateBook([Service]IBookService bookService, BookUpdate input) {

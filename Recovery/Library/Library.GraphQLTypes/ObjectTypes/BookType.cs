@@ -9,8 +9,8 @@ namespace Library.GraphQLTypes.ObjectTypes {
         //protected override void Configure(IObjectTypeDescriptor<Book> descriptor) { }
     }
 
-    //public class BookSubscriptionType: ObjectType {
-    //    protected override void Configure(IObjectTypeDescriptor descriptor) {
+    //public class BookSubscriptionType : ObjectType<Book> {
+    //    protected override void Configure(IObjectTypeDescriptor<Book> descriptor) {
     //        descriptor
     //            .Field("bookAdded")
     //            .Type<BookType>()

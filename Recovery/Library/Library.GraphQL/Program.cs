@@ -10,7 +10,8 @@ using Library.EF;
 using Library.GraphQL.DataLoaders;
 using Library.GraphQL.MutationTypes;
 using Library.GraphQL.QueryTypes;
-using Library.GraphQLTypes.InputTypes.Author;
+using Library.GraphQL.SubscriptionTypes;
+using Library.GraphQLTypes.InputTypes;
 using Library.GraphQLTypes.InputTypes.Book;
 using Library.GraphQLTypes.ObjectTypes;
 using Library.Mapper;
@@ -59,6 +60,7 @@ builder.Services.AddTransient<IAuthService, AuthService>();
 
 builder.Services
         .AddGraphQLServer()
+        .AddAuthorization()
         .AddProjections()
         .AddFiltering()
         .AddSorting()
@@ -71,13 +73,10 @@ builder.Services
         .AddTypeExtension<ReviewMutation>()
         .AddTypeExtension<AuthMutationTypeExtension>()
         .AddDataLoader<AuthorByIdDataLoader>()
-        .AddType<BookType>()
-        .AddType<AuthorType>()
-        .AddType<BookCreate>()
-        .AddType<BookUpdate>()
-        .AddType<AuthorCreate>()
-        .AddType<AuthorUpdate>()
-        .AddType<UserType>();
+        .AddSubscriptionType<Subscription>()
+        .AddTypeExtension<BookSubscription>();
+
+builder.Services.AddInMemorySubscriptions();
 
 var mapperConfig = new MapperConfiguration(mc => {
     mc.AddProfile(new BookProfile());
@@ -91,11 +90,17 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseAuthorization();
 
-app.UseRouting()
-    .UseEndpoints(endpoints => {
-        endpoints.MapGraphQL();
-    });
+app.UseRouting();
+
+app.UseWebSockets();
+
+app
+    .UseAuthentication()
+    .UseAuthorization();
+
+app.UseEndpoints(endpoints => {
+    endpoints.MapGraphQL();
+});
 
 app.Run();

@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using Library.BusinessLogic;
 using Library.Datamodel;
+using Library.GraphQL.Resolver;
 using Library.GraphQLTypes.InputTypes;
 using Library.GraphQLTypes.InputTypes.Author;
+using Library.GraphQLTypes.InputTypes.Book;
+using Library.GraphQLTypes.ObjectTypes;
 
 namespace Library.GraphQL.MutationTypes {
     [ExtendObjectType(Name = "Mutation")]
@@ -18,8 +21,7 @@ namespace Library.GraphQL.MutationTypes {
                 throw new ArgumentNullException(nameof(input));
             }
 
-            Author author = mapper.Map<Author>(input);
-            return await authorService.AddAsync(author);
+            return await authorService.AddAsync(mapper.Map<Author>(input));
         }
 
         public async Task<Author> UpdateAuthor([Service] IAuthorService authorService, AuthorUpdate input) {
@@ -27,8 +29,7 @@ namespace Library.GraphQL.MutationTypes {
                 throw new ArgumentNullException(nameof(input));
             }
 
-            Author author = mapper.Map<Author>(input);
-            return await authorService.UpdateAsync(author);
+            return await authorService.UpdateAsync(mapper.Map<Author>(input));
         }
     }
 }
