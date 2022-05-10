@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library.GraphQLTypes.InputTypes.Author {
+namespace Library.GraphQLTypes.InputTypes.User {
     public class LoginData {
         public string Email { get; set; }
         public string Password { get; set; }

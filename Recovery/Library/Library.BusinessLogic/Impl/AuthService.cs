@@ -17,12 +17,25 @@ namespace Library.BusinessLogic.Impl {
     public class AuthService : IAuthService {
 
         private readonly IRepository<User> userRepository;
+        private readonly IRepository<Role> roleRepository;
         private readonly TokenSettings tokenSettings;
-        public AuthService(IRepository<User> userRepository, IOptions<TokenSettings> tokenSettings) {
+        public AuthService(IRepository<User> userRepository,IRepository<Role> roleRepository, IOptions<TokenSettings> tokenSettings) {
             this.userRepository = userRepository;
+            this.roleRepository = roleRepository;
             this.tokenSettings = tokenSettings.Value;
         }
 
+        public async Task<string> Register(User entity) {
+            var user = await userRepository.GetFirstAsync(u => u.Email.Equals(entity.Email));
+
+            if(user != null) {
+                throw new Exception("User already exists");
+            }
+            entity.Password = BCrypt.Net.BCrypt.HashPassword(entity.Password);
+            entity.Roles = (await roleRepository.GetAsync(r => r.Name.Equals("User"))).ToList();
+
+            return (await userRepository.AddAsync(entity)).Email;
+        }
         public async Task<string> Login(string email, string password) {
 
             var user = await userRepository.GetFirstAsync(user => user.Email.Equals(email), user => user.Roles);

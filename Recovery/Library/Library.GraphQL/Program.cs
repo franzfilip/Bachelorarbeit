@@ -50,9 +50,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient(typeof(IBookRepository), typeof(BookRepository));
 builder.Services.AddTransient(typeof(IAuthorRepository), typeof(AuthorRepository));
+builder.Services.AddTransient(typeof(IReviewRepository), typeof(ReviewRepository));
 builder.Services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<IAuthorService, AuthorService>();
+builder.Services.AddTransient<IReviewService, ReviewService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 
 builder.Services
@@ -66,18 +68,21 @@ builder.Services
         .AddMutationType<Mutation>()
         .AddTypeExtension<BookMutation>()
         .AddTypeExtension<AuthorMutation>()
-        .AddTypeExtension<LoginMutation>()
+        .AddTypeExtension<ReviewMutation>()
+        .AddTypeExtension<AuthMutationTypeExtension>()
         .AddDataLoader<AuthorByIdDataLoader>()
         .AddType<BookType>()
         .AddType<AuthorType>()
         .AddType<BookCreate>()
         .AddType<BookUpdate>()
         .AddType<AuthorCreate>()
-        .AddType<AuthorUpdate>();
+        .AddType<AuthorUpdate>()
+        .AddType<UserType>();
 
 var mapperConfig = new MapperConfiguration(mc => {
     mc.AddProfile(new BookProfile());
     mc.AddProfile(new AuthorProfile());
+    mc.AddProfile(new ReviewProfile());
 });
 
 builder.Services.AddSingleton<IMapper>(mapperConfig.CreateMapper());
