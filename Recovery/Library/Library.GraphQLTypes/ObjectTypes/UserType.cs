@@ -10,6 +10,8 @@ namespace Library.GraphQLTypes.ObjectTypes {
     public class UserType : ObjectType<User> {
         protected override void Configure(IObjectTypeDescriptor<User> descriptor) {
             descriptor.Ignore(f => f.Password);
+            //descriptor.Ignore(f => f.Roles);
+            //descriptor.Ignore(f => f.Reviews);
         }
     }
 }

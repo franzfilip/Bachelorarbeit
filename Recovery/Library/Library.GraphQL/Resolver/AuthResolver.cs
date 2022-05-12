@@ -12,8 +12,8 @@ namespace Library.GraphQL.Resolver {
             this.mapper = mapper;
         }
 
-        public async Task<string> Login(string email, string password) {
-            return await authService.Login(email, password);
+        public async Task<string> Login(LoginData input) {
+            return await authService.Login(input.Email, input.Password);
         }
 
         public async Task<string> Register(RegisterData input) {

@@ -74,7 +74,7 @@ namespace AutoBetter.DataAccess.impl {
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            var toRemove = await context.Set<TEntity>().Where(e => e.Id == entity.Id).FirstAsync();
+            var toRemove = await GetFirstAsync(e => e.Id == entity.Id);
             context.Remove(toRemove);
             await context.SaveChangesAsync();
         }

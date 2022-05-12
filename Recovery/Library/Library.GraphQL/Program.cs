@@ -67,6 +67,7 @@ builder.Services
         .AddQueryType<Query>()
         .AddTypeExtension<BookQuery>()
         .AddTypeExtension<AuthorQuery>()
+        //.AddTypeExtension<ReviewQuery>()
         .AddMutationType<Mutation>()
         .AddTypeExtension<BookMutation>()
         .AddTypeExtension<AuthorMutation>()

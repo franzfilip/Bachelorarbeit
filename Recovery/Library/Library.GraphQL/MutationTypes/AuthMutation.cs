@@ -14,9 +14,8 @@ namespace Library.GraphQL.MutationTypes {
                 .Type<UserType>();
 
             descriptor.Field("login")
-                .Argument("email", r => r.Type<StringType>())
-                .Argument("password", r => r.Type<StringType>())
-                .ResolveWith<AuthResolver>(r => r.Login(default, default))
+                .Argument("input", r => r.Type<LoginData>())
+                .ResolveWith<AuthResolver>(r => r.Login(default))
                 .Type<StringType>();
         }
     }

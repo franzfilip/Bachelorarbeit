@@ -12,7 +12,8 @@ namespace Library.GraphQL.QueryTypes {
         [UseProjection]
         [UseFiltering]
         [UseSorting]
-        public async Task<IQueryable<Author>> AuthorsWithPaging([Service] IAuthorService authorService) {
+        //TODO Paging auf Connection umbennen
+        public async Task<IQueryable<Author>> AuthorsConnection([Service] IAuthorService authorService) {
             return await authorService.GetAsync();
         }
 
