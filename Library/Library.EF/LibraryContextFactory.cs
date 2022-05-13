@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace Library.EF {
-    class LibraryContextFactory: IDbContextFactory<LibraryContext> {
-        private const string DEFAULT_DB_CONNECTION_STRING = @"Server = (localdb)\mssqllocaldb; Database = LibraryDB; Trusted_Connection = True";
-        public LibraryContext CreateDbContext()
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<LibraryContext>().UseSqlServer(DEFAULT_DB_CONNECTION_STRING);
-            var context = new LibraryContext(optionsBuilder.Options);
-            return context;
+    public class LibraryContextFactory : IDesignTimeDbContextFactory<LibraryContext> {
+        public LibraryContext CreateDbContext(string[] args) {
+            var optionsBuilder = new DbContextOptionsBuilder<LibraryContext>();
+            optionsBuilder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = LibraryDB; Trusted_Connection = True");
+
+            return new LibraryContext(optionsBuilder.Options);
         }
     }
 }

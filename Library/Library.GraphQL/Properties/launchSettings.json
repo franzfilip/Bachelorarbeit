@@ -1,28 +1,28 @@
 ﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:21094",
+      "applicationUrl": "http://localhost:15154",
       "sslPort": 0
     }
   },
   "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
+    "Library.GraphQL": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "graphql",
+      "applicationUrl": "http://localhost:5065",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Library.GraphQL": {
-      "commandName": "Project",
-      "dotnetRunMessages": "true",
+    "IIS Express": {
+      "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "graphql",
-      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

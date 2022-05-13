@@ -5,15 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Library.Datamodel {
-    public class Author {
-        public int Id { get; set; }
+    public class Author: BaseEntity {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public ICollection<Book> Books { get; set; } = new List<Book>();
-
-        public override bool Equals(object obj) {
-            return obj is Author author &&
-                   Id == author.Id;
-        }
+        public List<Book> Books { get; set; } = new List<Book>();
     }
 }

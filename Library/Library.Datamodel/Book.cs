@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 
 namespace Library.Datamodel {
-    public class Book {
-        public int Id { get; set; }
+    public class Book: BaseEntity {
         public string Title { get; set; }
-        public ICollection<Author> Authors { get; set; } = new List<Author>();
+        public List<Author> Authors { get; set; } = new List<Author>();
+        public List<Review> Reviews { get; set; } = new List<Review>();
     }
 }

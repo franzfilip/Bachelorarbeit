@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Library.Datamodel {
-    public enum Role {
-        Admin = 1,
-        User = 2,
-        Librarian = 3
+    public class Role : BaseEntity {
+        public string Name { get; set; }
+        public List<User> Users { get; set; }
     }
 }

@@ -1,15 +1,60 @@
-[0] Config.pm:311> INFO - This is Biber 2.16
-[0] Config.pm:314> INFO - Logfile is 'main.blg'
-[112] biber-MSWIN64:340> INFO - === 
-[147] Biber.pm:415> INFO - Reading 'main.bcf'
-[266] Biber.pm:952> INFO - Found 7 citekeys in bib section 0
-[282] Biber.pm:4340> INFO - Processing section 0
-[301] Biber.pm:4531> INFO - Looking for bibtex format file 'literatur.bib' for section 0
-[348] bibtex.pm:1689> INFO - LaTeX decoding ...
-[360] bibtex.pm:1494> INFO - Found BibTeX data source 'literatur.bib'
-[446] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[446] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[448] Biber.pm:4168> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'de-DE'
-[448] Biber.pm:4174> INFO - No sort tailoring available for locale 'de-DE'
-[476] bbl.pm:654> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[479] bbl.pm:757> INFO - Output to main.bbl
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: dinat.bst
+Reallocating 'name_of_file' (item size: 1) to 10 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Database file #1: literatur.bib
+Warning--entry type for "graphqlOnline" isn't style-file defined
+--line 30 of file literatur.bib
+Warning--entry type for "dgraphOnline" isn't style-file defined
+--line 38 of file literatur.bib
+Warning--entry type for "rakutenGraphQLVsRest" isn't style-file defined
+--line 46 of file literatur.bib
+You've used 7 entries,
+            3552 wiz_defined-function locations,
+            831 strings with 6767 characters,
+and the built_in function-call counts, 3683 in all, are:
+= -- 430
+> -- 52
+< -- 55
++ -- 72
+- -- 27
+* -- 326
+:= -- 632
+add.period$ -- 4
+call.type$ -- 7
+change.case$ -- 29
+chr.to.int$ -- 7
+cite$ -- 7
+duplicate$ -- 103
+empty$ -- 314
+format.name$ -- 49
+if$ -- 756
+int.to.chr$ -- 0
+int.to.str$ -- 1
+missing$ -- 4
+newline$ -- 45
+num.names$ -- 28
+pop$ -- 49
+preamble$ -- 1
+purify$ -- 29
+quote$ -- 0
+skip$ -- 131
+stack$ -- 0
+substring$ -- 312
+swap$ -- 17
+text.length$ -- 8
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 72
+warning$ -- 0
+while$ -- 47
+width$ -- 0
+write$ -- 69
+(There were 3 warnings)

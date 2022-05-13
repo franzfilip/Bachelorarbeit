@@ -1,31 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HotChocolate.AspNetCore.Authorization;
-using HotChocolate.Types;
+﻿using HotChocolate.AspNetCore.Authorization;
+using HotChocolate.Resolvers;
+using Library.BusinessLogic;
 using Library.Datamodel;
-using Library.GraphQL.Contract;
+using Library.EF;
+using Library.GraphQL.DataLoaders;
 
 namespace Library.GraphQL.QueryTypes {
     [ExtendObjectType(typeof(Query))]
     public class AuthorQuery {
-        private readonly IAuthorService _authorService;
-
-        public AuthorQuery(IAuthorService authorService) {
-            this._authorService = authorService;
+        [UsePaging]
+        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
+        //TODO Paging auf Connection umbennen
+        public async Task<IQueryable<Author>> AuthorsConnection([Service] IAuthorService authorService) {
+            return await authorService.GetAsync();
         }
-        [Authorize]
-        public async Task<IEnumerable<Author>> Authors() => await _authorService.GetAllAsync();
 
         [Authorize]
-        public async Task<Author> Author(int id) {
-            var author = await _authorService.GetByIdAsync(id);
-            if(author is not null) {
-                return author;
-            }
-
-            throw new NullReferenceException($"Cannot find Author with ID {id}");
+        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
+        public async Task<IQueryable<Author>> Authors([Service] IAuthorService authorService) {
+            return await authorService.GetAsync();
         }
     }
 }

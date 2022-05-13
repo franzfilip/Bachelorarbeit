@@ -1,221 +1,52 @@
-% $ biblatex auxiliary file $
-% $ biblatex bbl format version 3.1 $
-% Do not modify the above lines!
-%
-% This is an auxiliary file used by the 'biblatex' package.
-% This file may safely be deleted. It will be recreated by
-% biber as required.
-%
-\begingroup
+\begin{thebibliography}{7}
+% this bibliography was produced with the style dinat.bst v2.5
 \makeatletter
-\@ifundefined{ver@biblatex.sty}
-  {\@latex@error
-     {Missing 'biblatex' package}
-     {The bibliography requires the 'biblatex' package.}
-      \aftergroup\endinput}
-  {}
-\endgroup
+\newcommand{\dinatlabel}[1]%
+{\ifNAT@numbers\else\NAT@biblabelnum{#1}\hspace{2\labelsep}\fi}
+\makeatother
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax\def\url#1{\texttt{#1}}\fi
 
+\bibitem[Berlind(2017)]{berlind2017apis}
+\dinatlabel{Berlind 2017} \textsc{Berlind}, David:
+\newblock \emph{APIs Are Like User Interfaces--Just With Different Users In
+  Mind}.
+\newblock 2017
 
-\refsection{0}
-  \datalist[entry]{nty/global//global/global}
-    \entry{berlind2017apis}{misc}{}
-      \name{author}{1}{}{%
-        {{hash=f45029d97d797ab97cef97cb14a920e1}{%
-           family={Berlind},
-           familyi={B\bibinitperiod},
-           given={David},
-           giveni={D\bibinitperiod}}}%
-      }
-      \strng{namehash}{f45029d97d797ab97cef97cb14a920e1}
-      \strng{fullhash}{f45029d97d797ab97cef97cb14a920e1}
-      \strng{bibnamehash}{f45029d97d797ab97cef97cb14a920e1}
-      \strng{authorbibnamehash}{f45029d97d797ab97cef97cb14a920e1}
-      \strng{authornamehash}{f45029d97d797ab97cef97cb14a920e1}
-      \strng{authorfullhash}{f45029d97d797ab97cef97cb14a920e1}
-      \field{sortinit}{B}
-      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{APIs Are Like User Interfaces--Just With Different Users In Mind}
-      \field{year}{2017}
-    \endentry
-    \entry{cotton1968data}{inproceedings}{}
-      \name{author}{2}{}{%
-        {{hash=4556e6406f2bd7c3a57a009761a6b37b}{%
-           family={Cotton},
-           familyi={C\bibinitperiod},
-           given={Ira\bibnamedelima W},
-           giveni={I\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
-        {{hash=36af7eb8a8c1377164429292975eb299}{%
-           family={Greatorex\bibnamedelima Jr},
-           familyi={G\bibinitperiod\bibinitdelim J\bibinitperiod},
-           given={Frank\bibnamedelima S},
-           giveni={F\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
-      }
-      \strng{namehash}{0b46210c332e25d4d3b4245c24258dee}
-      \strng{fullhash}{0b46210c332e25d4d3b4245c24258dee}
-      \strng{bibnamehash}{0b46210c332e25d4d3b4245c24258dee}
-      \strng{authorbibnamehash}{0b46210c332e25d4d3b4245c24258dee}
-      \strng{authornamehash}{0b46210c332e25d4d3b4245c24258dee}
-      \strng{authorfullhash}{0b46210c332e25d4d3b4245c24258dee}
-      \field{sortinit}{C}
-      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Proceedings of the December 9-11, 1968, fall joint computer conference, part I}
-      \field{title}{Data structures and techniques for remote computer graphics}
-      \field{year}{1968}
-      \field{pages}{533\bibrangedash 544}
-      \range{pages}{12}
-    \endentry
-    \entry{kress2020graphql}{book}{}
-      \name{author}{1}{}{%
-        {{hash=33774256477f855009fd6659bc01ab2a}{%
-           family={Kress},
-           familyi={K\bibinitperiod},
-           given={Dominik},
-           giveni={D\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {dpunkt. verlag}%
-      }
-      \strng{namehash}{33774256477f855009fd6659bc01ab2a}
-      \strng{fullhash}{33774256477f855009fd6659bc01ab2a}
-      \strng{bibnamehash}{33774256477f855009fd6659bc01ab2a}
-      \strng{authorbibnamehash}{33774256477f855009fd6659bc01ab2a}
-      \strng{authornamehash}{33774256477f855009fd6659bc01ab2a}
-      \strng{authorfullhash}{33774256477f855009fd6659bc01ab2a}
-      \field{sortinit}{K}
-      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{GraphQL: Eine Einführung in APIs mit GraphQL}
-      \field{year}{2020}
-    \endentry
-    \entry{wheeler1952use}{inproceedings}{}
-      \name{author}{1}{}{%
-        {{hash=21ccc911222a7c9feaccb3a50baffef7}{%
-           family={Wheeler},
-           familyi={W\bibinitperiod},
-           given={David\bibnamedelima J},
-           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-      }
-      \strng{namehash}{21ccc911222a7c9feaccb3a50baffef7}
-      \strng{fullhash}{21ccc911222a7c9feaccb3a50baffef7}
-      \strng{bibnamehash}{21ccc911222a7c9feaccb3a50baffef7}
-      \strng{authorbibnamehash}{21ccc911222a7c9feaccb3a50baffef7}
-      \strng{authornamehash}{21ccc911222a7c9feaccb3a50baffef7}
-      \strng{authorfullhash}{21ccc911222a7c9feaccb3a50baffef7}
-      \field{sortinit}{W}
-      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Proceedings of the 1952 ACM national meeting (Pittsburgh)}
-      \field{title}{The use of sub-routines in programmes}
-      \field{year}{1952}
-      \field{pages}{235\bibrangedash 236}
-      \range{pages}{2}
-    \endentry
-    \entry{graphqlOnline}{online}{}
-      \name{author}{1}{}{%
-        {{hash=d85544fce402c7a2a96a48078edaf203}{%
-           family={Facebook},
-           familyi={F\bibinitperiod}}}%
-      }
-      \strng{namehash}{d85544fce402c7a2a96a48078edaf203}
-      \strng{fullhash}{d85544fce402c7a2a96a48078edaf203}
-      \strng{bibnamehash}{d85544fce402c7a2a96a48078edaf203}
-      \strng{authorbibnamehash}{d85544fce402c7a2a96a48078edaf203}
-      \strng{authornamehash}{d85544fce402c7a2a96a48078edaf203}
-      \strng{authorfullhash}{d85544fce402c7a2a96a48078edaf203}
-      \field{sortinit}{F}
-      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{day}{15}
-      \field{month}{11}
-      \field{title}{Graphql}
-      \field{urlday}{15}
-      \field{urlmonth}{11}
-      \field{urlyear}{2021}
-      \field{year}{2021}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb http://spec.graphql.org/June2018/
-      \endverb
-      \verb{url}
-      \verb http://spec.graphql.org/June2018/
-      \endverb
-    \endentry
-    \entry{rakutenGraphQLVsRest}{online}{}
-      \name{author}{1}{}{%
-        {{hash=ec6ecd197b2b773eebcd0e1e84c34b1f}{%
-           family={Rakuten},
-           familyi={R\bibinitperiod}}}%
-      }
-      \strng{namehash}{ec6ecd197b2b773eebcd0e1e84c34b1f}
-      \strng{fullhash}{ec6ecd197b2b773eebcd0e1e84c34b1f}
-      \strng{bibnamehash}{ec6ecd197b2b773eebcd0e1e84c34b1f}
-      \strng{authorbibnamehash}{ec6ecd197b2b773eebcd0e1e84c34b1f}
-      \strng{authornamehash}{ec6ecd197b2b773eebcd0e1e84c34b1f}
-      \strng{authorfullhash}{ec6ecd197b2b773eebcd0e1e84c34b1f}
-      \field{sortinit}{R}
-      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{day}{15}
-      \field{month}{11}
-      \field{title}{Graphql vs Rest}
-      \field{urlday}{15}
-      \field{urlmonth}{11}
-      \field{urlyear}{2021}
-      \field{year}{2021}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://blog.api.rakuten.net/graphql-vs-rest/
-      \endverb
-      \verb{url}
-      \verb https://blog.api.rakuten.net/graphql-vs-rest/
-      \endverb
-    \endentry
-    \entry{dgraphOnline}{online}{}
-      \name{author}{1}{}{%
-        {{hash=f07ffe95dc1d5efd4a07033616444e73}{%
-           family={Sakib},
-           familyi={S\bibinitperiod},
-           given={Abu},
-           giveni={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{f07ffe95dc1d5efd4a07033616444e73}
-      \strng{fullhash}{f07ffe95dc1d5efd4a07033616444e73}
-      \strng{bibnamehash}{f07ffe95dc1d5efd4a07033616444e73}
-      \strng{authorbibnamehash}{f07ffe95dc1d5efd4a07033616444e73}
-      \strng{authornamehash}{f07ffe95dc1d5efd4a07033616444e73}
-      \strng{authorfullhash}{f07ffe95dc1d5efd4a07033616444e73}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{day}{15}
-      \field{month}{11}
-      \field{title}{Graphql vs Rest}
-      \field{urlday}{15}
-      \field{urlmonth}{11}
-      \field{urlyear}{2021}
-      \field{year}{2021}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://dgraph.io/blog/post/graphql-rest/
-      \endverb
-      \verb{url}
-      \verb https://dgraph.io/blog/post/graphql-rest/
-      \endverb
-    \endentry
-  \enddatalist
-\endrefsection
-\endinput
+\bibitem[Cotton und Greatorex~Jr(1968)]{cotton1968data}
+\dinatlabel{Cotton und Greatorex~Jr 1968} \textsc{Cotton}, Ira~W.~;
+  \textsc{Greatorex~Jr}, Frank~S.:
+\newblock Data structures and techniques for remote computer graphics.
+\newblock In: \emph{Proceedings of the December 9-11, 1968, fall joint computer
+  conference, part I}, 1968, S.~533--544
 
+\bibitem[Facebook()]{graphqlOnline}
+\dinatlabel{Facebook } \textsc{Facebook}:
+\newblock \emph{Graphql}. --
+\newblock URL \url{http://spec.graphql.org/June2018/}. -- Zugriffsdatum:
+  2021-11-15
+
+\bibitem[Kress(2020)]{kress2020graphql}
+\dinatlabel{Kress 2020} \textsc{Kress}, Dominik:
+\newblock \emph{GraphQL: Eine Einf{\"u}hrung in APIs mit GraphQL}.
+\newblock dpunkt. verlag, 2020
+
+\bibitem[Rakuten()]{rakutenGraphQLVsRest}
+\dinatlabel{Rakuten } \textsc{Rakuten}:
+\newblock \emph{Graphql vs Rest}. --
+\newblock URL \url{https://blog.api.rakuten.net/graphql-vs-rest/}. --
+  Zugriffsdatum: 2021-11-15
+
+\bibitem[Sakib()]{dgraphOnline}
+\dinatlabel{Sakib } \textsc{Sakib}, Abu:
+\newblock \emph{Graphql vs Rest}. --
+\newblock URL \url{https://dgraph.io/blog/post/graphql-rest/}. --
+  Zugriffsdatum: 2021-11-15
+
+\bibitem[Wheeler(1952)]{wheeler1952use}
+\dinatlabel{Wheeler 1952} \textsc{Wheeler}, David~J.:
+\newblock The use of sub-routines in programmes.
+\newblock In: \emph{Proceedings of the 1952 ACM national meeting (Pittsburgh)},
+  1952, S.~235--236
+
+\end{thebibliography}
