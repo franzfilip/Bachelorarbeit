@@ -1,12 +1,12 @@
-﻿using HotChocolate.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library.GraphQLTypes.InputTypes.Book {
-    public class BookCreate {
+namespace Library.GraphQLTypes.InputTypes.DTO {
+    public class BookUpdate {
+        public int Id { get; set; }
         public string Title { get; set; }
         public ICollection<int> Authors { get; set; }
     }

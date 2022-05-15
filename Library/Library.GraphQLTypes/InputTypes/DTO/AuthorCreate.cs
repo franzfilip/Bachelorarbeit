@@ -1,10 +1,11 @@
-﻿using System;
+﻿using HotChocolate.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library.GraphQLTypes.InputTypes.Author {
+namespace Library.GraphQLTypes.InputTypes.DTO {
     public class AuthorCreate {
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Library.Datamodel;
 using Library.GraphQLTypes.InputTypes.Author;
+using Library.GraphQLTypes.InputTypes.DTO;
 
 namespace Library.Mapper {
     public class AuthorProfile: Profile {

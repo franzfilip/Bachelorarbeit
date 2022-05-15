@@ -1,44 +1,33 @@
 ﻿using AutoMapper;
 using Library.BusinessLogic;
 using Library.Datamodel;
-using Library.GraphQLTypes.InputTypes;
+using Library.GraphQL.DataLoaders;
+using Library.GraphQLTypes.InputTypes.DTO;
 
 namespace Library.GraphQL.Resolver {
     public class AuthorResolver {
+        private readonly IAuthorService authorService;
         private readonly IMapper mapper;
 
-        public AuthorResolver(IMapper mapper) {
+        public AuthorResolver(IAuthorService authorService, IMapper mapper) {
+            this.authorService = authorService;
             this.mapper = mapper;
         }
 
-        //public async Task<Author> CreateAuthor([Service] IAuthorService authorService, AuthorInput input) {
-        //    if (input is null) {
-        //        throw new ArgumentNullException(nameof(input));
-        //    }
+        public async Task<IQueryable<Author>> Authors() {
+            return await authorService.GetAsync();
+        }
 
-        //    Author author = new Author {
-        //        //Id = input.Id,
-        //        //FirstName = input.FirstName,
-        //        //LastName = input.LastName,
-        //        //Books = input.Books
-        //    };
+        public async Task<Author> CreateAuthor([Service] IAuthorService authorService, AuthorCreate input) {
+            return await authorService.AddAsync(mapper.Map<Author>(input));
+        }
 
-        //    return await authorService.AddAsync(author);
-        //}
+        public async Task<Author> UpdateAuthor([Service] IAuthorService authorService, AuthorUpdate input) {
+            return await authorService.UpdateAsync(mapper.Map<Author>(input));
+        }
 
-        //public async Task<Author> UpdateAuthor([Service] IAuthorService authorService, AuthorInput input) {
-        //    if (input is null) {
-        //        throw new ArgumentNullException(nameof(input));
-        //    }
-
-        //    Author author = new Author {
-        //        //Id = input.Id,
-        //        //FirstName = input.FirstName,
-        //        //LastName = input.LastName,
-        //        //Books = input.Books
-        //    };
-
-        //    return await authorService.UpdateAsync(author);
-        //}
+        public async Task<Author> AuthorByDataLoader(int id, AuthorByIdDataLoader dataLoader, CancellationToken cancellationToken) {
+            return await dataLoader.LoadAsync(id, cancellationToken);
+        }
     }
 }

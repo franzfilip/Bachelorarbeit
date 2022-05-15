@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Library.Datamodel;
-using Library.GraphQLTypes.InputTypes.Book;
+using Library.GraphQLTypes.InputTypes.DTO;
 
 namespace Library.Mapper {
     public class BookProfile : Profile {

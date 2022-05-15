@@ -8,28 +8,18 @@ using Library.GraphQLTypes.InputTypes.Book;
 using Library.GraphQLTypes.ObjectTypes;
 
 namespace Library.GraphQL.MutationTypes {
-    [ExtendObjectType(Name = "Mutation")]
-    public class AuthorMutation {
-        private readonly IMapper mapper;
+    public class AuthorMutation: ObjectType<Mutation> {
 
-        public AuthorMutation(IMapper mapper) {
-            this.mapper = mapper;
-        }
+        protected override void Configure(IObjectTypeDescriptor<Mutation> descriptor) {
+            descriptor.Field("createAuthor")
+                .Argument("input", a => a.Type<NonNullType<AuthorCreateInput>>())
+                .ResolveWith<AuthorResolver>(r => r.CreateAuthor(default, default))
+                .Type<AuthorType>();
 
-        public async Task<Author> CreateAuthor([Service] IAuthorService authorService, AuthorCreate input) {
-            if (input is null) {
-                throw new ArgumentNullException(nameof(input));
-            }
-
-            return await authorService.AddAsync(mapper.Map<Author>(input));
-        }
-
-        public async Task<Author> UpdateAuthor([Service] IAuthorService authorService, AuthorUpdate input) {
-            if (input is null) {
-                throw new ArgumentNullException(nameof(input));
-            }
-
-            return await authorService.UpdateAsync(mapper.Map<Author>(input));
+            descriptor.Field("updateAuthor")
+                .Argument("input", a => a.Type<NonNullType<AuthorUpdateInput>>())
+                .ResolveWith<AuthorResolver>(r => r.UpdateAuthor(default, default))
+                .Type<AuthorType>();
         }
     }
 }

@@ -5,7 +5,7 @@ using HotChocolate.Types;
 using Library.Datamodel;
 
 namespace Library.GraphQLTypes.ObjectTypes {
-    public class BookType: ObjectType<Book> {
+    public class BookType : ObjectType<Book> {
         //protected override void Configure(IObjectTypeDescriptor<Book> descriptor) { }
     }
 

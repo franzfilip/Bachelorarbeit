@@ -3,35 +3,38 @@ using HotChocolate.Types;
 using Library.BusinessLogic;
 using Library.Datamodel;
 using Library.EF;
+using Library.GraphQL.Resolver;
+using Library.GraphQLTypes.ObjectTypes;
 
 namespace Library.GraphQL.QueryTypes {
-    [ExtendObjectType(typeof(Query))]
-    public class BookQuery {
-        
-        [Authorize]
-        [UsePaging]
-        [UseProjection]
-        [UseFiltering]
-        [UseSorting]
-        public async Task<IQueryable<Book>> BooksWithPaging([Service] IBookService bookService) {
-            return await bookService.GetAsync();
-        }
+    public class BookQuery: ObjectTypeExtension<Query>{
 
-        [Authorize]
-        [UseProjection]
-        [UseFiltering]
-        [UseSorting]
-        public async Task<IQueryable<Book>> Books([Service] IBookService bookService) {
-            return await bookService.GetAsync();
-        }
+        protected override void Configure(IObjectTypeDescriptor<Query> descriptor) {
+            descriptor.Field("booksConnection")
+                .ResolveWith<BookResolver>(r => r.Books(default))
+                .Authorize()
+                .UsePaging()
+                .UseProjection()
+                .UseFiltering()
+                .UseSorting()
+                .Type<ListType<NonNullType<BookType>>>();
 
-        [Authorize]
-        [UseSingleOrDefault]
-        [UseProjection]
-        [UseFiltering]
-        [UseSorting]
-        public async Task<IQueryable<Book>> Book([Service] IBookService bookService) {
-            return await bookService.GetAsync();
+            descriptor.Field("books")
+                .ResolveWith<BookResolver>(r => r.Books(default))
+                .Authorize()
+                .UseProjection()
+                .UseFiltering()
+                .UseSorting()
+                .Type<ListType<NonNullType<AuthorType>>>();
+
+            descriptor.Field("book")
+                .ResolveWith<BookResolver>(r => r.Books(default))
+                .Authorize()
+                .UseSingleOrDefault()
+                .UseProjection()
+                .UseFiltering()
+                .UseSorting()
+                .Type<ListType<NonNullType<AuthorType>>>();
         }
     }
 }

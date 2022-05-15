@@ -1,37 +1,26 @@
 ﻿using AutoMapper;
+using HotChocolate.Configuration;
 using HotChocolate.Subscriptions;
+using HotChocolate.Types.Descriptors.Definitions;
 using Library.BusinessLogic;
 using Library.Datamodel;
+using Library.GraphQL.Resolver;
 using Library.GraphQLTypes.InputTypes;
 using Library.GraphQLTypes.InputTypes.Book;
+using Library.GraphQLTypes.ObjectTypes;
 
 namespace Library.GraphQL.MutationTypes {
-    [ExtendObjectType(Name = "Mutation")]
-    public class BookMutation {
-        private readonly IMapper mapper;
+    public class BookMutation: ObjectTypeExtension<Mutation>{
+        protected override void Configure(IObjectTypeDescriptor<Mutation> descriptor) {
+            descriptor.Field("createBook")
+                .Argument("input", a => a.Type<NonNullType<BookCreateInput>>())
+                .ResolveWith<BookResolver>(r => r.CreateBook(default, default, default))
+                .Type<BookType>();
 
-        public BookMutation(IMapper mapper) {
-            this.mapper = mapper;
-        }
-
-        public async Task<Book> CreateBook([Service]IBookService bookService, BookCreate input, [Service]ITopicEventSender sender) {
-            if(input is null) {
-                throw new ArgumentNullException(nameof(input));
-            }
-
-            Book book = mapper.Map<Book>(input);
-            book = await bookService.AddAsync(book);
-            await sender.SendAsync("bookAdded", book);
-            return book;
-        }
-
-        public async Task<Book> UpdateBook([Service]IBookService bookService, BookUpdate input) {
-            if (input is null) {
-                throw new ArgumentNullException(nameof(input));
-            }
-
-            Book book = mapper.Map<Book>(input);
-            return await bookService.UpdateAsync(book);
+            descriptor.Field("updateBook")
+                .Argument("input", a => a.Type<NonNullType<BookUpdateInput>>())
+                .ResolveWith<BookResolver>(r => r.UpdateBook(default, default))
+                .Type<BookType>();
         }
     }
 }
