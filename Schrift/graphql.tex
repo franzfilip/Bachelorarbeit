@@ -18,9 +18,10 @@ Da GraphQL laut Spezifikation in jeder beliebigen Sprache implementierbar sein s
 Die Grundlage dafür stellt die in der Spezifikation definierte Beschreibungssprache (\textit{SDL}). 
 In GraphQL existieren folgende Typ-Definitionen: \textit{Skalar, Interface, Object, Input Object, Enum} und \textit{Union}.
 Diese bilden das Rückgrat des Schemas.
-Über diese Typen werden in den nachfolgenden Abschnitten genauer behandelt.
+Diese Typen werden in den nachfolgenden Abschnitten genauer behandelt.
 
-\subsection{Skalare}
+% \subsection{Skalare}
+\myparagraph{Skalare}
 
 Ein Datentyp, der nicht mehr weiter vereinfachbar ist, wird wie in anderen Programmiersprachen Skalar-Typ genannt.
 Skalar-Typen repräsentieren die Blätter, also die primitiven Werte des GraphQL-Typ-Systems \cite[S. 60]{kress2020graphql}.
@@ -49,12 +50,10 @@ Der Name eines Feldes im umgebenden Typ muss dabei eindeutig sein.
 Die Deklaration erfolgt mit dem Namen als auch dem Typ des Feldes, welche mit einem Doppelpunkt getrennt sind.
 Das Feld \textit{id} wird dabei mit einem Rufzeichen (!) als \textit{not null} deklariert.
 
-\myparagraph{Benutzerdefinierte Skalare}
-
-
 In den meisten sprachspezifischen Implementierungen ist es möglich, eigene Skalar-Typen zu definieren. Diese werden verwendet, um beispielsweise verschiedene Datumsformate darzustellen.
 
-\subsection{Enum}
+% \subsection{Enum}
+\myparagraph{Enum}
 
 Enum-Typen stellen wie Skalare die Blätter des Typ-Baums dar.
 Ein Enum-Feld hält ein spezifisches Element aus einer Menge von möglichen Werten
@@ -74,7 +73,8 @@ enum Category {
 In diesem Beispiel wurde ein Enum \textit{Category} definiert.
 Es gilt zu beachten, dass dieser Typ mit dem Schlüsselwort \textit{enum} definiert werden muss.
 
-\subsection{Objekt}
+% \subsection{Objekt}
+\myparagraph{Objekt}
 Wie bereits erwähnt bestehen die Blätter des Baumes in GraphQL aus den Skalar-Typen.
 Die Knoten wiederum werden von Objekt-Typen definiert.
 Diese Objekte halten eine Liste von Feldern die einen bestimmten Wert lieferen.
@@ -109,8 +109,8 @@ Die Felder \textit{id, title, firstName} und \textit{lastName} sind dabei skalar
 Da zwischen den Objekten Author und Book eine n:m Beziehung besteht, halten beide Objekte eine Liste des jeweils anderen Objekt-Typs.
 Listen werden in der SDL wie im obigen Beispiel ersichtlich mit eckigen Klammern definiert.
 
-\subsection{Interface}
-
+% \subsection{Interface}
+\myparagraph{Interface}
 Interfaces sind abstrakte Typen welche eine Liste an Feldern definieren.
 GraphQL-Interfaces repräsentieren eine Liste von Felder und deren Argumente.
 Objekte und Interfaces können ein Interface implementieren, dazu muss der Typ, welcher das Interface definieren will, alle Felder des zu implementierenden Interfaces definieren.
@@ -142,7 +142,8 @@ type Author implements Person {
 Jedes Interface benötigt eine spezifische Implementierung, im angeführen Beispiel implementiert \textit{Author} das Interface \textit{Person}.
 Author muss dabei alle Felder von \textit{Person} zur Verfügung stellen.
 
-\subsection{Input-Objekt}
+% \subsection{Input-Objekt}
+\myparagraph{Input-Objekt}
 Ein Input-Objekt ist ein spezieller Objekt-Typ. Ein Input-Objekt hält genauso wie ein Objekt-Typ skalare Felder, Enumerationen oder Referenzen.
 Diese referenzierten Objekt-Typen müssen aber ebenso Input-Objekte sein.
 Eine Mischung der Objekt-Typen ist laut Spezifikation nicht erlaubt.
@@ -160,7 +161,9 @@ input AuthorCreateInput {
 }
 \end{JsCode}
 
-\subsection{Fragmentierung}\label{sec:Bezeichnung}
+% \subsection{Fragmentierung}\label{sec:Bezeichnung}
+\myparagraph{Fragementierung}
+
 Fragmente helfen dabei den Text von Abfragen zu reduzieren indem sie oft gebrauchte Abfragen von Feldern kapseln.
 Weiters können Fragmente nur für Objekt-Typen, Interfaces und Union-Typen definiert werden.
 Fragmente müssen dabei den Objekt-Typen für den sie gelten mit dem Schlüsselwort  \textit{on} angeben.
@@ -191,7 +194,8 @@ query{
 }
 \end{JsCode}
 
-\subsection{Union}
+% \subsection{Union}
+\myparagraph{Union}
 Union-Typen fügen mehrere Objekte zu einer Gruppe zusammen.
 Diese Typen sind sehr nützlich, wenn beispielsweise eine Query zwei unterschiedliche Objekt-Typen zurückgeben kann, diese aber nicht diesselben Felder besitzen.
 In dieser Query können dann mithilfe von Inline-Fragmenten (siehe \ref{sec:Bezeichnung}) die spezifischen Felder abgefragt werden.
@@ -200,7 +204,8 @@ In dieser Query können dann mithilfe von Inline-Fragmenten (siehe \ref{sec:Beze
 union SearchResult = Author | Buch
 \end{JsCode}
 
-\subsection{Direktive}
+% \subsection{Direktive}
+\myparagraph{Direktive}
 Direktiven bieten die Möglichkeit die Struktur, des durch eine Query angefragtes Ergebnis zu beeinflussen.
 Mittels einer Annotation direkt an einem Feld oder einer Objekt-Relation
 Mit Direktiven ist es möglich mittels Annotationen, direkt an einem Feld oder einem Objekt-Typen, dasselbige entsprechend einer Eingabe zu beeinflussen.
@@ -208,7 +213,7 @@ GraphQL bietet dafür standardmäßig zwei Arten von Strukturmanipulationen: \te
 Mittels diesen Direktiven lassen sich Objekt-Typen oder Felder inkludieren oder überspringen.
 Für die auszuwertende Direktive muss dabei in der Query ein \textit{Boolean} mitübergeben werden.
 
-Im folgenden Beispiel wird eine Direktive gezeigt welche standardmäßig das Feld \textit{id} ignoriert.
+Im folgenden Beispiel wird eine Direktive gezeigt welche nach Bedarf das Feld \textit{id} ignoriert.
 
 \begin{JsCode}
 query {
@@ -234,7 +239,7 @@ Weiters dürfen die im Schema definierte Namen nicht mit doppeltem Unterstrich b
 Diese sind für das GraphQL Introspektionsystem reserviert.
 \cite[Abs. 3.3]{graphqlOnline}
 
-\section{Wurzel Operationen}
+\subsection{Wurzel Operationen}
 Das Schema definiert die Wurzelknoten der Eingangspunkte der Operationen (Query, Mutation und Subscription) die es unterstützt.
 Das Schema definiert dadurch den Eingangspunkt dieser Operationen im Typ System.
 Diese Wurzeloperationen sind spezielle Objekt-Typen.
@@ -244,7 +249,7 @@ Desweiteren müssen die Objekt-Typen der Wurzel-Operationen unterscheiden und d�
 \newline
 
 
-\section{Schema Definition}
+\subsection{Schema Definition}
 
 % \begin{figure}[H]
 %     \includegraphics[width=\textwidth]{pics/schema.png}
@@ -365,65 +370,9 @@ type Subscription {
 
 In Abbildung 3.1 ist eine Schemadefinition zu sehen welche Objekt-Typen, Input-Typen und die Wurzeloperationen beinhaltet.
 
-\section{Zugriff auf den GraphQL-Service}
-GraphQL liefert keine Spezifikation über die Netzwerkschicht, sondern lediglich eine Empfehlung \textit{HTTP} zu verwenden.
-Im Gegensatz zu \textit{REST-APIs} beschränkt sich GraphQL auf lediglich zwei HTTP-Methoden: GET und POST.
-Deswegen ist die Gestaltung und Bennung der Endpunkte nicht so relevant wie bei REST-APIs.
-\newline
-
-Der Unterschied, ob ein Client mittels GET oder POST-Anfrage auf den Service zugreift, besteht darin, dass mittels GET-Anfrage nur lesende Zugriffe möglich sind.
-Also können mit GET-Anfragen nur Querys aber keine Mutations umgesetzt werden.
-Desweiteren müsste man jene Query, welche zum Abfragen der Daten verwendet werden sollte, als URL-Parameter übergeben.
-Somit gilt es auch zu beachten die Sonderzeichen der Query in \textit{ASCII} umzuwandeln.
-\newline
-
-Wenn man nun also mittels GET-Anfrage eine Query an den GraphQL-Service schickt, resultiert es in dem Nachteil, dass man eine wesentlich schlechtere Übersicht hat. 
-Denn die URL-Encodierung verkompliziert die Anfrage und sorgt für Einschränkungen in der Lesbarkeit.
-Etwaig benötigte Variablen müssten auf dieselbe Art und Weise der Anfrage hinzugefügt werden.
-Problematischer ist dabei aber jedoch, dass einige Browser eine Maximallänge für URIs definiert haben.
-Somit können komplexe Querys nicht funktional sicher über GET-Anfragen abgebildet werden.
-\newline
-
-Aus diesem Grund ist es Standard, dass in GraphQL alle Anfragen per POST-Anfrage abgewickelt werden.
-Diese werden an den einzigen, nach außen freigegebenen Endpunkt gerichtet.
-Da für die Anfragen die POST-Methode verwendet wird, können im Body beliebig viele und komplexe Querys an den Service übergeben werden.
-\newline
-
-Grundsätzlich besteht eine Anfrage an den GraphQL-Service aus der eigentlichen Query und zwei optionalen Parametern: Variablen und der Name der Operation.
-
-
-% Um schreibend oder lesend auf den GraphQL-Service zugreifen zu können muss an den bereitgestellten Endpunkt eine POST-Anfrage mit einer Query geschickt werden.
-% Diese Query ist mittels der \textit{GraphQL Query Language GQL} definiert.
-% Eine Anfrage welche eine Query beinhaltet, hat zusätzlich noch zwei optionale Parameter: \textit{variables} und \textit{operationName}.
-% Der Name einer Operation wird jedoch nur benötigt wenn mehrere Operationen in der Query auszuführen sind.
-% graphql.org/learn/serving-over-http
-
-% Gress Seite 82-83
-
-\section{Querys}
-
-Querys bieten den Clients die Möglichkeit lesend auf die Objekte, welche vom GraphQL-Service verwaltet werden, zuzugreifen.
-GraphQL erlaubt es dem Client genau die Daten abzufragen welche er benötigt.
-Um auf eine Ressource zuzugreifen wird ein POST-Request an den Wurzelknoten der GraphQL-Applikation geschickt.
-Dieser POST-Request enthält ein in der \textit{GraphQL Query Language} definiertes Objekt.
-In diesem Objekt werden die auszuführenden Funktionen definiert und welche Felder davon an den Client zu retournieren sind.
-Das Ergebnis hat genau jenes Format welches in der Anfrage vom Client definiert wurde.
-\cite[S.40-41]{kress2020graphql}
-
-Da GraphQL mit einem Graphenschema arbeitet, welche auf den Beziehungen der Knoten zueinander basiert, ist es möglich diese Relationen zu nutzen um Daten über mehrere Objekte hinweg zu sammeln.
-\newline
-
-
-In der folgenden Abbildung ist eine verschachtelte Query zu sehen, welche alle Bücher mit den dazugehörigen Autoren anfordert.
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{pics/query_book_with_result.png}
-    \caption{Anfrage aller Bücher mit zugehörigen Autoren.}
-\end{figure}
-
-\section{Parameter}
+\subsection{Parameter}
 Felder können zusätzlich noch Parameter halten.
-Diese Parameter können den Rückgabewert des Feldes ändern um das Feld noch flexibler zu machen.
+Diese Parameter können den Rückgabewert des Feldes ändern um, das Feld noch flexibler zu machen.
 \newline
 
 \begin{JsCode}
@@ -441,9 +390,9 @@ type Book {
 }
 \end{JsCode}
 
-Im oben stehenden Code Beispiel wurde der Objekt-Typ Book um ein Feld \textit{price} erweitert.
-Bei einer Query auf das Feld price des Objekts Book kann ein Argument unit mitgegeben werden um den tatsächlichen Verkaufswert in der richtigen Währung zu bestimmen.
-Dabei wurde ebenfalls ein Standardwert definiert um unit nicht zwingend als Parameter übergeben zu müssen.
+Im oben angeführten Code-Beispiel wurde der Objekt-Typ \textit{Book} um ein Feld \textit{price} erweitert.
+Bei einer Query auf das Feld \textit{price} des Objekts \textit{Book} kann ein Argument \textit{unit} mitgegeben werden um den tatsächlichen Verkaufswert in der richtigen Währung zu bestimmen.
+Dabei wurde ebenfalls ein Standardwert definiert um \textit{unit} nicht zwingend als Parameter übergeben zu müssen.
 \cite[S.62]{kress2020graphql}
 
 
@@ -464,6 +413,138 @@ In der folgenden Abbildung ist eine Anfrage zu sehen welche das Buch mit der \te
     \caption{Anfrage aller Bücher mit zugehörigen Autoren unter Verwendung einer Variable.}
 \end{figure}
 
+\section{Zugriff auf den GraphQL-Service}
+GraphQL liefert keine Spezifikation der Netzwerkschicht, sondern lediglich eine Empfehlung, \textit{HTTP} zu verwenden.
+Im Gegensatz zu \textit{REST-APIs} beschränkt sich GraphQL auf lediglich zwei HTTP-Methoden: GET und POST.
+Deswegen ist die Gestaltung und Bennung der Endpunkte nicht so relevant wie bei REST-APIs.
+\newline
+
+GET und POST-Anfrage unterscheiden sich darin, dass mittels GET-Anfrage nur lesende Zugriffe möglich sind.
+Also können mit GET-Anfragen nur Querys aber keine Mutations umgesetzt werden.
+Desweiteren müsste man jede Query, als URL-Parameter übergeben.
+Somit gilt es auch zu beachten die Sonderzeichen der Query in \textit{ASCII} umzuwandeln.
+\newline
+
+Wenn man nun also mittels GET-Anfrage eine Query an den GraphQL-Service schickt, resultiert es in dem Nachteil, dass man eine wesentlich schlechtere Übersicht hat. 
+Denn die URL-Encodierung verkompliziert die Anfrage und sorgt für Einschränkungen in der Lesbarkeit.
+Etwaig benötigte Variablen müssten auf dieselbe Art und Weise der Anfrage hinzugefügt werden.
+Problematischer ist dabei aber jedoch, dass einige Browser eine Maximallänge für URIs vorgeben.
+Somit können komplexe Querys nicht funktional sicher über GET-Anfragen abgebildet werden.
+\newline
+
+Aus diesem Grund werden üblicherweise alle Operationen auf POST-Anfragen abgebildet.
+Diese werden an den einzigen, nach außen freigegebenen Endpunkt gerichtet.
+Da für die Anfragen die POST-Methode verwendet wird, können im Body beliebig viele und komplexe Queries an den Service übergeben werden.
+\newline
+
+Grundsätzlich besteht eine Anfrage an den GraphQL-Service aus der eigentlichen Query und zwei optionalen Parametern: Variablen und der Name der Operation.
+
+
+% Um schreibend oder lesend auf den GraphQL-Service zugreifen zu können muss an den bereitgestellten Endpunkt eine POST-Anfrage mit einer Query geschickt werden.
+% Diese Query ist mittels der \textit{GraphQL Query Language GQL} definiert.
+% Eine Anfrage welche eine Query beinhaltet, hat zusätzlich noch zwei optionale Parameter: \textit{variables} und \textit{operationName}.
+% Der Name einer Operation wird jedoch nur benötigt wenn mehrere Operationen in der Query auszuführen sind.
+% graphql.org/learn/serving-over-http
+
+% Gress Seite 82-83
+
+\section{Querys}
+
+Querys bieten den Clients die Möglichkeit lesend auf die Objekte, welche vom GraphQL-Service verwaltet werden, zuzugreifen.
+GraphQL erlaubt es dem Client genau die Daten abzufragen welche er benötigt.
+Um auf eine Ressource zuzugreifen wird ein POST-Request an den Wurzelknoten der GraphQL-Applikation geschickt.
+Dieser POST-Request enthält ein in der \textit{GraphQL Query Language} definiertes Objekt.
+In diesem Objekt werden die auszuführenden Funktionen definiert und welche Felder davon an den Client zu retournieren sind.
+Das Ergebnis hat genau jenes Format welches in der Anfrage vom Client definiert wurde \cite[S.40-41]{kress2020graphql}.
+\newline
+
+Da GraphQL mit einem Graphenschema arbeitet, welche auf den Beziehungen der Knoten zueinander basiert, ist es möglich diese Relationen zu nutzen um Daten über mehrere Objekte hinweg zu sammeln.
+\newline
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{pics/query_book_with_result.png}
+    \caption{Anfrage eines Buches mit ID=2.}
+\end{figure}
+
+Die in der obigen Abbildung ersichtliche Query fragt den Autor mit der ID=2 vom GraphQL-Service ab.
+Dabei sollen die Bücher die der Autor geschrieben hat und mit dem Buch referenzierte Reviews ebenfalls zurückgegeben werden.
+Um die in der obigen Abbildung angeführte Query ausführen zu können sind folgende Definitionen im Schema erforderlich:
+
+\begin{JsCode}
+type Author {
+    firstName: String!
+    lastName: String!
+    books: [Book!]!
+    id: Int!
+}
+
+type Book {
+    title: String!
+    authors: [Author!]!
+    reviews: [Review!]!
+    id: Int!
+}
+
+type Review {
+    userId: Int!
+    user: User!
+    bookId: Int!
+    book: Book!
+    rating: Int!
+    id: Int!
+}
+
+input AuthorFilterInput {
+    and: [AuthorFilterInput!]
+    or: [AuthorFilterInput!]
+    firstName: StringOperationFilterInput
+    lastName: StringOperationFilterInput
+    books: ListFilterInputTypeOfBookFilterInput
+    id: ComparableInt32OperationFilterInput
+}
+
+type Query {
+    author(where: AuthorFilterInput): Author
+}
+\end{JsCode}
+
+Aus dem Schema lassen sich folgende Entitäten herauslesen: \textit{Book}, \textit{Author} und \textit{Review}.
+Weiters wurde ein \textit{AuthorFilterInput} deklariert, damit serverseitig nach einem bestimmten Buch sortieren werden kann.
+Die Wurzeloperation Query enthält den Eintrittspunkt \textit{author}.
+Dieser kann einen Filter entgegennehmen und liefert nach einer erfolgreichen Anfrage einen \textit{Author}, wobei dieser auch \textit{null} sein kann.
+
+Die Anfrage die dem Server für das einholen der Daten geschickt wird enthält dabei folgenden Request-Body:
+
+\begin{JsCode}
+{
+    "operationName": "author",
+    "query": "query author($filter: AuthorFilterInput){
+        authors(where: $filter){
+            id
+            lastName
+            books {
+                title
+                reviews{
+                    rating
+                }
+            }
+        }
+    }",
+    "variables": {
+        "filter": {
+            "id": {
+                "eq": 2
+            }
+        }
+    }
+}
+\end{JsCode}
+
+Der Request-Body ist dabei wie bereits erwähnt in 3 Teile unterteilt: \textit{operationName}, \textit{query}, \textit{variables}.
+Diese Teile werden dann durch den GraphQL-Service zusammengefügt und nach erfolgreicher Validierung an die Resolver zur Evaluierung und Rückgabe der Daten weitergereicht.
+Betrachtet man die Entitäten und ihre Referenzen als Baumstruktur, so ist bei der Evaluierung dieser Query der Autor die Wurzel, das Buch das Geäst und die Bewertung das Blatt des Baumes.
+Die Resolver schreiten somit den Baum der angeforderten Entitäten bis zu den Blättern durch und geben dabei die angeforderten Daten an den Client zurück.
+
 % \subsection{Aliase}
 % In GraphQL-Queries ist es möglich, dass mehrere miteinander in Konflikt stehende Parameter übergeben werden.
 % Um diesem Problem vorzuwirken besteht die Möglichkeit mit \textit{Aliases} zu arbeiten.
@@ -474,15 +555,60 @@ In der folgenden Abbildung ist eine Anfrage zu sehen welche das Buch mit der \te
 \section{Mutationen}
 APIs benötigen neben dem lesenden Zugriff auf Daten auch einen schreibenden.
 Dieser wird in GraphQL mittels Mutationen umgesetzt.
-Mutationen kapseln die Implementierungen der Datenbankzugriffsschicht in ein Interface welches die Möglichkeiten zur Manipulation der Daten vorgibt.
+Mutationen kapseln die Implementierungen der Geschäftslogik in ein Interface welches die Möglichkeiten zur Manipulation der Daten vorgibt.
 Manipulierende Anfragen können Daten dadurch nur auf jene Art und Weise ändern, wie es in der Applikation vorgesehen ist.
 % Kress 54
 \cite[S. 54]{kress2020graphql}
 
+In der folgenden Abbildung ist eine Mutation zum hinzufügen einer Bewertung abgebildet:
 
-% Mutationen ermöglichen es die Zugriffe 
-% Sie werden in der Schemasprache (anderer Begriff ??? -> GDL etc)  mit dem Schlüsselwort mutation definiert.
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{pics/createReviewMutation.png}
+    \caption{Anfrage eines Buches mit ID=2.}
+\end{figure}
 
+Um eine Bewertung zu erstellen wird ein Input-Objekt \textit{ReviewCreateInput} und eine Mutation \textit{createReview} welches ein solches Objekt entgegennimmt benötigt.
+
+\begin{JsCode}
+input ReviewCreateInput {
+    userId: Int!
+    bookId: Int!
+    rating: Int!
+}
+
+type mutation {
+    createReview(input: ReviewCreateInput!): Review!
+}
+\end{JsCode}
+
+\begin{JsCode}
+{
+    "operationName": "createReview",
+    "query": "mutation createReview($input: ReviewCreateInput!){
+        createReview(input: $input){
+            id
+            rating
+            user {
+                firstName
+                lastName
+            }
+            book{
+                title
+            }
+        }
+    }",
+    "variables": {
+        "input": {
+        "bookId": 8,
+        "userId": 4,
+        "rating": 7
+        }
+    }
+}
+\end{JsCode}
+
+Der oben angegebene Request-Body der Anfrage ist wie bei der Query wieder in die drei Teile \textit{operationName}, \textit{query}, \textit{variables} aufgeteilt.
+Diese werden wieder durch den GraphQL-Service an den verantwortlichen Resolver weitergeleitet.
 
 \section{Subscriptions}
 % Durch diese spezielle Form der Querys ist es möglich Daten in Echtzeit zu folgen und Updates direkt vom Server zu erhalten wenn gewisse Events ausgelöst wurden.
@@ -497,17 +623,23 @@ Mit Subscriptions ist es zum Beispiel möglich den aktuellen Bestand von Produkt
 Mit dieser Information kann auf der Client-Seite gewährleistet werden, dass ein Benutzer nur ein Produkt kaufen kann, welches noch verügbar ist.
 \newline
 
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{pics/SubscriptionWebSocket.png}
+    \caption{Subscription die auf das Erstellen eines Buches wartet.}
+\end{figure}
+
+In der obigen Abbildung
+
+Im folgenden Codebeispiel ist die Definition einer Subscription im Schema ersichtlich.
+
+\begin{JsCode}
+type Subscription {
+    bookAdded: Book!
+}
+\end{JsCode}
+
 % Weil sich der Server die Clients merken muss, ändert sich der Status des Systems von einem \textit{statless} zu einem \textit{stateful} API.
 % Dadurch wird wiederum die Komplexität des Systems erhöht und die Skalierbarkeit erschwert.
 
 \section{Bekannte Probleme}
 
-\subsection{Authentifizierung, Autorisierung und Rollenmanagement}
-
-\subsection{1 + n Problem}
-
-\subsection{Fehlermanagement}
-
-\subsection{Pagination}
-
-\subsection{Caching}
