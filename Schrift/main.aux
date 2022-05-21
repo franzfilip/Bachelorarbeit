@@ -67,37 +67,52 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3.7}Subscriptions}{24}{}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Subscription die auf das Erstellen eines Buches wartet.}}{25}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.8}Bekannte Probleme}{25}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Entwicklung}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Entwicklung eines GraphQL-Service in .NET mit HotChocolate}{26}{}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}Anwendungsszenario}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Datenbankschema}{26}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Datenbankschema}}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}HotChocolate}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Was ist HotChocolate}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Schema Erstellung in HotChocolate}{27}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4.3}Architektur}{27}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Drei-Schicht-Architektur}}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Hot Chocolate}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Entwurf Schema}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Entity Framework}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}Querys}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Pagination und Sorting}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.7}Mutations}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.8}Subscriptions}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.9}Authentifizierung und Autorisierung}{29}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Rechte User.}}{29}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Rechte Bibliothekar.}}{30}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Rechte Admin.}}{30}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.10}Entwicklertools}{31}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.10.1}GraphiQL}{31}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.11}1 + n Problem}{31}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.12}Fehlermanagement}{31}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.13}Pagination}{31}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.14}Caching}{31}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Drei-Schicht-Architektur}}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}API:}{28}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Use-Cases des Service.}}{29}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Datenbankschema}}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definierung des Schemas mit HotChocolate}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Geschäftslogik:}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Datenbankzugriff:}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Hot Chocolate}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Entwurf Schema}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Entity Framework}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Resolver}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Umsetzung Resolver mittels Geschäftslogik}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Querys}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Generierung Schema}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.1}Field Middleware}{34}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reihenfolge Exekution Middleware}{34}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Exekutierungsreihenfolge Middleware}}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Authorize}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Projection}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Filtering}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sorting}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ausführung Query und Ergebnis}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Generiertes SQL-Statement}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.8}Mutations}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.9}Subscriptions}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.10}Authentifizierung und Autorisierung}{36}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Rechte User.}}{36}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Rechte Bibliothekar.}}{37}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Rechte Admin.}}{37}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.11}1 + n Problem}{38}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.12}Entwicklertools}{38}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.12.1}GraphiQL}{38}{}\protected@file@percent }
 \bibdata{literatur}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusio}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusio}{39}{}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Fazit}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Ausblick}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Fazit}{39}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Ausblick}{39}{}\protected@file@percent }
 \bibcite{berlind2017apis}{{1}{2017}{{Berlind}}{{}}}
 \bibcite{cotton1968data}{{2}{1968}{{Cotton und Greatorex~Jr}}{{}}}
 \bibcite{graphqlOnline}{{3}{}{{Facebook}}{{}}}
@@ -105,4 +120,4 @@
 \bibcite{rakutenGraphQLVsRest}{{5}{}{{Rakuten}}{{}}}
 \bibcite{dgraphOnline}{{6}{}{{Sakib}}{{}}}
 \bibcite{wheeler1952use}{{7}{1952}{{Wheeler}}{{}}}
-\gdef \@abspage@last{33}
+\gdef \@abspage@last{40}
