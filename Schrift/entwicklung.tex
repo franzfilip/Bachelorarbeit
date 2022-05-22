@@ -89,6 +89,10 @@ Die darunterliegende Datenbankzugriffsschicht ermöglicht, den darüberliegenden
 Der GraphQL-Service wurde mit dem Framework \textit{Hot Chocolate} umgesetzt.
 Bei Hot Chocolate handelt es sich um einen Open Source GraphQL-Server welche 
 
+WICHTIG --> Dependency Injection %TODO
+PooledDB Context
+
+
 \subsection{Entwurf Schema}
 
 \section{Entity Framework}
@@ -159,13 +163,13 @@ public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : BaseEn
 
 Im obigen Code-Beispiel ist die Basisimplementierung jedes Service zu sehen.
 Besonders relevant für das Zusammenspiel mit HotChocolate ist dabei, dass die lesenden Operationen ein \textit{IQueryable} zurückliefern.
-Warum \textit{IQueryable} so wichtig ist für HotChocolate wird im Abschnitt \textit{Projections} näher erläutert.
+Warum \textit{IQueryable} so wichtig ist für HotChocolate wird im Abschnitt \textit{Field Middleware} näher erläutert.
 \newline
 
 Zusammenfassend lassen sich Resolver wie folgt zusammenfassen: Sie bieten den angefragten Feldern die benötigte Logik der Geschäftslogik um eben jene abgefragten Felder bereitzustellen.
 
 \section{Querys}
-Im folgenden Abschnitt wird die Umsetzung eines lesenden Zugriffs mittels einer Query auf die Entität \textit{Book} erläutert.
+Im folgenden Abschnitt wird die Umsetzung eines lesenden Zugriffs mittels einer Query auf die Entität \textit{Author} erläutert.
 Dabei wird das Zustandekommen der Schema-Definition der Query, als auch der Zugriff auf die Datenbank mittels der Geschäftslogik erläutert.
 Weiters wird erläutert wie HotChocolate das Over und Underfetching Problem löst, als auch Filtern, Sortieren und Pagination ermöglicht.
 \newline
@@ -194,6 +198,19 @@ public class AuthorQuery: ObjectType<Query> {
 Im obigen Code-Beispiel ist zu sehen, dass die Wurzeloperation \textit{Query} um eine \textit{AuthorQuery} erweitert wird.
 Überschreibt man nun die in der Klasse \textit{ObjectType} definierte Methode \textit{Configure} kann man die Felder der Query mit dem \textit{IObjectTypeDescriptor} erweitern.
 Dabei wird das Feld \textit{authors} angelegt welches eine Liste von Autoren zurückgibt.
+
+%irrelevant?
+% \begin{JsCode}
+% builder.Services
+%     .AddGraphQLServer()
+%     .AddAuthorization()
+%     .AddProjections()
+%     .AddFiltering()
+%     .AddSorting()
+%     .AddQueryType<Query>()
+%     .AddTypeExtension<AuthorQuery>();
+% \end{JsCode}
+
 
 Das obige Code-Beispiel generiert dabei zur Laufzeit die im nächsten Code-Beispiel gezeigte Query.
 Dabei gilt zu erwähnen, dass nur der \textit{AuthorType} als auch die Wurzel-Operation der Query mit dem Feld \textit{authors} explizit generiert wird.
@@ -309,31 +326,290 @@ HotChocolate erweitert dieses \textit{IQueryable} nun durch jene Felder welche i
 \myparagraph{Filtering}
 Aktiviert man die \textit{Filtering} Middleware für ein Query-Field so kann man den implizit von HotChocolate bereitgestellten Sortier-Input verwenden.
 Diese Middleware erweitert das vom Resolver zurückgelieferte \textit{IQueryable} um die gegebene Filterung und liefert das Ergebnis der vorangestellten Middleware zurück.
+Weiters ist es möglich benutzerdefinierte Typen für die Filterung zu definieren.
 
 \myparagraph{Sorting}
-% Aktiviert man die \textit{Sorting} Middleware für ein Query-Field so kann man entweder selbst einen Sortier-Input definieren, oder den implizit von HotChocolate bereitgestellten Sortier-Input verwenden.
+Aktiviert man die \textit{Sorting} Middleware für ein Query-Field so kann man den implizit von HotChocolate bereitgestellten Filter-Input verwenden.
+Diese Middleware fügt der vom Resolver zurückgelieferten \textit{IQueryable} die gegebene Sortierung hinzu.
+Das Ergebnis wird wiederum an die vorangestellte Middleware zurückgeliefert.
+Weiters ist es möglich benutzerdefinierte Typen für die Sortierung zu definieren.
 
+\myparagraph{Zusammenführung Middleware}
+Nachdem jene Middleware, welche als erstes definiert wurde, das Ergebnis der restlichen Middlewarekomponenten erhalten hat wird das \textit{IQueryable} ausgeführt und das Ergebnis an den Client zurückgeliefert.
 
 \myparagraph{Ausführung Query und Ergebnis}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{pics/authors_request.png}
+    \caption{Exekutierungsreihenfolge Middleware}
+\end{figure}
 
-\myparagraph{Generiertes SQL-Statement}
+Die obige Abbildung zeigt eine Query welche alle Autoren mittels dem Feld \textit{authors} abfrägt.
+Dabei sollen nur jene Autoren zurückgegeben werden deren Nachname entweder "Freu" oder "Pre" enthält.
+Weiters werden die Autoren nach ihrem Nachnamen sortiert.
+Bei der Antwort des GraphQL-Service ist zu sehen, dass dieser die Daten genau in jenem Format zurückgibt in dem sie angefragt worden sind.
+Mittles HTTP-Parametern wurde der für die Authentifizierung notwendige \textit{JWT-Token} mitübermittelt.
+\newline
 
+Die oben abgebildete Anfrage hat am Server folgende Abfrage an die Datenbank ausgelöst:
 \begin{JsCode}
-builder.Services
-    .AddGraphQLServer()
-    .AddAuthorization()
-    .AddProjections()
-    .AddFiltering()
-    .AddSorting()
-    .AddQueryType<Query>()
-    .AddTypeExtension<AuthorQuery>();
+SELECT [a].[Id], [a].[FirstName], [a].[LastName], [t].[Id], [t].[Title], [t].[AuthorsId], [t].[BooksId]
+FROM [Authors] AS [a]
+LEFT JOIN (
+    SELECT [b].[Id], [b].[Title], [a0].[AuthorsId], [a0].[BooksId]
+    FROM [AuthorBook] AS [a0]
+    INNER JOIN [Books] AS [b] ON [a0].[BooksId] = [b].[Id]
+) AS [t] ON [a].[Id] = [t].[AuthorsId]
+WHERE ((@__p_0 LIKE N'') OR (CHARINDEX(@__p_0, [a].[LastName]) > 0)) OR ((@__p_1 LIKE N'') OR (CHARINDEX(@__p_1, [a].[LastName]) > 0))
+ORDER BY [a].[LastName], [a].[Id], [t].[AuthorsId], [t].[BooksId]
 \end{JsCode}
 
 \section{Mutations}
+Mutations werden wie bereits erwähnt für schreibende Zugriffe auf den GraphQL-Service verwendet.
+In den folgenden Abschnitten wird die Umsetzung einer Mutation für das Bearbeiten eines bereits bestehenden Buches erläutert.
+Dabei wird auf das Generieren des Schemas zur Laufzeit, als auch der Zugriff auf die Datenbank mittels der Geschäftslogik erläutert.
+
+\myparagraph{Generierung Schema}
+Damit ein Client die Möglichkeit hat auf eine Mutation zuzugreifen, muss der Wurzeloperation im Schema das gewünschte Feld hinzugefügt werden.
+Dabei wird, wie bereits bei der Implementierung der Query, die Pure-Code-First Vorgehensweise angewandt.
+\newline
+Im folgenden Code wird die Wurzeloperation Mutation um ein Feld \textit{updateBook} erweitert.
+Dabei werden nur Benutzern mit den Rollen Admin oder Bibliothekar die Ausführung gestattet.
+Als Übergabeparameter bekommt die Funktion das \textit{DTO BookUpateInput}.
+Der Resolver \textit{BookResolver} kümmert sich dabei um Ausführung der Operation.
+
+\begin{JsCode}
+public class BookMutation: ObjectTypeExtension<Mutation>{
+    protected override void Configure(IObjectTypeDescriptor<Mutation> descriptor) {
+        descriptor.Field("updateBook")
+            .Authorize(new [] {"Admin", "Librarian"})
+            .Argument("input", a => a.Type<NonNullType<BookUpdateInput>>())
+            .ResolveWith<BookResolver>(r => r.UpdateBook(default, default))
+            .Type<BookType>();
+    }
+}
+\end{JsCode}
+
+Der obige Code resultiert in folgendem Schema:
+\begin{JsCode}
+type mutation{
+    updateBook(input: BookUpdateInput!): Book @authorize(roles: [ "Admin", "Librarian" ], apply: BEFORE_RESOLVER)
+}
+
+type Book {
+  title: String!
+  authors: [Author!]!
+  reviews: [Review!]!
+  id: Int!
+}
+
+type Author {
+  firstName: String!
+  lastName: String!
+  books: [Book!]!
+  id: Int!
+}
+
+type Review {
+  userId: Int!
+  user: User!
+  bookId: Int!
+  book: Book!
+  rating: Int!
+  id: Int!
+}
+
+type User {
+  firstName: String!
+  lastName: String!
+  email: String!
+  roles: [Role!]!
+  reviews: [Review!]!
+  id: Int!
+}
+
+type Role {
+  name: String!
+  users: [User!]!
+  id: Int!
+}
+
+input BookUpdateInput {
+  authors: [Int!]
+  id: Int!
+  title: String!
+}
+\end{JsCode}
+
+In dem generierten Schema ist zu erkennen, dass der Objekt-Typ Buch alle Objekt-Typen die dieser explizit oder implizit referenziert, generiert wurden.
+Desweiteren wurde die Wurzeloperation Mutation durch das Feld \textit{updateBook} erweitert.
+Dieses Feld hat eine \textit{@authorize} Direktive, welche nur Benutzern mit den Rollen Admin oder Bibliothekar Zugriff gewährt.
+Weiters wurde das Input-Objekt \textit{BookUpdateInput} generiert.
+\newline
+
+Das Input-Objekt \textit{BookUpateInput} wurde dabei zusätzlich wie folgt deklariert:
+\begin{JsCode}
+public class BookUpdateInput: InputObjectType<BookUpdate> {
+
+    protected override void Configure(IInputObjectTypeDescriptor<BookUpdate> descriptor) {
+        descriptor.Field(f => f.Authors).Type<ListType<NonNullType<IntType>>>();
+    }
+}
+
+public class BookUpdate {
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public ICollection<int> Authors { get; set; }
+}
+\end{JsCode}
+
+Bei der Definition des Input-Objekts \textit{BookUpdateInput} bietet die \textit{Configure} Methode der Basisklasse \textit{ObjectType} wiederum die Möglichkeit genauere Definitionen vorzunehmen.
+Im obigen Code-Beispiel ist ersichtlich, dass das Feld \textit{Authors} eine Liste von \textit{Integer} enthält die nicht \textit{null} sein dürfen.
+\newline
+
+Anders als die im Datenbankschema beschriebene Entität Buch, hält das Input-Objekt \textit{BookUdpateInput} keine Liste des Objekt-Typs Autor, sondern nur eine Liste von \textit{Integer} Werten, welche die IDs wiederspiegeln.
+Mit dieser Vorgehensweise wird einer zyklischen Abhängigkeit vorgebeugt, denn sonst würden die Bücher Autoren referenzieren, welche wiederum Bücher referenzieren und das wiederholt sich endlos.
+Um diese \textit{DTOs} wieder zu Domänenklassen umzuwandeln müssen sie gemappt werden.
+Dafür wird im Prototypen \textit{AutoMapper} verwendet.
+
+Im folgenden Code-Beispiel wird \textit{BookUpdateInput} wieder zu \textit{Book} umgewandelt:
+\begin{JsCode}
+public class BookProfile : Profile {
+    public BookProfile() {
+        CreateMap<BookUpdate, Book>()
+            .ForMember(
+            dest => dest.Authors,
+            opt => opt.MapFrom(src => src.Authors.Select(id => new Author { Id = id })));
+    }
+
+}
+\end{JsCode}
+
+Zum Vergleich hier noch die Klasse \textit{Book} welche das Domänenobjekt Buch darstellt und von \textit{BaseEntity} ableitet und damit eine \textit{Id} erbt.
+
+\begin{JsCode}
+public class Book: BaseEntity {
+    public string Title { get; set; }
+    public List<Author> Authors { get; set; } = new List<Author>();
+    public List<Review> Reviews { get; set; } = new List<Review>();
+}
+\end{JsCode}
+
+\myparagraph{Ausführung und Ergebnis}
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{pics/execution_mutation.png}
+    \caption{Schemadefinition}
+\end{figure}
+
+In dieser Abbildung ist die Ausführung des Feldes \textit{updateBook} der Mutation zu sehen.
+Der Anfrage muss als HTTP-Header ein \textit{JWT-Token} übergeben werden um zu überprüfen ob der ausführende Benutzer genügend Rechte hat.
+Die Antwort des GraphQL-Service entspricht dabei wiederum genau dem Schema welches in der Query der Anfrage angegeben wurde.
+
 
 \section{Subscriptions}
+Subscriptions werden wie bereits erwähnt, verwendet um bidirektionale Kommunikation zwischen dem Client und Server zu ermöglichen.
+Dabei registriert sich der Client auf Events welche vom Server ausgelöst werden und bekommt dadurch in Echtzeit Updates.
+HotChocolate realisiert Subscriptions mittels WebSockets.
+HotChocolate bietet dabei 2 Subscription Provider: \textit{In-Memory} und \textit{Redis}.
+Für den Prototypen wurde dabei die \textit{In-Memory} Version verwendet.
+
+\myparagraph{Subscription über Event benachrichtigen}
+Um eine Subscription über ein ausgeführtes Event zu benachrichtigen stellt HotChocolate den \textit{ITopicEventSender} und den \textit{ITopicEventReceiver} zur Verfügung.
+Diese Interfaces sind Abstraktionen der Funktionalitäten des Subscription Providers.
+Diese Abstraktion ermöglicht es dem Entwickler den Subscription Provider je nach Bedarf zu einem späteren Zeitpunkt beliebig auszutauschen.
+Um nun eine Subscription von zu benachrichtigen ist folgender Code notwendig:
+\begin{JsCode}
+public async Task<Book> CreateBook([Service] IBookService bookService, BookCreate input,[Service] ITopicEventSender sender) {
+    var book = await bookService.AddAsync(mapper.Map<Book>(input));
+    await sender.SendAsync("bookAdded", book);
+    return book;
+}
+\end{JsCode}
+
+In Zeile 3 des obigen Code-Beispiels wird mittels dem \textit{ITopicEventSender} der \textit{ITopicEventReceiver} von dem neu erstelltem Buch notifiziert.
+Auf die Verwendung des \textit{ITopicEventReceiver} wird in der folgenden Erläuterung der Implementierung einer Subscription, welche auf die Erstellung eines Buches wartet, näher eingegangen:
+
+\myparagraph{Schemagenerierung}
+Für die Generierung des Schemas wird die Pure-Code-First Methode von GraphQL verwendet.
+Die Wurzeloperationen Subscription wird dabei um ein Feld \textit{bookAdded} erweitert.
+Die Umsetzung ist dabei in folgendem Code-Beispiel ersichtlich:
+
+\begin{JsCode}
+public class BookSubscription: ObjectTypeExtension<Subscription> {
+    protected override void Configure(IObjectTypeDescriptor<Subscription> descriptor) {
+        descriptor
+        .Field("bookAdded")
+        .Type<BookType>()
+        .Resolve(context => context.GetEventMessage<Book>())
+        .Subscribe(async context => {
+            var receiver = context.Service<ITopicEventReceiver>();
+            return await receiver.SubscribeAsync<string, Book>("bookAdded");
+        });
+    }
+}    
+\end{JsCode}
+In Zeile 9 des obigen Code-Beispiels ist ersichtlich, dass der \textit{ITopicEventReceiver} auf eine Benachrichtigung durch den \textit{ITopicEventSender} wartet.
+
+Der oben stehende Code generiert dabei folgendes Schema:
+\begin{JsCode}
+type subscription{
+    bookAdded: Book
+}
+
+type Book {
+  title: String!
+  authors: [Author!]!
+  reviews: [Review!]!
+  id: Int!
+}
+
+type Author {
+  firstName: String!
+  lastName: String!
+  books: [Book!]!
+  id: Int!
+}
+
+type Review {
+  userId: Int!
+  user: User!
+  bookId: Int!
+  book: Book!
+  rating: Int!
+  id: Int!
+}
+
+type User {
+  firstName: String!
+  lastName: String!
+  email: String!
+  roles: [Role!]!
+  reviews: [Review!]!
+  id: Int!
+}
+
+type Role {
+  name: String!
+  users: [User!]!
+  id: Int!
+}
+\end{JsCode} 
+
+\myparagraph{Ausführung und Ergebnis}
+
 
 \section{Authentifizierung und Autorisierung}
+Authentifizierung ist der Vorgang mit dem die Identität eines Benutzers festgestellt wird.
+Die Autorisierung wiederum ermittelt ob ein Benutzer die erforderlichen Rechte hat, um auf eine bestimmte Ressource hat.
+Wie im Anwendungsszenario bereits beschrieben, gibt es im System 3 Rollen für Benutzer: User, Librarian und Admin.
+Jede Rolle kann dabei nur für Sie freigegebene Ressourcen zugreifen.
+\newline
+
+Die Authentifizierung und Autorisierung für den Prototypen wird mit \textit{JWT-Tokens} und der Zuhilfenahme der \textit{ASP.NET Core-Authentifizierung} umgesetzt.
+Die folgenden Abbildungen beschreiben die Rollen und die Ressourcen auf die sie Zugriff haben.
+Grüne Felder bedeuten dabei, dass auch Benutzer ohne valides \textit{JWT-Token} Zugriff auf diese Ressource haben.
+Das gelbe Feld "Einloggen" kann nur nach einer bereits erfolgten Registrierung aufgerufen werden.
+Rote Felder wiederum verlangen ein valides \textit{JWT-Token} und sind an die Rolle des aufrufenden Benutzers gebunden.
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{pics/UseCaseUser.png}
@@ -350,8 +626,114 @@ builder.Services
     \caption{Rechte Admin.}
 \end{figure}
 
+\myparagraph{Generierung JWT-Token}
+Um die Authentifizierung mittels JWT-Token zu ermöglichen muss diese Authentifizierungsform erst registriert werden.
+Diese Registrierung erfolgt, wie in .NET üblich, im \textit{WebApplicationBuilder}.
+
+\begin{JsCode}
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options => {
+        var tokenSettings = configuration
+        .GetSection("JWT").Get<TokenSettings>();
+        options.TokenValidationParameters = new TokenValidationParameters {
+            ValidIssuer = tokenSettings.Issuer,
+            ValidateIssuer = true,
+            ValidAudience = tokenSettings.Audience,
+            ValidateAudience = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.Key)),
+            ValidateIssuerSigningKey = true
+        };
+    });
+\end{JsCode}
+
+Im obigen Code ist zu sehen, dass dem Server auf dem der GraphQL-Service läuft, eine JWT-Token Authentifizierung hinzugefügt wird.
+Hierzu wurde eine Klasse \textit{TokenSettings} erstellt welche den \textit{Issuer}, die \textit{Audience} und den \textit{Key} welche die benötigten Daten aus der \textit{appsettings.json} liest und bereitstellt.
+\newline
+
+Nachdem die zu verwendende Authentifizierungsmethode am Server registriert ist, ist es notwendig die Logik für die Erstellung eines Tokens zu implementieren.
+Diese wurde im \textit{AuthService} in der Methode \textit{Login} umgesetzt.
+Diese Methode erhält dabei einen Benutzernamen und ein Passwort als Übergabeparameter.
+Hervorzuheben ist dabei, dass der Login als Mutation umgesetzt wurde.
+Zum jetzigen Zeitpunkt finden zwar keine schreibenden Operationen in dieser Methode statt, aber Login-Operationen beinhalten beispielsweise oftmals das Speichern des Letzten erfolgreichen Logins.
+\newline
+
+Im folgenden Code-Beispiel wird ein JWT-Token, bei übereinstimmenden User-Credentials, generiert.
+
+\begin{JsCode}
+public async Task<string> Login(string email, string password) {
+
+    var user = await userRepository.GetFirstAsync(user => user.Email.Equals(email), user => user.Roles);
+    if (user is not null && BCrypt.Net.BCrypt.Verify(password, user.Password)) {
+        var securtityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.Key));
+
+        var credentials = new SigningCredentials(securtityKey, SecurityAlgorithms.HmacSha256);
+
+        var claims = new List<Claim>();
+
+        claims.Add(new Claim("FirstName", user.FirstName));
+        claims.Add(new Claim("LastName", user.LastName));
+        claims.Add(new Claim("Email", user.Email));
+        if (user.Roles?.Count > 0) {
+            foreach (var role in user.Roles) {
+                claims.Add(new Claim(ClaimTypes.Role, role.Name));
+            }
+        }
+
+        var jwtSecurityToken = new JwtSecurityToken(
+            issuer: tokenSettings.Issuer,
+            audience: tokenSettings.Audience,
+            //expires: DateTime.Now.AddMinutes(30),
+            expires: DateTime.Now.AddDays(1),
+            signingCredentials: credentials,
+            claims: claims
+        );
+
+        return new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+    }
+
+    return "";
+}
+\end{JsCode}
+
+Der obige Code beinhaltet die Überprüfung der vom Client übergebenen Benutzerdaten.
+Stimmen diese mit jenen in der Datenbank überein, so wird ein JWT-Token generiert.
+Der Token beinhaltet dabei folgende Daten des Benutzers: Vorname, Nachname, Email und die zugewiesenen Rollen.
+
+\myparagraph{Verwendung Authentifizierung und Autorisierung}
+Um ein Feld einer Query, Mutation oder Subscription nun abzusichern muss man die Field-Middleware Authentifizierung bei dem jeweiligen Feld aktivieren.
+% Mit Pure-Code-First funktioniert das wie im folgenden Code-Beispiel abgebildet:
+Mit der Pure-Code-First Methode von HotChocolate wird die Konfiguration in der \textit{Configure} Methode des jeweiligen \textit{ObjectType} abgebildet.
+
+\begin{JsCode}
+public class AuthorQuery: ObjectType<Query> {
+    protected override void Configure(IObjectTypeDescriptor<Query> descriptor) {
+        descriptor.Field("authors")
+            .ResolveWith<AuthorResolver>(r => r.Authors())
+            .Authorize()
+            .Type<ListType<NonNullType<AuthorType>>>();
+    }
+}
+\end{JsCode}
+
+In dem oben stehenden Code wird festgelegt, dass ein User ein valides \textit{JWT-Token} an de Service übergeben muss um Zugriff auf die Ressource zu haben.
+Im Umkehrschluss bedeutet dies, dass jeder Benutzer des Systems, wenn er angemeldet ist, Zugriff auf diese Ressource hat.
+\newline
+
+\begin{JsCode}
+public class AuthorQuery: ObjectType<Query> {
+    protected override void Configure(IObjectTypeDescriptor<Query> descriptor) {
+        descriptor.Field("authors")
+            .ResolveWith<AuthorResolver>(r => r.Authors())
+            .Authorize(new [] {"Admin", "Librarian"})
+            .Type<ListType<NonNullType<AuthorType>>>();
+    }
+}
+\end{JsCode}
+Dieser Code erweitert die erste Version um Autorisierung.
+Es haben somit nur mehr Benutzer mit den Rollen Admin und Bibliothekar Zugriff auf diese Ressource.
+Ein "normaler" Benutzer würde abgewiesen werden.
+
 \section{1 + n Problem}
 Lösung mit Dataloader
-\section{Entwicklertools}
-\subsection{GraphiQL}
+
 
