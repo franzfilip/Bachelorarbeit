@@ -33,30 +33,28 @@
 \contentsline {section}{\numberline {3.6}Mutationen}{23}{}%
 \contentsline {section}{\numberline {3.7}Subscriptions}{24}{}%
 \contentsline {section}{\numberline {3.8}Bekannte Probleme}{25}{}%
-\contentsline {chapter}{\numberline {4}Entwicklung eines GraphQL-Service in .NET mit HotChocolate}{26}{}%
+\contentsline {chapter}{\numberline {4}Entwicklung GraphQL-Service in .NET mit HotChocolate}{26}{}%
 \contentsline {section}{\numberline {4.1}Anwendungsszenario}{26}{}%
-\contentsline {section}{\numberline {4.2}HotChocolate}{26}{}%
-\contentsline {paragraph}{Was ist HotChocolate}{27}{}%
-\contentsline {paragraph}{Schema Erstellung in HotChocolate}{27}{}%
-\contentsline {section}{\numberline {4.3}Architektur}{27}{}%
-\contentsline {subsection}{\numberline {4.3.1}API:}{28}{}%
-\contentsline {paragraph}{Definierung des Schemas mit HotChocolate}{30}{}%
-\contentsline {subsection}{\numberline {4.3.2}Geschäftslogik:}{30}{}%
-\contentsline {subsection}{\numberline {4.3.3}Datenbankzugriff:}{30}{}%
-\contentsline {section}{\numberline {4.4}Hot Chocolate}{30}{}%
-\contentsline {subsection}{\numberline {4.4.1}Entwurf Schema}{31}{}%
-\contentsline {section}{\numberline {4.5}Entity Framework}{31}{}%
-\contentsline {section}{\numberline {4.6}Resolver}{31}{}%
+\contentsline {section}{\numberline {4.2}Planung GraphQl Schema}{26}{}%
+\contentsline {section}{\numberline {4.3}HotChocolate}{28}{}%
+\contentsline {paragraph}{Was ist HotChocolate}{28}{}%
+\contentsline {paragraph}{Schema Erstellung in HotChocolate}{28}{}%
+\contentsline {paragraph}{Dependency Injection}{29}{}%
+\contentsline {section}{\numberline {4.4}Architektur}{29}{}%
+\contentsline {subsection}{\numberline {4.4.1}API:}{30}{}%
+\contentsline {subsection}{\numberline {4.4.2}Geschäftslogik}{30}{}%
+\contentsline {subsection}{\numberline {4.4.3}Datenbankzugriff}{30}{}%
+\contentsline {section}{\numberline {4.5}Resolver}{31}{}%
 \contentsline {paragraph}{Umsetzung Resolver mittels Geschäftslogik}{31}{}%
-\contentsline {section}{\numberline {4.7}Querys}{32}{}%
+\contentsline {section}{\numberline {4.6}Field Middleware}{32}{}%
+\contentsline {paragraph}{Reihenfolge Exekution Middleware}{32}{}%
+\contentsline {paragraph}{Zusammenführung Middleware}{33}{}%
+\contentsline {section}{\numberline {4.7}Querys}{33}{}%
 \contentsline {paragraph}{Generierung Schema}{33}{}%
-\contentsline {subsection}{\numberline {4.7.1}Field Middleware}{34}{}%
-\contentsline {paragraph}{Reihenfolge Exekution Middleware}{34}{}%
 \contentsline {paragraph}{Authorize}{35}{}%
 \contentsline {paragraph}{Projection}{35}{}%
-\contentsline {paragraph}{Filtering}{35}{}%
+\contentsline {paragraph}{Filtering}{36}{}%
 \contentsline {paragraph}{Sorting}{36}{}%
-\contentsline {paragraph}{Zusammenführung Middleware}{36}{}%
 \contentsline {paragraph}{Ausführung Query und Ergebnis}{36}{}%
 \contentsline {section}{\numberline {4.8}Mutations}{37}{}%
 \contentsline {paragraph}{Generierung Schema}{37}{}%
@@ -67,8 +65,8 @@
 \contentsline {paragraph}{Ausführung und Ergebnis}{42}{}%
 \contentsline {section}{\numberline {4.10}Authentifizierung und Autorisierung}{42}{}%
 \contentsline {paragraph}{Generierung JWT-Token}{44}{}%
-\contentsline {paragraph}{Verwendung Authentifizierung und Autorisierung}{45}{}%
-\contentsline {section}{\numberline {4.11}1 + n Problem}{46}{}%
-\contentsline {chapter}{\numberline {5}Conclusio}{47}{}%
-\contentsline {section}{\numberline {5.1}Fazit}{47}{}%
-\contentsline {section}{\numberline {5.2}Ausblick}{47}{}%
+\contentsline {paragraph}{Verwendung Authentifizierung und Autorisierung}{46}{}%
+\contentsline {section}{\numberline {4.11}1 + n Problem}{47}{}%
+\contentsline {chapter}{\numberline {5}Conclusio}{48}{}%
+\contentsline {section}{\numberline {5.1}Fazit}{48}{}%
+\contentsline {section}{\numberline {5.2}Ausblick}{48}{}%
