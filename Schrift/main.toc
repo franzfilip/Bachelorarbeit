@@ -35,9 +35,9 @@
 \contentsline {section}{\numberline {3.8}Bekannte Probleme}{25}{}%
 \contentsline {chapter}{\numberline {4}Entwicklung GraphQL-Service in .NET mit HotChocolate}{26}{}%
 \contentsline {section}{\numberline {4.1}Anwendungsszenario}{26}{}%
-\contentsline {section}{\numberline {4.2}Planung GraphQl Schema}{26}{}%
+\contentsline {section}{\numberline {4.2}Planung Schnittstelle}{26}{}%
 \contentsline {section}{\numberline {4.3}HotChocolate}{28}{}%
-\contentsline {paragraph}{Was ist HotChocolate}{28}{}%
+\contentsline {paragraph}{HotChocolate Allgemein}{28}{}%
 \contentsline {paragraph}{Schema Erstellung in HotChocolate}{28}{}%
 \contentsline {paragraph}{Dependency Injection}{29}{}%
 \contentsline {section}{\numberline {4.4}Architektur}{29}{}%
@@ -53,20 +53,21 @@
 \contentsline {paragraph}{Generierung Schema}{33}{}%
 \contentsline {paragraph}{Authorize}{35}{}%
 \contentsline {paragraph}{Projection}{35}{}%
-\contentsline {paragraph}{Filtering}{36}{}%
+\contentsline {paragraph}{Filtering}{35}{}%
 \contentsline {paragraph}{Sorting}{36}{}%
+\contentsline {paragraph}{Zugriff auf Daten}{36}{}%
 \contentsline {paragraph}{Ausführung Query und Ergebnis}{36}{}%
-\contentsline {section}{\numberline {4.8}Mutations}{37}{}%
-\contentsline {paragraph}{Generierung Schema}{37}{}%
+\contentsline {section}{\numberline {4.8}Mutations}{38}{}%
+\contentsline {paragraph}{Generierung Schema}{38}{}%
 \contentsline {paragraph}{Ausführung und Ergebnis}{40}{}%
-\contentsline {section}{\numberline {4.9}Subscriptions}{40}{}%
-\contentsline {paragraph}{Subscription über Event benachrichtigen}{40}{}%
-\contentsline {paragraph}{Schemagenerierung}{41}{}%
-\contentsline {paragraph}{Ausführung und Ergebnis}{42}{}%
-\contentsline {section}{\numberline {4.10}Authentifizierung und Autorisierung}{42}{}%
-\contentsline {paragraph}{Generierung JWT-Token}{44}{}%
-\contentsline {paragraph}{Verwendung Authentifizierung und Autorisierung}{46}{}%
-\contentsline {section}{\numberline {4.11}1 + n Problem}{47}{}%
-\contentsline {chapter}{\numberline {5}Conclusio}{48}{}%
-\contentsline {section}{\numberline {5.1}Fazit}{48}{}%
-\contentsline {section}{\numberline {5.2}Ausblick}{48}{}%
+\contentsline {section}{\numberline {4.9}Subscriptions}{41}{}%
+\contentsline {paragraph}{Subscription über Event benachrichtigen}{41}{}%
+\contentsline {paragraph}{Schemagenerierung}{42}{}%
+\contentsline {paragraph}{Ausführung und Ergebnis}{43}{}%
+\contentsline {section}{\numberline {4.10}Authentifizierung und Autorisierung}{43}{}%
+\contentsline {paragraph}{Generierung JWT-Token}{45}{}%
+\contentsline {paragraph}{Verwendung Authentifizierung und Autorisierung}{47}{}%
+\contentsline {section}{\numberline {4.11}1 + n Problem}{48}{}%
+\contentsline {chapter}{\numberline {5}Conclusio}{49}{}%
+\contentsline {section}{\numberline {5.1}Fazit}{49}{}%
+\contentsline {section}{\numberline {5.2}Ausblick}{49}{}%

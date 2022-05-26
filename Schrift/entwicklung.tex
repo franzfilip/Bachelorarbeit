@@ -6,14 +6,14 @@ Der Prototyp ist ein GraphQL-Service welcher mit .NET 6 und der Zuhilfenahme der
 % Der Anwendungsfall des Prototypen lässt sich wie folgt beschreiben:
 % Da die Verwaltungen von Büchern und dazugehörige Autoren und Bewertungen ein aufwändiges Verfahren ist soll 
 Die Auswahl eines neuen Buches ist oftmals ein sehr schwieriges Unterfangen.
-Bei der Entscheidungsfindung helfen oft Bewertungen von Lesern die das jeweilige Buch schon gelesen haben.
+Bei der Entscheidungsfindung helfen oft Bewertungen von Lesern, die das jeweilige Buch schon gelesen haben.
 Demnach soll eine Bücher-Bewertungsplattform geschaffen werden.
-Diese Plattform ermöglicht es Benutzern Bücher zu bewerten und Informationen über Bücher, Autoren oder Bewertungen einzusehen.
+Diese Plattform ermöglicht es Benutzern, Bücher zu bewerten und Informationen über Bücher, Autoren oder Bewertungen einzusehen.
 % Benutzer, mit mehr Rechten als reinen Benutzerrechen, haben zudem die Möglichkeit die zusätzlich benötigten Entitäten 
 Weiters sollen Benutzer in der Lage sein sich im System zu registrieren und anzumelden.
 Angemeldete Benutzer haben, je nach ihren Benutzerrollen, Möglichkeiten im System verwaltete Entitäten zu Erstellen, zu Bearbeiten oder zu Löschen.
 
-\section{Planung GraphQl Schema}
+\section{Planung Schnittstelle}
 Bevor ein Entwickler sich um die technische Umsetzung einer API kümmert, ist es ratsam, dass er sich einen Gesamtüberblick über das zu entwerfende System verschafft.
 Dafür werden vor Beginn der technischen Umsetzung, unter Zuhilfenahme des Anwendungsszenarios, Use-Cases definiert.
 % Diese Use-Cases definieren die Art und Weise wie ein Client auf den GraphQL-Service zugreif.
@@ -47,21 +47,23 @@ Die zu vewaltenden Entitäten und ihre Relationen zueinander sind im folgenden E
 \section{HotChocolate}
 Für die Implementierung des GraphQL-Service wurde das Framework HotChocolate herangezogen.
 Zusätzlich zum HotChocoalte Framework gibt es noch das .NET GraphQL Framework.
-Der Prototyp wurde aufgrund der steigenden Beliebtheit und Aktivät der Community des HotChocolate Frameworks mit eben jenem Framework umgesetzt.
+% Der Prototyp wurde aufgrund der steigenden Beliebtheit und Aktivät der Community des HotChocolate Frameworks mit eben jenem Framework umgesetzt.
+Die Entscheidung, HotChocolate zu verwenden, fiel aufgrund der besseren Dokumentation des Frameworks und der höheren Aktivität der Community.
 
-\myparagraph{Was ist HotChocolate}
+\myparagraph{HotChocolate Allgemein}
 HotChoclate ist ein Open-Source Framework zur Implementierung eines GraphQL-Services.
-Es ist konform laut den GraphQL-Spezifikationen implementiert und bietet somit Kompatibilität gegenüber allen anderen GraphQL konform umgesetzten Clients wie zum Beispiel den Apollo Client.
-Ein großer Teil der Komplexität einen GraphQL-Service zu schreiben ist dabei die Entwicklung des Schemas.
+Es ist konform, laut den GraphQL-Spezifikationen implementiert.
+Damit ist HotChocolate kompatibel mit allen anderen GraphQL konform umgesetzten Clients.
+Ein großer Teil der Komplexität, einen GraphQL-Service zu entwickeln, fällt dabei auf die Entwicklung des Schemas zurück.
 HotChoclate kümmert sich um die Generierung des Schemas zur Laufzeit und entfernt somit einen großen Teil dieser Komplexität vom Entwickler.
 
 \myparagraph{Schema Erstellung in HotChocolate}
 Um das Schema in HotChocolate zu definieren gibt es 3 Varianten: \textit{Pure-Code-First}, \textit{Code-First} und \textit{Schema-First}.
-Schema-First nimmt dabei ein bereits bestehendes Schema und fügt es dem Service zu.
-Pure-Code-First verwendet Annotationen um das Schema zu definieren.
-Code-First verwendet eine Fluent-API.
+Schema-First übernimmt dabei ein bereits bestehendes Schema und fügt es dem Service zu.
+Code-First verwendet \textit{Attributes} um das Schema zu definieren.
+Pure-Code-First verwendet eine Fluent-API.
 Alle 3 Varianten liefern das selbe Schema, wobei man mit Pure-Code-First am meisten Kontrolle bei der Konfiguration hat.
-Der Prototyp wurde mittels der Pure-Code-First Methode umgesetzt.
+Der Prototyp wurde mittels der Pure-Code-First Vorgehensweise umgesetzt.
 
 \myparagraph{Dependency Injection}
 Dependency-Injection in HotChocolate funktioniert sehr ähnlich wie die Dependency Injection von ASP.NET Applikationen.
@@ -93,7 +95,7 @@ public async Task<IQueryable<Book>> Books([Service]IBookService bookService) {
 
 \section{Architektur}
 Der Prototyp wurde mit der für REST-APIs üblichen Drei-Schicht-Architektur umgesetzt.
-Die Geschäftslogikschicht und Datenbankzugriffsschicht wurden dabei so entwickelt, dass sie eigentlichen Implementierungen je nach Bedarf einfach ausgetauscht werden können.
+Die Geschäftslogikschicht und Datenbankzugriffsschicht wurden dabei so entwickelt, dass die eigentlichen Implementierungen, je nach Bedarf, einfach ausgetauscht werden können.
 % Auf die Geschäftslogik wird in den Unterkapiteln Query, Mutation und Subscription näher eingegangen. Die Datenbankzugriffsschicht wird im Kapitel Entity Framework näher erläutert.
 \newline
 
@@ -112,7 +114,7 @@ Dieses Schema definiert, wie im GraphQL-Kapitel bereits erwähnt, die verfügbar
 \subsection{Geschäftslogik}
 Die Geschäftslogik bildet dabei die Logik der Server-Applikation ab.
 Diese Logik wird dem GraphQL-Schema mittels Resolvern zur Verfügung gestellt.
-Genaueres zu den Resolvern und zur Geschäftslogik wird im Unterkapitel Resolver beschrieben.
+Genaueres zu den Resolvern und zur Geschäftslogik folgt im Unterkapitel Resolver.
 Die Geschäftslogik wurde mit dem DAO-Pattern umgesetzt und besteht aus \textit{Service} Klassen und zugehörigen Interfaces.
 
 \subsection{Datenbankzugriff}
@@ -124,7 +126,7 @@ Wobei ein generisches Repository die Grundfunktionalität für die anderen entit
 
 \section{Resolver}
 Das Schema beschreibt, wie bereits im GraphQL-Kapitel erwähnt, nur die verfügbaren Typen, Querys, Mutations und Subscriptions.
-Über die Generierung der Daten als auch über die Manipulation derer hat das Schema kein Wissen.
+Über die Generierung der Daten, als auch über die Manipulation dieser, hat das Schema kein Wissen.
 Für den Datenzugriff bzw. Datenmanipulation sind in GraphQL \textit{Resolver} verantwortlich.
 Jedes Feld in einer Query ist nichts anderes als eine Methode welches den Wert dieses Typs retourniert.
 Jedes Feld eines Typs wird dabei einem \textit{Resolver} zugewiesen, diese Resolver sind Zugriffe auf die Geschäftslogik.
@@ -204,7 +206,7 @@ Sie sind eine der fundamentalen Komponenten des Frameworks.
 % Im folgenden Unterkapitel Query werden Funktionalitäten für das Authentifizieren und Autorisieren eines Benutzers als auch für das Sortieren, dem Filtern und der Projection verwendet.
 
 \myparagraph{Reihenfolge Exekution Middleware}
-Middlewarekomponenten werden in der Reihenfolge in der sie definiert worden sind ausgeführt.
+Middlewarekomponenten werden in der Reihenfolge, in der sie definiert worden sind, ausgeführt.
 Jede Middleware-Schicht kennt dabei nur die jeweils nächste Middleware.
 Die letzte auszuführende Middleware ist dabei der eigentliche Resolver.
 Die Reihenfolge der Anordnung der Middlewarekomponenten ist dabei sehr entscheidend, denn die Komponenten werden in genau dieser Reihenfolge exekutiert.
@@ -216,19 +218,20 @@ Die folgende Abbildung beschreibt die Aneinanderreihung der Middlewarekomponente
     \caption{Exekutierungsreihenfolge Middleware}
 \end{figure}
 
-In der obigen Abbildung ist zu sehen, dass die Middleware in der Reihenfolge ausgeführt wird in der sie definiert wurde.
-Aber das Resultat welches von der letzten Middleware (dem Resolver) generiert wurde, wird in der umgekehrten Reihenfolge zurückgereicht.
-Dabei wird das vom Resolver zurückgelieferte \textit{IQueryable} um die jeweiligen Operationen der restlichen Middleware erweitert.
+In der obigen Abbildung ist zu sehen, dass die Middleware in der Reihenfolge ausgeführt wird, in der sie definiert wurde.
+Das Resultat, welches von der letzten Middleware (dem Resolver) generiert wurde, wird in der umgekehrten Reihenfolge zurückgereicht.
+Dabei wird das vom Resolver zurückgelieferte \textit{IQueryable} um die jeweiligen Operationen der restlichen Middlewarekomponenten erweitert.
 \newline
 
-Da im Unterkapitel Query, in der Implementierung, diese Middlewarekomponenten verwendet werden, erfolgt dort auch eine genauere Erläuterung der einzelnen Komponenten.
+Im Unterkapitel Query werden die verwendeten Middlewarekomponenten des Prototypen genauer erläutert.
+% Da im Unterkapitel Query, welche die in der Implementierung, diese Middlewarekomponenten verwendet werden, erfolgt dort auch eine genauere Erläuterung der einzelnen Komponenten.
 % In den folgenden Abschnitten wird auf zuvor erwähnten Middlewarekomponenten genauer eingegangen, diese sind für die folgenden Unterkapitel Query und Mutation von besonderer Relevanz: 
 
 \myparagraph{Zusammenführung Middleware}
 Nachdem jene Middleware, welche als erstes definiert wurde, das Ergebnis der restlichen Middlewarekomponenten erhalten hat wird das \textit{IQueryable} ausgeführt und das Ergebnis an den Client zurückgeliefert.
 
 \section{Querys}
-Im folgenden Abschnitt wird die Umsetzung eines lesenden Zugriffs mittels einer Query auf die Entität \textit{Author} erläutert.
+Im folgenden Abschnitt wird die Umsetzung, eines lesenden Zugriffs mittels einer Query, auf die Entität \textit{Author} erläutert.
 Dabei wird das Zustandekommen der Schema-Definition der Query, als auch der Zugriff auf die Datenbank mittels der Geschäftslogik eingegangen.
 Weiters wird erläutert wie HotChocolate das Over und Underfetching Problem löst, als auch Filtern, Sortieren und Pagination ermöglicht.
 \newline
@@ -326,13 +329,13 @@ input ComparableInt32OperationFilterInput {
 Der oben gegebene Code erzeugt dabei zur Laufzeit das hier gezeigte Schema.
 % Das obige Code-Beispiel generiert dabei zur Laufzeit die im nächsten Code-Beispiel gezeigte Query.
 Nur der \textit{AuthorType} als auch die Wurzel-Operation der Query mit dem Feld \textit{authors} wurden explizit generiert.
-Die Methodenaufrufe \textit{Authorize()}, \textit{UseProjection()}, \textit{UseFiltering()} und \textit{UseSorting()} sind dabei für die Generierung von nicht explizit angegeben Typen verantwortlich.
+Die Methodenaufrufe \textit{Authorize()}, \textit{UseFiltering()} und \textit{UseSorting()} sind dabei für die Generierung von nicht explizit angegeben Typen verantwortlich.
 Diese Methodenaufrufe aktivieren die jeweilige Field-Middleware, diese werden in den nachfolgenden Abschnitten genauer erläutert:
 
 \myparagraph{Authorize}
-Hierbei wird deklariert, dass nur angemeldete Benutzer Zugriff auf diese Feld haben.
-Diese Middleware, ist wie in der obigen Schemadefinition ersichtlich, vor dem Resolver auszuführen.
-Sie stellt damit sicher, dass nur Anfragen mit einer gültigen Authentifizierung ausgeführt werden.
+Hierbei wird deklariert, dass nur angemeldete Benutzer Zugriff auf dieses Feld haben.
+Diese Middleware ist, wie in der obigen Schemadefinition ersichtlich, vor dem Resolver auszuführen.
+Sie stellt damit sicher, dass nur Anfragen mit einer gültigen Authentifizierung an die Geschäftslogik weitergereicht werden.
 Im Schema wird das Feld \textit{authors} der Query mit der Direktive \textit{@authorize} versehen.
 Näheres zur Authentifizierung und Autorisierung ist im gleichnamigen Abschnitt ersichtlich.
 
@@ -340,19 +343,26 @@ Näheres zur Authentifizierung und Autorisierung ist im gleichnamigen Abschnitt 
 Mit \textit{Projections} liefert HotChocolate die Möglichkeit Over und Underfetching zu verhindern.
 Over und Underfetching zu verhindern bedeutet, dass genau jene Daten, welche vom Client angefordert werden, in der Datenbank selektiert und anschließend an den Client zurückgeliefert werden.
 Dabei bekommt HotChocolate vom \textit{Resolver} ein \textit{IQueryable}.
-Dieses \textit{IQueryable} beinhaltet zunächst nur jene Filterungen und Selektionen welche von der Geschäftslogik festgelegt worden sind.
+Dieses \textit{IQueryable} beinhaltet zunächst nur jene Filterungen und Selektionen welche von der Geschäftslogik festgelegt werden.
 HotChocolate erweitert dieses \textit{IQueryable} nun durch jene Felder welche in der Query angefordert wurden.
 
 \myparagraph{Filtering}
-Aktiviert man die \textit{Filtering} Middleware für ein Query-Field so kann man den implizit von HotChocolate bereitgestellten Sortier-Input verwenden.
+Aktiviert man die \textit{Filtering} Middleware für ein Query-Field, so kann man den implizit von HotChocolate bereitgestellten Filter-Input verwenden.
 Diese Middleware erweitert das vom Resolver zurückgelieferte \textit{IQueryable} um die gegebene Filterung und liefert das Ergebnis der vorangestellten Middleware zurück.
 Weiters ist es möglich benutzerdefinierte Typen für die Filterung zu definieren.
 
 \myparagraph{Sorting}
-Aktiviert man die \textit{Sorting} Middleware für ein Query-Field so kann man den implizit von HotChocolate bereitgestellten Filter-Input verwenden.
+Aktiviert man die \textit{Sorting} Middleware für ein Query-Field, so kann man den implizit von HotChocolate bereitgestellten Sortier-Input verwenden.
 Diese Middleware fügt der vom Resolver zurückgelieferten \textit{IQueryable} die gegebene Sortierung hinzu.
 Das Ergebnis wird wiederum an die vorangestellte Middleware zurückgeliefert.
 Weiters ist es möglich benutzerdefinierte Typen für die Sortierung zu definieren.
+
+\myparagraph{Zugriff auf Daten}
+Der \textit{AuthorResolver} kümmert sich dabei um die Bereitstellung der geforderten Daten.
+Er greift auf den \textit{AuthorService}, einer Kindklasse des \textit{BaseService}, zu und dieser mithilfe der Datenbankzugriffsschicht auf die Datenbank.
+Wichtig dabei ist, dass der \textit{AuthorService}, HotChocolate ein \textit{IQueryable} zurückliefert.
+Das zurückgelieferte \textit{IQueryable} wird vom Resolver an die restlichen Middlewarekomponenten zurückgereicht.
+Diese erweitern dann das \textit{IQueryable} mit der von ihnen definierten Logik und werten es anschließend aus.
 
 \myparagraph{Ausführung Query und Ergebnis}
 \begin{figure}[H]
@@ -360,10 +370,10 @@ Weiters ist es möglich benutzerdefinierte Typen für die Sortierung zu definier
     \caption{Exekutierungsreihenfolge Middleware}
 \end{figure}
 
-Die obige Abbildung zeigt eine Query welche alle Autoren mittels dem Feld \textit{authors} abfrägt.
+Die obige Abbildung zeigt eine Query, welche alle Autoren mittels dem Feld \textit{authors} abfrägt.
 Dabei sollen nur jene Autoren zurückgegeben werden deren Nachname entweder "Freu" oder "Pre" enthält.
 Weiters werden die Autoren nach ihrem Nachnamen sortiert.
-Bei der Antwort des GraphQL-Service ist zu sehen, dass dieser die Daten genau in jenem Format zurückgibt in dem sie angefragt worden sind.
+Bei der Antwort des GraphQL-Service ist zu sehen, dass dieser die Daten genau in jenem Format zurückgibt, in dem sie angefragt worden sind.
 Mittles HTTP-Parametern wurde der für die Authentifizierung notwendige \textit{JWT-Token} mitübermittelt.
 \newline
 
@@ -387,7 +397,7 @@ Dabei wird auf das Generieren des Schemas zur Laufzeit, als auch der Zugriff auf
 
 \myparagraph{Generierung Schema}
 Damit ein Client die Möglichkeit hat auf eine Mutation zuzugreifen, muss der Wurzeloperation im Schema das gewünschte Feld hinzugefügt werden.
-Dabei wird, wie bereits bei der Implementierung der Query, die Pure-Code-First Vorgehensweise verwendet.
+Dabei wird, wie bereits bei der Implementierung der Query, die Pure-Code-First Vorgehensweise angewendet.
 \newline
 Im folgenden Code wird die Wurzeloperation Mutation um ein Feld \textit{updateBook} erweitert.
 Dabei werden nur Benutzern mit den Rollen Admin oder Bibliothekar die Ausführung gestattet.
@@ -483,10 +493,10 @@ Bei der Definition des Input-Objekts \textit{BookUpdateInput} bietet die \textit
 Im obigen Code-Beispiel ist ersichtlich, dass das Feld \textit{Authors} eine Liste von \textit{Integer} enthält die nicht \textit{null} sein dürfen.
 \newline
 
-Anders als die im Datenbankschema beschriebene Entität Buch, hält das Input-Objekt \textit{BookUdpateInput} keine Liste des Objekt-Typs Autor, sondern nur eine Liste von \textit{Integer} Werten, welche die IDs wiederspiegeln.
+Anders als die im Datenbankschema beschriebene Entität Buch hält das Input-Objekt \textit{BookUdpateInput} keine Liste des Objekt-Typs Autor, sondern nur eine Liste von \textit{Integer} Werten, welche die IDs wiederspiegeln.
 Mit dieser Vorgehensweise wird einer zyklischen Abhängigkeit vorgebeugt, denn sonst würden die Bücher Autoren referenzieren, welche wiederum Bücher referenzieren und das wiederholt sich endlos.
-Um diese \textit{DTOs} wieder zu Domänenklassen umzuwandeln müssen sie gemappt werden.
-Dafür wird im Prototypen \textit{AutoMapper} verwendet.
+Um diese \textit{DTOs} wieder zu Domänenklassen umzuwandeln, müssen sie gemappt werden.
+Dafür wird im Prototyp die Bibliothek \textit{AutoMapper} verwendet.
 
 Im folgenden Code-Beispiel wird \textit{BookUpdateInput} wieder zu \textit{Book} umgewandelt:
 \begin{JsCode}
@@ -524,17 +534,17 @@ Die Antwort des GraphQL-Service entspricht dabei wiederum genau dem Schema welch
 
 
 \section{Subscriptions}
-Subscriptions werden wie bereits erwähnt, verwendet um bidirektionale Kommunikation zwischen dem Client und Server zu ermöglichen.
-Dabei registriert sich der Client auf Events welche vom Server ausgelöst werden und bekommt dadurch in Echtzeit Updates.
+Subscriptions werden wie bereits erwähnt verwendet, um bidirektionale Kommunikation zwischen dem Client und Server zu ermöglichen.
+Dabei registriert sich der Client auf Events, welche vom Server ausgelöst werden, und bekommt dadurch in Echtzeit Updates.
 HotChocolate realisiert Subscriptions mittels WebSockets.
 HotChocolate bietet dabei 2 Subscription Provider: \textit{In-Memory} und \textit{Redis}.
 Für den Prototypen wurde dabei die \textit{In-Memory} Version verwendet.
 
 \myparagraph{Subscription über Event benachrichtigen}
-Um eine Subscription über ein ausgeführtes Event zu benachrichtigen stellt HotChocolate den \textit{ITopicEventSender} und den \textit{ITopicEventReceiver} zur Verfügung.
+Um eine Subscription über ein ausgeführtes Event zu benachrichtigen, stellt HotChocolate den \textit{ITopicEventSender} und den \textit{ITopicEventReceiver} zur Verfügung.
 Diese Interfaces sind Abstraktionen der Funktionalitäten des Subscription Providers.
-Diese Abstraktion ermöglicht es dem Entwickler den Subscription Provider je nach Bedarf zu einem späteren Zeitpunkt beliebig auszutauschen.
-Um nun eine Subscription von zu benachrichtigen ist folgender Code notwendig:
+Diese Abstraktion ermöglicht es dem Entwickler, den Subscription Provider je nach Bedarf, zu einem späteren Zeitpunkt beliebig auszutauschen.
+Um nun eine Subscription von einem Event zu benachrichtigen, ist folgender Code notwendig:
 \begin{JsCode}
 public async Task<Book> CreateBook([Service] IBookService bookService, BookCreate input,[Service] ITopicEventSender sender) {
     var book = await bookService.AddAsync(mapper.Map<Book>(input));
@@ -544,7 +554,7 @@ public async Task<Book> CreateBook([Service] IBookService bookService, BookCreat
 \end{JsCode}
 
 In Zeile 3 des obigen Code-Beispiels wird mittels dem \textit{ITopicEventSender} der \textit{ITopicEventReceiver} von dem neu erstelltem Buch notifiziert.
-Auf die Verwendung des \textit{ITopicEventReceiver} wird in der folgenden Erläuterung der Implementierung einer Subscription, welche auf die Erstellung eines Buches wartet, näher eingegangen:
+Auf die Verwendung des \textit{ITopicEventReceiver} wird in der folgenden Implementierung einer Subscription, welche auf die Erstellung eines Buches wartet, näher eingegangen:
 
 \myparagraph{Schemagenerierung}
 Für die Generierung des Schemas wird die Pure-Code-First Methode von GraphQL verwendet.
@@ -622,7 +632,7 @@ Das folgende Bild zeigt das Ergebnis einer Subscription welche von der Erstellun
 \end{figure}
 
 \section{Authentifizierung und Autorisierung}
-Authentifizierung ist der Vorgang mit dem die Identität eines Benutzers festgestellt wird.
+Als Authentifizierung wird jener Vorgang bezeichnet, mit dem die Identität eines Benutzers festgestellt wird.
 Die Autorisierung wiederum ermittelt ob ein Benutzer die erforderlichen Rechte hat, um auf eine bestimmte Ressource zugreifen zu können.
 Wie im Anwendungsszenario bereits beschrieben, gibt es im System 3 Rollen für Benutzer: User, Librarian und Admin.
 Jede Rolle kann dabei nur für Sie freigegebene Ressourcen zugreifen.
@@ -673,11 +683,13 @@ Im obigen Code ist zu sehen, dass dem Server auf dem der GraphQL-Service läuft,
 Hierzu wurde eine Klasse \textit{TokenSettings} erstellt welche den \textit{Issuer}, die \textit{Audience} und den \textit{Key} welche die benötigten Daten aus der \textit{appsettings.json} liest und bereitstellt.
 \newline
 
-Nachdem die zu verwendende Authentifizierungsmethode am Server registriert ist, ist es notwendig die Logik für die Erstellung eines Tokens zu implementieren.
+% Nachdem die zu verwendende Authentifizierungsmethode am Server registriert ist, ist es notwendig die Logik für die Erstellung eines Tokens zu implementieren.
+Nach der Registrierung, der zu verwendenden Authentifizierungsmethode, erfolgt die eigentliche Generierung des Tokens.
 Diese wurde im \textit{AuthService} in der Methode \textit{Login} umgesetzt.
 Diese Methode erhält dabei einen Benutzernamen und ein Passwort als Übergabeparameter.
 Hervorzuheben ist dabei, dass der Login als Mutation umgesetzt wurde.
-Zum jetzigen Zeitpunkt finden zwar keine schreibenden Operationen in dieser Methode statt, aber Login-Operationen beinhalten beispielsweise oftmals das Speichern des Letzten erfolgreichen Logins.
+Zum jetzigen Zeitpunkt finden keine schreibenden Operationen in dieser Methode statt.
+Login-Operationen beinhalten aber oftmals das Speichern des Letzten erfolgreichen Logins, deswegen wurde für die Implementierung eine Mutation gewählt.
 \newline
 
 Im folgenden Code-Beispiel wird ein JWT-Token, bei übereinstimmenden User-Credentials, generiert.
@@ -705,7 +717,6 @@ public async Task<string> Login(string email, string password) {
         var jwtSecurityToken = new JwtSecurityToken(
             issuer: tokenSettings.Issuer,
             audience: tokenSettings.Audience,
-            //expires: DateTime.Now.AddMinutes(30),
             expires: DateTime.Now.AddDays(1),
             signingCredentials: credentials,
             claims: claims
