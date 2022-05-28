@@ -1,8 +1,30 @@
 \chapter{Einleitung}
 
 \section{Motivation}
-placeholder
-\pagebreak
+% bietet flexiblere möglichkeit für den client auf das backend zuzugreifen
+% In modernen Anwendungen werden REST-Services oftmals für die Datenübertragung herangezogen.
+% Für die Ressourcen-orientierte Kommunikation zwischen Client und Server werden oftmals REST-Services herangezogen.
+Für die Realisierung Ressourcen-orientierter Kommunikation sind REST-Services oftmals das Mittel der Wahl.
+Dabei kommuniziert das Frontend mit dem Backend um die, für die Visualisierung benötigen Daten, abzufragen.
+% Der Client kommuniziert dabei mit dem Server über diese Schnittstelle um die für ihn benötigen Daten abzufragen.
+Dabei ist die Datenabfrage mittels REST jedoch sehr unflexibel.
+Bei komplexeren Datenstrukturen reicht eine einzelne Abfrage oftmals nicht aus um alle für den Client relevanten Daten bereitzustellen.
+Weiters können Probleme auftreten die auf die Unflexibilität von REST zurückzuführen sind.
+Um der Unflexibilität von REST und den auftretenden Problemen entegenzuwirken, wurde von Facebook GraphQL entwickelt.
+% Eine weitere Möglichkeit Web-APIs zu realiseren, bietet die von Facebook entwickelte Abfragesprache GraphQL.
+GraphQL bietet eine weitere Möglichkeit Web-APIs zu realiseren und dabei die Probleme von REST zu minimieren.
+% GraphQL bietet Möglichkeiten die Probleme von REST zu minimieren oder zu beheben.
+Weiters bietet GraphQL eine flexiblere und effizientere Möglichkeit Daten abzufragen.
+\newline
+
+In dieser Arbeit werden die konzeptionellen Grundlagen von GraphQL aufgearbeitet.
+Weiters wird der Entwicklungsprozess eines GraphQL-Service beschrieben.
+Der aus der Entwicklung resultierende Prototyp wird mit .NET 6 und unter Zuhilfenahme des HotChocolate Frameworks umgesetzt.
+Für den Datenbankzugriff wird das Entity Framework herangezogen.
+Die Umsetzung beschäftigt sich zudem mit der Lösung von bekannten Problemen wie dem 1+n Problem oder dem Verhindern von Under und Overfetching.
+Weiters wird die Absicherung des GraphQL-Service mit Authentifizierung und Autorisierung durch unberechtigte Zugriffe von außen abgesichert.
+Weiters wird mittels dem Prototypen eine bidirektionale Kommunikation zwischen Client und Server realisiert. 
+Zudem wird die bidirektionale Kommunikation zwischen Backend und Frontend mittels Subscriptions realisert.
 
 \section{Zielsetzung}
 placeholder
