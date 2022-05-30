@@ -46,9 +46,9 @@ GraphQL beinhaltet folgende vordefinierten Skalar-Typen:
 \end{JsCode}
 
 Im oben angeführten Codebeispiel werden die Felder \textit{id} und \textit{title} definiert.
-Der Name eines Feldes im umgebenden Typ muss dabei eindeutig sein.
+Der Name eines Feldes im umgebenden Typ muss eindeutig sein.
 Die Deklaration erfolgt mit dem Namen als auch dem Typ des Feldes, welche mit einem Doppelpunkt getrennt sind.
-Das Feld \textit{id} wird dabei mit einem Rufzeichen (!) als \textit{not null} deklariert.
+Das Feld \textit{id} wird mit einem Rufzeichen (!) als \textit{not null} deklariert.
 
 In den meisten sprachspezifischen Implementierungen ist es möglich, eigene Skalar-Typen zu definieren. Diese werden verwendet, um beispielsweise verschiedene Datumsformate darzustellen.
 
@@ -102,10 +102,10 @@ type Author {
 Im oben angeführten Schemaausschnitt werden die beiden Objekte \textit{Author} und \textit{Book} definiert.
 Um einen Objekttypen zu definieren wird das Schlüsselwort \textit{type} verwendet.
 
-Das Objekt Book wird dabei mit den Feldern \textit{id, title} und \textit{authors} definiert.
+Das Objekt Book wird mit den Feldern \textit{id, title} und \textit{authors} definiert.
 Das Objekt Author erhält die Felder \textit{id, firstName, lastName} und \textit{books}.
 
-Die Felder \textit{id, title, firstName} und \textit{lastName} sind dabei skalare Felder und bilden dabei Blätter des Baumes.
+Die Felder \textit{id, title, firstName} und \textit{lastName} sind skalare Felder und bilden die Blätter des Baumes.
 Da zwischen den Objekten Author und Book eine n:m Beziehung besteht, halten beide Objekte eine Liste des jeweils anderen Objekt-Typs.
 Listen werden in der SDL wie im obigen Beispiel ersichtlich mit eckigen Klammern definiert.
 
@@ -140,7 +140,7 @@ type Author implements Person {
 \end{JsCode}
 
 Jedes Interface benötigt eine spezifische Implementierung, im angeführen Beispiel implementiert \textit{Author} das Interface \textit{Person}.
-Author muss dabei alle Felder von \textit{Person} zur Verfügung stellen.
+Author muss alle Felder von \textit{Person} zur Verfügung stellen.
 
 % \subsection{Input-Objekt}
 \myparagraph{Input-Objekt}
@@ -166,7 +166,7 @@ input AuthorCreateInput {
 
 Fragmente helfen dabei den Text von Abfragen zu reduzieren indem sie oft gebrauchte Abfragen von Feldern kapseln.
 Weiters können Fragmente nur für Objekt-Typen, Interfaces und Union-Typen definiert werden.
-Fragmente müssen dabei den Objekt-Typen für den sie gelten mit dem Schlüsselwort  \textit{on} angeben.
+Fragmente müssen den Objekt-Typen für den sie gelten mit dem Schlüsselwort  \textit{on} angeben.
 Inline-Fragmente müssen nicht mit dem Schlüsselwort \textit{fragment} definiert werden.
 Sie können mit dem Spread-Operator direkt in der Abfrage definiert werden \cite[Abs. 2.8 -  2.8.1]{graphqlOnline}.
 Fragmente liefern nur dann Daten zurück wenn der Objekt-Typ der sie anfordert auch wirklich dem Typen des Fragments entspricht.
@@ -211,7 +211,7 @@ Mittels einer Annotation direkt an einem Feld oder einer Objekt-Relation
 Mit Direktiven ist es möglich mittels Annotationen, direkt an einem Feld oder einem Objekt-Typen, dasselbige entsprechend einer Eingabe zu beeinflussen.
 GraphQL bietet dafür standardmäßig zwei Arten von Strukturmanipulationen: \textit{@include} und \textit{@skip}, es ist aber auch möglich serverseitig zusätzliche Direktiven zu implementieren.
 Mittels diesen Direktiven lassen sich Objekt-Typen oder Felder inkludieren oder überspringen.
-Für die auszuwertende Direktive muss dabei in der Query ein \textit{Boolean} mitübergeben werden.
+Für die auszuwertende Direktive muss in der Query ein \textit{Boolean} mitübergeben werden.
 
 Im folgenden Beispiel wird eine Direktive gezeigt welche nach Bedarf das Feld \textit{id} ignoriert.
 
@@ -308,7 +308,7 @@ Somit gilt es auch zu beachten die Sonderzeichen der Query in \textit{ASCII} umz
 Wenn man nun also mittels GET-Anfrage eine Query an den GraphQL-Service schickt, resultiert es in dem Nachteil, dass man eine wesentlich schlechtere Übersicht hat. 
 Denn die URL-Encodierung verkompliziert die Anfrage und sorgt für Einschränkungen in der Lesbarkeit.
 Etwaig benötigte Variablen müssten auf dieselbe Art und Weise der Anfrage hinzugefügt werden.
-Problematischer ist dabei aber jedoch, dass einige Browser eine Maximallänge für URIs vorgeben.
+Problematischer ist aber jedoch, dass einige Browser eine Maximallänge für URIs vorgeben.
 Somit können komplexe Querys nicht funktional sicher über GET-Anfragen abgebildet werden.
 \newline
 
@@ -505,10 +505,10 @@ DataLoader ist eine Zusatzbibliothek von GraphQl und wurde ebenfalls von Faceboo
 Diese Bibliothek ist offiziell für die Performanceoptimierung von GraphQl-Services empfohlen.
 Sie ermöglicht das Batching und Caching von Resolver-Aufrufen innerhalb einer einzelnen Anfrage.
 Der DataLoader generiert bei jeder Anfrage auf den GraphQL-Endpunkt eine Liste an Schlüssel-Wert-Paaren und löst die Anfragen darin auf \cite[S. 105]{kress2020graphql}.
-Die in der Liste enthaltenen Schlüssel sind dabei eindeutige IDs der Elemente.
+Die in der Liste enthaltenen Schlüssel sind eindeutige IDs der Elemente.
 In einem ersten Resolver sammelt der DataLoader die IDs aller Bücher.
 Anschließend werden in einer Sammelanfrage die Liste an IDs mit entsprechenden Werten befüllt.
-Auf der Datenbank würde die Anfrage dabei wie folgt aussehen:
+Auf der Datenbank würde die Anfrage wie folgt aussehen:
 
 \begin{JsCode}
 SELECT * from Books;

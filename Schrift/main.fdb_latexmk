@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1653872962 "main.aux" "main.bbl" "main" 1653873137
+["bibtex main"] 1653872962 "main.aux" "main.bbl" "main" 1653873335
   "C:/Users/Franz-Filip/AppData/Local/Programs/MiKTeX/bibtex/bst/dinat/dinat.bst" 974264347 44478 8171722d387d8657f0397923511dcd08 ""
   "literatur.bib" 1653848866 1820 a01bcd0cb265645698f90578d384f48e ""
-  "main.aux" 1653873137 12978 6f04c76f83526eadf882e5e20579a288 "pdflatex"
+  "main.aux" 1653873334 12978 6f04c76f83526eadf882e5e20579a288 "pdflatex"
   (generated)
-  "main.blg"
   "main.bbl"
-["pdflatex"] 1653873134 "d:/FH/Bachelorarbeit/repo/Schrift/main.tex" "main.pdf" "main" 1653873137
+  "main.blg"
+["pdflatex"] 1653873331 "d:/FH/Bachelorarbeit/repo/Schrift/main.tex" "main.pdf" "main" 1653873335
   "C:/Users/Franz-Filip/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tctt0800.pk" 1652393864 7416 be118fd926fafbe0366b70da8ed9d96f ""
   "C:/Users/Franz-Filip/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1636885475 9770118 8896c071d2c08ee8edc6730a507e3a03 ""
   "C:/Users/Franz-Filip/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1653862518 81107 70b8516c68c2e617189c5e44bfd16b96 ""
@@ -76,12 +76,12 @@
   "einleitung.tex" 1653862223 96 c66de096eb7986f517f66637f9f41e7f ""
   "entwicklung.tex" 1653872238 47061 af80c884d2757433049875795af1df19 ""
   "graphql.tex" 1653871541 24909 c2cf9eed2ceb60120939754422ffadd4 ""
-  "grundlagen.tex" 1653873133 13894 75df6c4f60adc6002ff37f9d5a9933dd ""
+  "grundlagen.tex" 1653873331 13842 5c1be606c4da6f131ea169557a13972b ""
   "kurzfassung.tex" 1653870836 3024 baac37f138e6717a2a6f83e9282daf88 ""
-  "main.aux" 1653873137 12978 6f04c76f83526eadf882e5e20579a288 "pdflatex"
+  "main.aux" 1653873334 12978 6f04c76f83526eadf882e5e20579a288 "pdflatex"
   "main.bbl" 1653872962 2293 b5090418e9ee3c9f747325108399314a "bibtex main"
   "main.tex" 1653862547 21046 d326b922cc9fa34dca383d17f34ee706 ""
-  "main.toc" 1653873137 5099 fb76390f9e198a6b41ac60f70f109948 "pdflatex"
+  "main.toc" 1653873334 5099 fb76390f9e198a6b41ac60f70f109948 "pdflatex"
   "pics/ER-Diagram.png" 1652654339 31281 24198cacd52c5c21bebff189cf5c31f1 ""
   "pics/SubscriptionWebSocket.png" 1652652496 128327 8b71ba9a73e5a08b6a80a6dac2e03e0e ""
   "pics/UseCaseAdmin.png" 1652653788 555123 c95a864d3671da238bfa7bc72554f386 ""
@@ -98,7 +98,7 @@
   "pics/middleware.png" 1653155816 139821 c8579b52c9667d22357610a3bd788e0c ""
   "pics/query_book_with_result.png" 1652640679 79820 38821627e5e3fb30ef8f52a70e102536 ""
   (generated)
-  "main.toc"
-  "main.aux"
   "main.pdf"
   "main.log"
+  "main.toc"
+  "main.aux"

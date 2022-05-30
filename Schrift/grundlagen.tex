@@ -19,7 +19,7 @@ REST wurde aufgrund des Erfolgs von SOAP entworfen. \cite[Abs. REST APIs]{graphc
 REST ist dabei aber keine konkrete Technologie oder ein Standard.
 REST beschreibt einen Architekturstil, welcher im Jahr 2000 von Roy Fielding konzipiert wurde.
 Bei REST werden Daten als Ressourcen gesehen und in einem spezifischen Format übertragen.
-Ursprünglich wurde von Fielding dabei XML verwendet \cite[S.11]{kress2020graphql}.
+Ursprünglich wurde von Fielding XML verwendet \cite[S.11]{kress2020graphql}.
 Anders als bei SOAP können REST-APIs aber auch noch andere Datenübertragungsformate wie JSON oder YAML anbieten \cite[Abs. REST APIs]{graphcms}.
 \newline
 
@@ -82,8 +82,8 @@ Dadurch kann das Verhalten des Clients zur Laufzeit variieren \cite[S. 84]{field
 
 \subsection{Kommunikation mit dem Server}
 Die Kommunikation zwischen Server und Client wird bei einer REST-API mittels HTTP und dessen Methoden realisert.
-Eine REST-Anfrage besteht dabei aus dem Endpunkt, der HTTP-Methode, den HTTP-Headern und dem HTTP-Body.
-Ein Endpunkt enthält dabei eine \textit{URI} welche die Ressource, auf die zugegriffen wird, identifiziert.
+Eine REST-Anfrage besteht aus einem Endpunkt, der HTTP-Methode, den HTTP-Headern und dem HTTP-Body.
+Ein Endpunkt enthält eine \textit{URI} welche die Ressource, auf die zugegriffen wird, identifiziert.
 \newline
 
 Die HTTP-Methode beschreibt die CRUD-Operation welche auf die Ressource ausgeführt werden soll.
@@ -102,7 +102,7 @@ Der HTTP-Body beinhaltet die Daten welcher der Client an den Server schicken wil
 
 \subsection{Antwort des Servers auf eine Anfrage}
 Da REST-APIs auf dem HTTP-Standard beruhen, wird der zurückgegebene HTTP-Statuscode einer Anfrage verwendet, um den Erfolg oder das Fehlschlagen der Anfrage festzustellen.
-Jeder Status-Code gehört dabei einer Klasse an, jede Klasse wird durch die erste Ziffer des dreistelligen Statuscodes definiert.
+Jeder Status-Code gehört einer Klasse an, jede Klasse wird durch die erste Ziffer des dreistelligen Statuscodes definiert.
 Die Statuscodes von 100 bis 199 bedeuten, dass die Antwort eine vorläufige Informationsantwort enthält.
 War der Statuscode im Bereich von 200 bis 299 so war die Anfrage erfolgreich.
 300 bis 399 gibt an den Client die Information zurück, dass die Anfrage an eine andere Ressource weitergeleitet werden muss.
@@ -117,9 +117,9 @@ Der wesentliche Unterschied zu REST-APIs besteht darin, dass GraphQL genau einen
 An diesen Endpunkt werden entweder Querys oder Mutations gesendet.
 Querys sind lesende Zugriffe auf Ressourcen, Mutations beschreiben schreibende Zugriffe auf die Ressourcen.
 Weiters ermöglicht GraphQL eine bidirektionale Verbindung zwischen Client und Server mittels Subscriptions.
-Die Zugriffsmöglichkeiten (Query, Mutation, Subscription) und die von GraphQL verwalteten Objekte werden dabei mittels der \textit{Schema Definition Language SDL} in einem Schema definiert.
+Die Zugriffsmöglichkeiten (Query, Mutation, Subscription) und die von GraphQL verwalteten Objekte werden mittels der \textit{Schema Definition Language SDL} in einem Schema definiert.
 In GraphQL werden Ressourcen im Kontext von Graphen gesehen.
-Knoten, welche mittels dem GraphQl-Schema-System definiert werden, repräsentieren dabei Objekte.
+Knoten, welche mittels dem GraphQl-Schema-System definiert werden, repräsentieren Objekte.
 Kanten beschreiben die Beziehungen von Objekten im Graphen \cite[Abs. Basics of a GraphQL API]{rakutenGraphQLVsRest}.
 \newline
 
@@ -143,7 +143,7 @@ Diese Entwurfsprinzipien werden in den folgenden Abschnitten näher erläutert:
 \myparagraph{Produktzentriert}
 Die Anforderungen der Clients (Darstellung der Daten) stehen im Mittelpunkt.
 GraphQL bietet mit einer Abfragesprache dem Client die Möglichkeit, genau die Daten abzufragen, die er tatsächlich benötigt. Die Hierarchie der
-Abfrage wird dabei durch eine Menge ineinander geschachtelter Felder abgebildet \cite[Abs. 1]{graphqlOnline}.
+Abfrage wird durch eine Menge ineinander geschachtelter Felder abgebildet \cite[Abs. 1]{graphqlOnline}.
 
 \myparagraph{Hierarchisch}
 Eine GraphQL-Anfrage ist hierarchisch strukturiert.
@@ -159,8 +159,8 @@ Mit Tools wie zum Beispiel \textit{GraphiQL} kann man vor Ausführung der Anfrag
 \myparagraph{Benutzerdefinierte Antwort}
 Mittels dem Typ-System definiert der GraphQl-Service ein Schema welches er veröffentlicht.
 In diesem Schema sind die Zugriffsarten als auch die verwalteten Ressourcen definiert.
-Der Client ist dabei zuständig, zu definieren welche Daten er wie abfragen will.
-Die miesten anderen Client-Server-Applikationen geben dabei die Form der Daten, welche sie zurückgeben, selbst vor.
+Der Client ist zuständig, zu definieren welche Daten er wie abfragen will.
+Die meisten anderen Client-Server-Applikationen geben die Form der Daten, welche sie zurückgeben, selbst vor.
 Ein GraphQl-Service, retourniert exakt die Daten welche der Client angefordert hat, nicht mehr und nicht weniger \cite[Abs. 1]{graphqlOnline}.
 
 \myparagraph{Introspektion}
