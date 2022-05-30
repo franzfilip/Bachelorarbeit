@@ -1,17 +1,29 @@
+\babel@toc {ngerman}{}\relax 
 \contentsline {chapter}{\numberline {1}Einleitung}{3}{}%
 \contentsline {section}{\numberline {1.1}Motivation}{3}{}%
-\contentsline {section}{\numberline {1.2}Zielsetzung}{4}{}%
-\contentsline {chapter}{\numberline {2}Grundlagen}{5}{}%
-\contentsline {section}{\numberline {2.1}API}{5}{}%
-\contentsline {section}{\numberline {2.2}REST-API}{6}{}%
-\contentsline {subsection}{\numberline {2.2.1}REST-Bedingungen}{7}{}%
-\contentsline {subsection}{\numberline {2.2.2}Kommunikation mit dem Server}{8}{}%
-\contentsline {section}{\numberline {2.3}GraphQL}{8}{}%
-\contentsline {subsection}{\numberline {2.3.1}Entwurfsprinzipien}{9}{}%
+\contentsline {section}{\numberline {1.2}Zielsetzung}{3}{}%
+\contentsline {chapter}{\numberline {2}Grundlagen}{4}{}%
+\contentsline {section}{\numberline {2.1}API}{4}{}%
+\contentsline {section}{\numberline {2.2}REST-API}{4}{}%
+\contentsline {subsection}{\numberline {2.2.1}REST-Bedingungen}{5}{}%
+\contentsline {paragraph}{Einheitliche Schnittstelle}{5}{}%
+\contentsline {paragraph}{Client-Server-Architektur}{5}{}%
+\contentsline {paragraph}{Zustandslosigkeit}{6}{}%
+\contentsline {paragraph}{Schichtenarchitektur}{6}{}%
+\contentsline {paragraph}{Zwischenspeicher}{6}{}%
+\contentsline {paragraph}{Code auf Anfrage}{6}{}%
+\contentsline {subsection}{\numberline {2.2.2}Kommunikation mit dem Server}{6}{}%
+\contentsline {subsection}{\numberline {2.2.3}Antwort des Servers auf eine Anfrage}{7}{}%
+\contentsline {section}{\numberline {2.3}GraphQL}{7}{}%
+\contentsline {subsection}{\numberline {2.3.1}Entwurfsprinzipien}{8}{}%
+\contentsline {paragraph}{Produktzentriert}{8}{}%
+\contentsline {paragraph}{Hierarchisch}{8}{}%
+\contentsline {paragraph}{Strenge Typisierung}{9}{}%
+\contentsline {paragraph}{Benutzerdefinierte Antwort}{9}{}%
+\contentsline {paragraph}{Introspektion}{9}{}%
 \contentsline {section}{\numberline {2.4}GraphQL vs. REST}{9}{}%
 \contentsline {subsection}{\numberline {2.4.1}Endpunkte}{9}{}%
-\contentsline {subsection}{\numberline {2.4.2}Over-fetching und Under-fetching}{10}{}%
-\contentsline {subsection}{\numberline {2.4.3}Was ist für welches Szenario besser geeignet?}{10}{}%
+\contentsline {subsection}{\numberline {2.4.2}Over-fetching und Under-fetching}{9}{}%
 \contentsline {chapter}{\numberline {3}GraphQL}{11}{}%
 \contentsline {section}{\numberline {3.1}Typ-System}{11}{}%
 \contentsline {section}{\numberline {3.2}Schema-Definitions-Sprache SDL}{11}{}%
@@ -25,49 +37,50 @@
 \contentsline {paragraph}{Direktive}{15}{}%
 \contentsline {section}{\numberline {3.3}Schema}{15}{}%
 \contentsline {subsection}{\numberline {3.3.1}Wurzel Operationen}{16}{}%
-\contentsline {subsection}{\numberline {3.3.2}Schema Definition}{16}{}%
-\contentsline {subsection}{\numberline {3.3.3}Parameter}{18}{}%
-\contentsline {subsection}{\numberline {3.3.4}Variablen}{18}{}%
-\contentsline {section}{\numberline {3.4}Zugriff auf den GraphQL-Service}{19}{}%
-\contentsline {section}{\numberline {3.5}Querys}{20}{}%
-\contentsline {section}{\numberline {3.6}Mutationen}{23}{}%
-\contentsline {section}{\numberline {3.7}Subscriptions}{24}{}%
-\contentsline {section}{\numberline {3.8}Bekannte Probleme}{25}{}%
-\contentsline {chapter}{\numberline {4}Entwicklung GraphQL-Service in .NET mit HotChocolate}{26}{}%
-\contentsline {section}{\numberline {4.1}Anwendungsszenario}{26}{}%
-\contentsline {section}{\numberline {4.2}Planung Schnittstelle}{26}{}%
-\contentsline {section}{\numberline {4.3}HotChocolate}{28}{}%
-\contentsline {paragraph}{HotChocolate Allgemein}{28}{}%
-\contentsline {paragraph}{Schema Erstellung in HotChocolate}{28}{}%
-\contentsline {paragraph}{Dependency Injection}{29}{}%
-\contentsline {section}{\numberline {4.4}Architektur}{29}{}%
-\contentsline {subsection}{\numberline {4.4.1}API:}{30}{}%
-\contentsline {subsection}{\numberline {4.4.2}Geschäftslogik}{30}{}%
-\contentsline {subsection}{\numberline {4.4.3}Datenbankzugriff}{30}{}%
-\contentsline {section}{\numberline {4.5}Resolver}{31}{}%
-\contentsline {paragraph}{Umsetzung Resolver mittels Geschäftslogik}{31}{}%
-\contentsline {section}{\numberline {4.6}Field Middleware}{32}{}%
-\contentsline {paragraph}{Reihenfolge Exekution Middleware}{32}{}%
-\contentsline {paragraph}{Zusammenführung Middleware}{33}{}%
-\contentsline {section}{\numberline {4.7}Querys}{33}{}%
-\contentsline {paragraph}{Generierung Schema}{33}{}%
-\contentsline {paragraph}{Authorize}{35}{}%
-\contentsline {paragraph}{Projection}{35}{}%
-\contentsline {paragraph}{Filtering}{35}{}%
-\contentsline {paragraph}{Sorting}{36}{}%
-\contentsline {paragraph}{Zugriff auf Daten}{36}{}%
+\contentsline {subsection}{\numberline {3.3.2}Parameter}{16}{}%
+\contentsline {subsection}{\numberline {3.3.3}Variablen}{16}{}%
+\contentsline {section}{\numberline {3.4}Zugriff auf den GraphQL-Service}{17}{}%
+\contentsline {section}{\numberline {3.5}Querys}{18}{}%
+\contentsline {section}{\numberline {3.6}Mutationen}{21}{}%
+\contentsline {section}{\numberline {3.7}Subscriptions}{21}{}%
+\contentsline {section}{\numberline {3.8}1 + n Problem}{22}{}%
+\contentsline {paragraph}{DataLoader}{23}{}%
+\contentsline {chapter}{\numberline {4}Entwicklung eines GraphQL-Service in .NET mit HotChocolate}{24}{}%
+\contentsline {section}{\numberline {4.1}Anwendungsszenario}{24}{}%
+\contentsline {section}{\numberline {4.2}Design der Schnittstelle}{24}{}%
+\contentsline {section}{\numberline {4.3}HotChocolate}{26}{}%
+\contentsline {paragraph}{HotChocolate allgemein}{26}{}%
+\contentsline {paragraph}{Schema-Erstellung in HotChocolate}{26}{}%
+\contentsline {paragraph}{Abhängigkeitsinjektion}{26}{}%
+\contentsline {section}{\numberline {4.4}Architektur}{27}{}%
+\contentsline {subsection}{\numberline {4.4.1}API:}{28}{}%
+\contentsline {subsection}{\numberline {4.4.2}Geschäftslogik}{28}{}%
+\contentsline {subsection}{\numberline {4.4.3}Datenbankzugriff}{28}{}%
+\contentsline {section}{\numberline {4.5}Resolver}{30}{}%
+\contentsline {paragraph}{Umsetzung Resolver}{30}{}%
+\contentsline {section}{\numberline {4.6}Field Middleware}{31}{}%
+\contentsline {paragraph}{Reihenfolge Exekution Middleware}{31}{}%
+\contentsline {paragraph}{Ausführung Middleware}{32}{}%
+\contentsline {section}{\numberline {4.7}Querys}{32}{}%
+\contentsline {paragraph}{Generierung Schema}{32}{}%
+\contentsline {paragraph}{Authorize}{34}{}%
+\contentsline {paragraph}{Projektionen}{34}{}%
+\contentsline {paragraph}{Filtering}{34}{}%
+\contentsline {paragraph}{Sorting}{35}{}%
+\contentsline {paragraph}{Zugriff auf Daten}{35}{}%
 \contentsline {paragraph}{Ausführung Query und Ergebnis}{36}{}%
-\contentsline {section}{\numberline {4.8}Mutations}{38}{}%
-\contentsline {paragraph}{Generierung Schema}{38}{}%
+\contentsline {section}{\numberline {4.8}Mutations}{37}{}%
+\contentsline {paragraph}{Generierung Schema}{37}{}%
 \contentsline {paragraph}{Ausführung und Ergebnis}{40}{}%
-\contentsline {section}{\numberline {4.9}Subscriptions}{41}{}%
-\contentsline {paragraph}{Subscription über Event benachrichtigen}{41}{}%
-\contentsline {paragraph}{Schemagenerierung}{42}{}%
-\contentsline {paragraph}{Ausführung und Ergebnis}{43}{}%
-\contentsline {section}{\numberline {4.10}Authentifizierung und Autorisierung}{43}{}%
-\contentsline {paragraph}{Generierung JWT-Token}{45}{}%
-\contentsline {paragraph}{Verwendung Authentifizierung und Autorisierung}{47}{}%
-\contentsline {section}{\numberline {4.11}1 + n Problem}{48}{}%
+\contentsline {section}{\numberline {4.9}Subscriptions}{40}{}%
+\contentsline {paragraph}{Subscription über Event benachrichtigen}{40}{}%
+\contentsline {paragraph}{Schemagenerierung}{41}{}%
+\contentsline {paragraph}{Ausführung und Ergebnis}{42}{}%
+\contentsline {section}{\numberline {4.10}Authentifizierung und Autorisierung}{42}{}%
+\contentsline {paragraph}{Generierung JWT-Token}{44}{}%
+\contentsline {paragraph}{Verwendung Authentifizierung und Autorisierung}{46}{}%
+\contentsline {section}{\numberline {4.11}1 + n Problem}{46}{}%
+\contentsline {paragraph}{Implementierung DataLoader}{47}{}%
 \contentsline {chapter}{\numberline {5}Conclusio}{49}{}%
 \contentsline {section}{\numberline {5.1}Fazit}{49}{}%
 \contentsline {section}{\numberline {5.2}Ausblick}{49}{}%

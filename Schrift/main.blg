@@ -12,49 +12,49 @@ Reallocating 'wiz_functions' (item size: 4) to 6000 items.
 Database file #1: literatur.bib
 Warning--entry type for "graphqlOnline" isn't style-file defined
 --line 30 of file literatur.bib
-Warning--entry type for "dgraphOnline" isn't style-file defined
---line 38 of file literatur.bib
 Warning--entry type for "rakutenGraphQLVsRest" isn't style-file defined
 --line 46 of file literatur.bib
-You've used 7 entries,
+Warning--entry type for "graphcms" isn't style-file defined
+--line 54 of file literatur.bib
+You've used 8 entries,
             3552 wiz_defined-function locations,
-            831 strings with 6767 characters,
-and the built_in function-call counts, 3683 in all, are:
-= -- 430
-> -- 52
-< -- 55
-+ -- 72
-- -- 27
-* -- 326
-:= -- 632
-add.period$ -- 4
-call.type$ -- 7
-change.case$ -- 29
-chr.to.int$ -- 7
-cite$ -- 7
-duplicate$ -- 103
-empty$ -- 314
-format.name$ -- 49
-if$ -- 756
+            837 strings with 6947 characters,
+and the built_in function-call counts, 4266 in all, are:
+= -- 491
+> -- 59
+< -- 70
++ -- 89
+- -- 31
+* -- 368
+:= -- 726
+add.period$ -- 5
+call.type$ -- 8
+change.case$ -- 33
+chr.to.int$ -- 8
+cite$ -- 8
+duplicate$ -- 119
+empty$ -- 371
+format.name$ -- 55
+if$ -- 878
 int.to.chr$ -- 0
 int.to.str$ -- 1
-missing$ -- 4
-newline$ -- 45
-num.names$ -- 28
-pop$ -- 49
+missing$ -- 6
+newline$ -- 50
+num.names$ -- 32
+pop$ -- 58
 preamble$ -- 1
-purify$ -- 29
+purify$ -- 33
 quote$ -- 0
-skip$ -- 131
+skip$ -- 160
 stack$ -- 0
-substring$ -- 312
-swap$ -- 17
-text.length$ -- 8
+substring$ -- 370
+swap$ -- 19
+text.length$ -- 9
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 72
+type$ -- 78
 warning$ -- 0
-while$ -- 47
+while$ -- 53
 width$ -- 0
-write$ -- 69
+write$ -- 77
 (There were 3 warnings)

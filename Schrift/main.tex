@@ -1,6 +1,6 @@
 \documentclass{report}
-\usepackage[utf8]{inputenc}
 % \documentclass[bachelor, german ]{hgbthesis}
+\usepackage[utf8]{inputenc}
 \usepackage[utf8]{inputenc}
 \usepackage{natbib}
 \bibliographystyle{dinat}
@@ -9,8 +9,11 @@
 \usepackage{color}
 \usepackage{float}
 \usepackage{graphicx}
-
-
+\usepackage{cleveref}
+\usepackage[ngerman]{babel}
+\usepackage{textcomp}
+\usepackage{abstract}
+\usepackage{blindtext}
 % \newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
 \setlength{\parindent}{0em}
 \newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
@@ -441,6 +444,8 @@ keepspaces=true,%
 {\expandafter\endcomment}%
 
 \begin{document}
+
+\input{kurzfassung.tex}
 
 \tableofcontents
 

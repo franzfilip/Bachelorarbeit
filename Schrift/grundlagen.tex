@@ -1,52 +1,27 @@
 \chapter{Grundlagen}
 \section{API}
 
-Der Begriff API steht für Application Programming Interface (auf Deutsch Anwendungs-Programmier-Schnittstelle).
+Der Begriff API steht für Application Programming Interface (auf Deutsch: Anwendungs-Programmier-Schnittstelle).
 Die Grundlagen heutiger APIs wurden 1952 von David Wheeler, einem Informatikprofessor an der Universität Cambrigde, in einem Leitfaden verfasst.
-Dieser Leitfaden beschreibt das Extrahieren einer Sub-Routinen-Bibliothek mit einheitlichem dokumentierten Zugriff. \cite{wheeler1952use}
-Ira Cotton und Frank Greatorex erwähnten den Begriff erstmalig auf der Fall Joint Computer Con.\cite{cotton1968data}
-Dabei erweiterten sie den Leitfaden von David Wheeler um einen wesentlichen Punkt: Der konzeptionellen Trennung der Schnittstelle und Implementierung der Sub-Routinen-Bibliothek.
-Somit kann die Implementierung auf die die Schnittstelle zugreift ohne Einfluss auf die Benutzer ausgetauscht werden.\cite{kress2020graphql}
-
-\begin{quote}
-APIs sind wie User Interfaces - nur mit anderen Nutzern im Fokus. David Berlind \cite{berlind2017apis}
-\end{quote}
-
-APIs sind also wie UIs für die Interaktion mit Benutzern gedacht.
-Der wesentliche Unterschied zwischen UI-Schnittstellen und einer API liegt aber an der Art der Nutzer die auf das Interface zugreifen.
-Bei UIs spricht man von einem \textit{human-readable-interface}, das bedeutet das ein menschlicher User mit dem System interagiert.
-Bei einer API spricht man von einem \textit{machine-readable-interface}, also von einer Schnittstelle die für die Kommunikation zwischen Maschinen gedacht ist.
-
-Ein abstraktes Beispiel für eine API wäre beispielsweise die Post. Angenommen eine Person will einen Brief an eine andere Person senden, um diese Person zum Essen einzuladen. Was passiert ist dann folgendes:
-\begin{itemize}
- \item Person 1 verfasst eine Nachricht und packt diesen in einen Briefumschlag
- \item Der Briefumschlag wird mit einer Briefmarke und der Adresse des Empfängers und des Absenders versehen
- \item Der Brief wird nun an die Post übergeben
- \item Die Post kümmert sich um die Zustellung des Briefes
- \item Person 2 erhält den Brief
-\end{itemize}
-
-Damit dieser Zugriff der unterschiedlichen Systeme (hier Menschen) auf die Post funktioniert muss eine genaue Definition des Service vorliegen. Die genaue Spezifikation des Service ist dabei folgende:
-\begin{itemize}
- \item Das zu versendende Objekt (Brief, Paket, etc.) muss an einem Sammelposten der Post abgegeben werden
- \item Das Objekt ist dabei mit einer Empfängeradresse und einer Absenderadresse zu versehen, zusätzlich muss eine Briefmarke gekauft werden
-\end{itemize}
-Das stellt die Art des Services dar und legt somit fest was über die API versendet wird. Zudem wird die Repräsentation der API definiert, also in welcher Form der Service im System des Servicenutzers integiert wird.
-Der Briefkasten / Sammelposten ist dabei die eigentliche Schnittstelle - also die API. Die Zustellung ist dabei Implementierungsdetail, der Weg vom Sammelposten der Post über die Verteilerzentren und mit dem Briefträger zum Empfänger.
-Dieses Implementierungsdetail kann beliebig angepasst werden, die Zustellung kann beispielsweise über den Land- oder Luftweg erfolgen. Der Benutzer welcher den Brief versendet hat ist davon nicht betroffen.
+Dieser Leitfaden beschreibt das Extrahieren einer Bibliothek von Funktionen und Prodzeduren mit einheitlichem, dokumentierten Zugriff \cite[S.5-6]{wheeler1952use}.
+Ira Cotton und Frank Greatorex erwähnten den Begriff erstmalig auf der Fall Joint Computer Konferenz \cite[S.5]{cotton1968data}.
+Dabei erweiterten sie den Leitfaden von David Wheeler um einen wesentlichen Punkt: Der konzeptionellen Trennung der Schnittstelle und Implementierung der Bibliothek.
+Somit kann die Implementierung, welche auf die Schnittstelle zugreift, ohne Einfluss auf die Verwender ausgetauscht werden \cite[S.2]{kress2020graphql}.
+APIs sind wie User Interfaces, nur ist ein anderer Nutzen dabei im Fokus \cite[S.5]{berlind2017apis}.
+APIs sind also wie Benutzer-Schnittstellen für die Interaktion mit Benutzern gedacht.
+Der wesentliche Unterschied zwischen Benutzer-Schnittstellen und einer API liegt aber in der Art der Nutzer, die auf das Interface zugreifen.
+Bei Benutzer-Schnittstellen spricht man von einem \textit{human-readable-interface}, was bedeutet, dass ein menschlicher User mit dem System interagiert.
+Bei einer API spricht man von einem \textit{machine-readable-interface}, also von einer Schnittstelle, die für die Kommunikation zwischen Maschinen gedacht ist.
 
 \section{REST-API}
-REST steht für Representational State Transfer \cite{wheeler1952use}. REST ist dabei aber keine konkrete Technologie oder ein Standard. REST beschreibt einen Architekturstil welcher im Jahr 2000 von Roy Fielding konzipiert wurde.
-Bei REST werden Daten als Ressourcen gesehen und in einem spezifischen Format übertragen. Ursprünglich wurde von Fielding dabei XML verwendet. XML wird aber in den letzten Jahren verstärkt durch JSON abgelöst.
+REST steht für \textit{Representational State Transfer} \cite[S.235-236]{wheeler1952use}.
+REST wurde aufgrund des Erfolgs von SOAP entworfen. \cite[Abs. REST APIs]{graphcms}
+REST ist dabei aber keine konkrete Technologie oder ein Standard.
+REST beschreibt einen Architekturstil, welcher im Jahr 2000 von Roy Fielding konzipiert wurde.
+Bei REST werden Daten als Ressourcen gesehen und in einem spezifischen Format übertragen.
+Ursprünglich wurde von Fielding dabei XML verwendet \cite[S.11]{kress2020graphql}.
+Anders als bei SOAP können REST-APIs aber auch noch andere Datenübertragungsformate wie JSON oder YAML anbieten \cite[Abs. REST APIs]{graphcms}.
 \newline
-
-
-Deswegen ist JSON besser als XML für den Austausch einfacher Daten mittels einer API geeignet:
-\begin{itemize}
-    \item JSON wurde speziell für den leichtgewichtigen Datenaustausch konzipiert.
-    \item JSON ist schneller als XML
-    \item JSON hat weniger Overhead als XML da XML deklarativ ist und somit wesentlich mehr Daten als JSON beinhaltet
-\end{itemize}
 
 Zum Vergleich hier ein Buch welches in JSON und XML repräsentiert wird:
 \begin{JsCode}
@@ -57,103 +32,139 @@ Zum Vergleich hier ein Buch welches in JSON und XML repräsentiert wird:
 }
 \end{JsCode}
 
-% \begin{XmlCode}
-% <book>
-%     <isbn name="isbn" type="string">978-3551555557</isbn>
-%     <title name="title" type="string">Harry Potter und der Orden des Phönix</title>
-%     <releaseDate name="isbn" type="dateTime">2003-11-15T00:00:00.000Z</releaseDate>
-% </book>
-% \end{XmlCode}
+\begin{XmlCode}
+<book>
+    <isbn name="isbn" type="string">978-3551555557</isbn>
+    <title name="title" type="string">Harry Potter und der Orden des Phönix</title>
+    <releaseDate name="isbn" type="dateTime">2003-11-15T00:00:00.000Z</releaseDate>
+</book>
+\end{XmlCode}
 
-Wie in den obigen Code Beispielen ersichtlich produziert JSON (134 Bytes) wesentlich weniger Daten als XML(238 Bytes).
-Man kann zusammengefasst also sagen, wenn es rein um die Datenübertragung geht, ist JSON deutlich leichtgewichtiger und damit auch performanter.
+In diesem Beispiel ist ersichtlich, dass JSON (134 Bytes) wesentlich weniger Daten als XML (238 Bytes) beinhaltet.
+Zusammenfassend kann man sagen, dass JSON deutlich leichtgewichtiger als XML ist, was sich positiv auf die Datenübertragungszeit auswirkt.
 
 \subsection{REST-Bedingungen}
-Die Begriffe Web und HTTP müssen von REST unterschieden werden, da REST lediglich einen Architekturstil beschreibt. Das Web hingegen besteht aus mehreren Architekturstilen und nutzt als Standargkommunikationsprotokoll HTTP. HTTP ist als
-REST-konforme Implementierung zu erachten.
-\newline
+Als REST-API versteht man eine API welche die REST-Bedingungen erfüllt \cite[Abs. REST-APIs]{graphcms}.
+Die REST-Bedingungen werden wie folgt definiert:
 
+\myparagraph{Einheitliche Schnittstelle}
+Der zentrale Unterschied zwischen REST und anderen netzwerkbasiertern Architekturstilen, ist die Definition eines einheitlichen Interfaces \cite[S.81]{fielding2000architectural}.
+Den beteiligten Komponenten wird es ermöglicht sich unabhängig voneinander weiterzuentwickeln.
+Um diese unabhängige Weiterentwicklung zu gewährleisten werden Implementierungen von den Services, die sie zur Verfügung stellen, entkoppelt.
 
-REST hat folgende architektonische Bedingungen:
+\myparagraph{Client-Server-Architektur}
+Das Client-Server-Prinzip beschreibt verteilte Systeme.
+In diesen verteilten Systemen, sendet der Client, über eine netzwerkbasierte Verbindung, Anfragen an den Server.
+In der REST-Architektur sind der Client und der Server klar voneinander abgetrennt.
+Damit ist es möglich beide Komponenten unabhängig voneinander weiterzuentwickeln, ohne dabei Einfluss auf die jeweils andere Kompnente zu haben
 
-\begin{enumerate}
-    \item \textbf{Einheitliche Schnittstelle: }
-    Jeder REST-Client der auf den Server zugreift muss auf dieselbe Art und Weise zugreifen.
-    Dabei ist es egal ob der Client ein Browser, eine Desktop-Applikation oder eine mobile Anwendung ist.
-    Dabei kommt hier HTTP mit der Verwendung einer URI - \textit{Unique Resource Identifier}, welche dann eine URL ist wie zum Beispiel: \textit{https://api.twitter.com}, zu tragen.
-    Desweiteren müssen Anfragen autark sein - der Client überträgt alle Informationen, die der Server für die Abarbeitung der Anfrage benötigt, mit.
-    Zudem wird die Implementierung von dem Service der sie zur Verfügung stellt entkoppelt, man kann also die Implementierung beliebig weiterentwickeln oder austauschen.
-    \item \textbf{Client-Server Architektur: }
-    Durch das Client-Server Prinzip werden verteilte Systeme beschrieben, die mittels netzwerkbasierter Kommunikation miteinander kommunizieren.
-    In der REST-Architektur sind der Client und der Server klar voneinander abgetrennt.
-    Damit ist es möglich beide Komponenten unabhängig voneinander weiterzuentwickeln, ohne dabei Einfluss auf die jeweils andere Kompnente zu haben
-    \item \textbf{Zustandslosigkeit (Stateless): }
-    Zustandlosigkeit bedeutet, dass der Client alle Informationen die der Server benötigt mitsendet.
-    Das resultiert darin, dass der Server keine Overhad Daten des Clients speichern muss um zukünfige Anfragen abarbeiten zu können.
-    Dadurch ist es auch möglich eine Lastverteilung (also mehrere Serverinstanzen nebeneinander laufen zu lassen) zu realisieren. Dies wiederum erleichtert die Skalierbarkeit des Servers.
-    \item \textbf{Schichtsystem: }
-    Geschichtete Systeme sind Systeme die aus mehreren hierarchischen angeordneten Schichten bestehen. Ein geschichtetes System wäre in .NET beispielsweise so umzusetzen:
-    \begin{itemize}
-        \item Controller (Leitet die Anfrage an die Logik weiter)
-        \item Business-Logik (Setzt die geforderte Aktion um)
-        \item Datenbankzugriff
-    \end{itemize}
-    Durch dieses Schichtsystem werden die Abhängikeiten im System reduziert und die Austauschbarkeit der einzelnen Komponenten erleichtert.
-    \item \textbf{Zwischenspeicher (Cache): }
-    Um wiederkehrende Anfragen performanter abwickeln zu können, kann dem Server mithilfe des \textit{Cache-Control-Headers} mitgeteilt werden, ob die angefragten Daten zwischengespeichert werden sollen.
-    Zusätzlich muss definiert werden wielange dieser Cache gültig ist. Nach Ablauf der Gültigkeit werden die Daten erneut vom Server geladen.
-    Durch das Zwischenspeichern von Daten wird die Performanz des Servers gesteigert. Ein Nachteil besteht dahingehend, dass dem Client womöglich nicht immer die aktuellsten Daten zur Verfügung stehen.
-    \item \textbf{Code auf Anfrage: }
-    Hierbei handelt es sich um eine optionale Bedingung, die Code-Snippets für die lokale Ausführung an den Client senden kann. Beispielsweise als JavaScript-Code innerhalb einer HTML-Antwort.
-\end{enumerate}
+\myparagraph{Zustandslosigkeit}
+Zustandlosigkeit bedeutet, dass der Client alle Informationen die der Server benötigt, um eine Anfrage auszuführen, mitsendet.
+Diese REST-Bedingung gibt einer REST-API eine Verbesserung der Sichtbarkeit, der Zuverlässigkeit und der Skalierbarkeit \cite[S. 79]{fielding2000architectural}.
+
+\myparagraph{Schichtenarchitektur}
+Geschichtete Systeme sind Systeme, die aus mehreren hierarchischen angeordneten Schichten bestehen.
+Dadurch wird eine Architektur geschaffen werden, in der die einzelnen Komponenten nicht über die unmittelbare Schicht, mit der sie interagiert hinaussehen kann.
+Mit dieser Architektur wird die Komplexität der Abhängigkeiten innerhalb des Systems reduziert.
+Weiters wird die Unabhängigkeit der beteiligten Komponenten gefördert \cite[S. 79]{fielding2000architectural}.
+
+\myparagraph{Zwischenspeicher}
+Um wiederkehrende Anfragen performanter abwickeln zu können, kann dem Server mithilfe des \textit{Cache-Control-Headers} mitgeteilt werden, ob die angefragten Daten zwischengespeichert werden sollen.
+Zusätzlich muss definiert werden, wie Lange dieser Cache gültig ist.
+Nach Ablauf der Gültigkeit werden die Daten erneut vom Server geladen.
+Durch das Zwischenspeichern von Daten wird die Performanz des Servers gesteigert.
+Ein Nachteil besteht dahingehend, dass dem Client womöglich nicht immer die aktuellsten Daten zur Verfügung stehen \cite[S. 79]{fielding2000architectural}.
+
+\myparagraph{Code auf Anfrage}
+Hierbei handelt es sich um eine optionale Bedingung von REST.
+REST erlaubt es dem Client zusätzliche Funktionalitäten, in Form von Applets oder Scripts, herunterzuladen und auszuführen.
+Dadurch kann das Verhalten des Clients zur Laufzeit variieren \cite[S. 84]{fielding2000architectural}.
 
 \subsection{Kommunikation mit dem Server}
-Die Kommunikation zwischen Server und Client wird bei einer RESTful-API mittels HTTP und dessen Methoden realisert.
-Um CRUD (Create, Read, Update, Delete) Operationen auf Ressourcen abzusetzen werden folgende Methoden verwendet:
+Die Kommunikation zwischen Server und Client wird bei einer REST-API mittels HTTP und dessen Methoden realisert.
+Eine REST-Anfrage besteht dabei aus dem Endpunkt, der HTTP-Methode, den HTTP-Headern und dem HTTP-Body.
+Ein Endpunkt enthält dabei eine \textit{URI} welche die Ressource, auf die zugegriffen wird, identifiziert.
+\newline
+
+Die HTTP-Methode beschreibt die CRUD-Operation welche auf die Ressource ausgeführt werden soll.
+Um CRUD (Create, Read, Update, Delete) Operationen auf Ressourcen abzusetzen werden folgende HTTP-Methoden verwendet:
 \begin{enumerate}
     \item \textbf{GET: }Wird als lesender Zugriff auf eine Ressource verwendet.
-    \item \textbf{PUT: }Wird verwendet um eine Ressource zu aktualisieren.
     \item \textbf{POST: }Wird verwendet um eine neue Ressource zu erstellen.
+    \item \textbf{PUT: }Aktualisiert oder ersetzt eine bestehende Ressource.
+    \item \textbf{PATCH: }Wird verwendet um eine Ressource zu bearbeiten.
     \item \textbf{DELETE: }Wird für das Löschen einer Ressource verwendet.
 \end{enumerate}
 
-Zusätzlich wird dem Client mittels HTTP-Statuscodes mitgeteilt ob die Anfrage erfolgreich war oder fehlgeschlagen ist. Beispielsweise werden hier Statuscodes angeführt die an den Client zurückgesendet werden:
-\begin{itemize}
-    \item \textbf{Erfolgreich:} 200
-    \item \textbf{Anfrage fehlerhaft:} 400
-    \item \textbf{Server interner Fehler:} 500
-\end{itemize}
+Der HTTP-Header übermittelt bei einer Anfrage zusätzliche Informationen die für das Caching oder die Authentifizierung benötigt werden.
+\newline
+Der HTTP-Body beinhaltet die Daten welcher der Client an den Server schicken will.
+
+\subsection{Antwort des Servers auf eine Anfrage}
+Da REST-APIs auf dem HTTP-Standard beruhen, wird der zurückgegebene HTTP-Statuscode einer Anfrage verwendet, um den Erfolg oder das Fehlschlagen der Anfrage festzustellen.
+Jeder Status-Code gehört dabei einer Klasse an, jede Klasse wird durch die erste Ziffer des dreistelligen Statuscodes definiert.
+Die Statuscodes von 100 bis 199 bedeuten, dass die Antwort eine vorläufige Informationsantwort enthält.
+War der Statuscode im Bereich von 200 bis 299 so war die Anfrage erfolgreich.
+300 bis 399 gibt an den Client die Information zurück, dass die Anfrage an eine andere Ressource weitergeleitet werden muss.
+Liegt der zurückgegebene Statuscode zwischen 400 und 499 so hat der Client bei der Anfrage etwas falsch gemacht.
+500 bis 599 würde bedeuten, dass der Fehler am Server passiert ist \cite[S. 120]{fielding2000architectural}.
 
 \section{GraphQL}
-Die Informationen für dieses und das folgende Kapitel wurden aus diesen Quellen bezogen \cite{kress2020graphql, graphqlOnline, dgraphOnline, rakutenGraphQLVsRest}
+GraphQL wurde 2015 von Facebook für seine eigene Facebook-API veröffentlicht und ist die Spezifikation einer plattformunabhängigen Query-Sprache für APIs \cite[S. 18]{kress2020graphql}.
+GraphQL wurde unter der MIT-Lizenz veröffentlicht.
+Die Kommunikation erfolgt wie bei REST über ein Request-Response-Schema.
+Der wesentliche Unterschied zu REST-APIs besteht darin, dass GraphQL genau einen Endpunkt, anstatt für jede Ressource einen eigenen Endpunkt, zur Verfügung zu stellt \cite[S. 18]{kress2020graphql}.
+An diesen Endpunkt werden entweder Querys oder Mutations gesendet.
+Querys sind lesende Zugriffe auf Ressourcen, Mutations beschreiben schreibende Zugriffe auf die Ressourcen.
+Weiters ermöglicht GraphQL eine bidirektionale Verbindung zwischen Client und Server mittels Subscriptions.
+Die Zugriffsmöglichkeiten (Query, Mutation, Subscription) und die von GraphQL verwalteten Objekte werden dabei mittels der \textit{Schema Definition Language SDL} in einem Schema definiert.
+In GraphQL werden Ressourcen im Kontext von Graphen gesehen.
+Knoten, welche mittels dem GraphQl-Schema-System definiert werden, repräsentieren dabei Objekte.
+Kanten beschreiben die Beziehungen von Objekten im Graphen \cite[Abs. Basics of a GraphQL API]{rakutenGraphQLVsRest}.
 \newline
 
+GraphQL erlaubt es Clients Daten von mehereren Ressourcen in einer einzigen Abfragequery abzufragen.
+Dabei müssen nicht mehr wie bei REST mehrere Abfragen an den Server geschickt werden um dasselbe Ergebnis zu erzielen.
 
-2015 veröffentlichte Facebook unter der MIT-Lizenz GraphQL. GraphQL ist die Spezifikation einer plattformunabhängigen Query-Sprache. GraphQL dient als Übersetzer der Kommunikation zwischen Client und Server.
-Die Kommunikation erfolgt wie bei REST über ein Request-Response-Schema.
-Der wesentliche Unterschied zu REST-APIs besteht darin, dass GraphQL genau einen Endpunkt, anstatt für jede Ressource einen eigenen Endpunkt, zur Verfügung zu stellt.
-Desweiteren werden nur POST-Anfragen von GraphQL akzeptiert, diese können lesend (Query) oder schreibend (Mutation) sein.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{pics/graphql_rest_request.png}
+    \caption{Gegenüberstellung REST-Anfrage / GraphQL-Anfrage}
+\end{figure}
+
+In Abbildung 2.1 ist zu sehen, dass ein Client zwei Anfragen an eine REST-API stellen muss, während er bei einem GraphQL-Service nur eine einzige Anfrage benötigt.
+Weiters ist zu sehen, dass GraphQL die Daten, welche in der Query abgefragt wurden, genau in dem Schema zurückliefert in dem sie abgefragt wurden.
+Dadurch hat GraphQl den Vorteil, dass Antworten auf Anfragen immer vorhersehbar sind \cite[Abs. Basics of a GraphQL API]{rakutenGraphQLVsRest}.
 
 \subsection{Entwurfsprinzipien}
-GraphQL definiert keine Implementierungsdetails sondern diese Entwurfsprinzipien:
-\begin{enumerate}
-    \item \textbf{Produktzentriert:}
-    Die Anforderungen der Clients (Darstellung der Daten) stehen im Mittelpunkt. GraphQL bietet mit der Abfragesprache dem Client die Möglichkeit genau die Daten abzufragen, die er tatsächlich benötigt. Die Hierarchie der
-    Abfrage wird dabei durch eine Menge ineinander geschachtelter Felder abgebildet.
-    \item \textbf{Hierarchisch:}
-    Jede Anfrage ist wie die Daten die er anfordert geformt.
-    Das bedeutet, dass der Client die Daten genau in dem Format erhält wie in der Anfrage spezifiziert. Das ist ein intuitiver Weg für den Client um seine Datenanforderungen zu definieren.
-    \item \textbf{Strenge Typisierung:}
-    Jeder GraphQL-Service definiert ein für das System spezifisches Typ-System. Anfragen werden im Kontext dieses Typ-Systems ausgeführt.
-    Mit Tools wie zum Beispiel GraphiQL kann man vor Ausführung der Anfrage sicherstellen, dass sie syntaktisch und semantisch korrekt sind.
-    \item \textbf{Benutzerdefinierte Antwort:}
-    Durch das Typ-System veröffentlicht der GraphQLService die Möglichkeiten, die ein Client hat um auf die dahinterliegenden Daten zuzugreifen.
-    Der Client ist dafür verantwortlich genau zu spezifizieren wie er diese Möglichkeiten nutzen will.
-    Bei einer normalen REST-API liefert ein Endpunkt jene Daten einer Ressource zurück welche vom Server definiert wurden.
-    Bei GraphQL werden hingegen genau jene Daten einer Ressource zurückgegeben, die vom Client in seiner Anfrage definiert wurden.
-    \item \textbf{Introspektion:}
-    Das Typ-System eines GraphQL-Services kann direkt mit der GraphQL-Abfragesprache abgefragt werden. Diese Abfragen werden für die Erstellung von Tools für GraphQL benötigt.
-\end{enumerate}
+Da GraphQL sprachunabhängig ist, werden in der Spezifikation keine Implementierungsdetails definiert sondern nur Entwurfsprinzipien.
+Diese Entwurfsprinzipien werden in den folgenden Abschnitten näher erläutert:
+
+\myparagraph{Produktzentriert}
+Die Anforderungen der Clients (Darstellung der Daten) stehen im Mittelpunkt.
+GraphQL bietet mit einer Abfragesprache dem Client die Möglichkeit, genau die Daten abzufragen, die er tatsächlich benötigt. Die Hierarchie der
+Abfrage wird dabei durch eine Menge ineinander geschachtelter Felder abgebildet \cite[Abs. 1]{graphqlOnline}.
+
+\myparagraph{Hierarchisch}
+Eine GraphQL-Anfrage ist hierarchisch strukturiert.
+Jede Anfrage ist so geformt wie die Daten die zurückgelifert werden.
+Das bedeutet, dass der Client die Daten genau in dem Format erhält, wie diese in der Anfrage spezifiziert wurden.
+Das ist ein intuitiver Weg für den Client um seine Datenanforderungen zu definieren \cite[Abs. 1]{graphqlOnline}.
+
+\myparagraph{Strenge Typisierung}
+Jeder GraphQL-Service definiert ein anwendungsspezifisches Typ-System.
+Anfragen werden im Kontext dieses Typ-Systems ausgeführt.
+Mit Tools wie zum Beispiel \textit{GraphiQL} kann man vor Ausführung der Anfrage sicherstellen, dass sie syntaktisch und semantisch korrekt sind \cite[Abs. 1]{graphqlOnline}.
+
+\myparagraph{Benutzerdefinierte Antwort}
+Mittels dem Typ-System definiert der GraphQl-Service ein Schema welches er veröffentlicht.
+In diesem Schema sind die Zugriffsarten als auch die verwalteten Ressourcen definiert.
+Der Client ist dabei zuständig, zu definieren welche Daten er wie abfragen will.
+Die miesten anderen Client-Server-Applikationen geben dabei die Form der Daten, welche sie zurückgeben, selbst vor.
+Ein GraphQl-Service, retourniert exakt die Daten welche der Client angefordert hat, nicht mehr und nicht weniger \cite[Abs. 1]{graphqlOnline}.
+
+\myparagraph{Introspektion}
+Das Typ-System eines GraphQL-Services kann direkt mit der GraphQL-Abfragesprache abgefragt werden. Diese Abfragen werden für die Erstellung von Tools für GraphQL benötigt \cite[Abs. 1]{graphqlOnline}.
 
 \section{GraphQL vs. REST}
 \subsection{Endpunkte}
@@ -161,24 +172,13 @@ Eine REST-API bietet für jede Ressource verschiedene Endpunkte an um CRUD Opera
 Endpunkt. An diesem kann der Client eine Abfrage mit einer Query oder einer Mutation senden um auf die jeweilige Ressource zuzugreifen.
 
 \subsection{Over-fetching und Under-fetching}
-Als Over-fetching wird das Laden von zuvielen oder nicht benötigten Daten bezeichnet.
-Under-fetching bedeutet, dass man mehr Daten benötigt als der Server dem Client zurückgibt. Dieses Problem tritt bei REST-APIs auf die viele verschiedene Clients mit Daten versorgen müssen (beispielsweise eine Desktop-Applikation, eine Mobile-Anwendung
-und ein Web-Client). Grundsätzlich wollen alle drei Clients diesselbe Ressourcen abfragen, mit dem Unterschied, dass die Mobile Anwendung beispielsweise nicht alle Daten
-benötigt. Die Desktop-Applikation möchte aber alle Daten einer Ressource bekommen
-um diese darzustellen. Eine Lösung dafür wäre beispielsweise einen Endpunkt für jeden
-Client zu definieren um die für ihn benötigen Daten zur Verfügung zu stellen. Dies resultiert aber in mehr Programmieraufwand und damit auch einer höheren Komplexität
-der Anwendung.
+Als Overfetching wird das Laden von zu Vielen oder nicht benötigten Daten bezeichnet.
+Underfetching bedeutet, dass man mehr Daten benötigt, als der Server dem Client zurückgibt.
+Dieses Problem tritt bei REST-APIs auf die viele verschiedene Clients mit Daten versorgen müssen (beispielsweise eine Desktop-Applikation, eine mobile Anwendung und ein Web-Client).
+Grundsätzlich wollen alle drei Clients diesselbe Ressourcen abfragen, mit dem Unterschied, dass die mobile Anwendung beispielsweise weniger Daten benötigt.
+Die Desktop-Applikation möchte aber alle Daten einer Ressource bekommen, um diese darzustellen.
+Eine Lösung dafür wäre beispielsweise, einen Endpunkt für jeden Client zu definieren um die für ihn benötigen Daten zur Verfügung zu stellen.
+Dies resultiert aber in einem erhöten Programmieraufwand und damit auch einer höheren Komplexität der Anwendung.
 \newline
 
-Dieses Problem kann bei GraphQL nicht auftreten da der Client in seiner Anfrage genau die Daten definiert die er braucht.
-
-\subsection{Was ist für welches Szenario besser geeignet?}
-Möchte man ein System entwickeln auf welches verschiedene Clients (die verschiedene Anforderungen an die Ressourcen haben) zugreifen, dann ist GraphQL die bessere
-Wahl. Würde man dieses System mit einer REST-API umsetzen, müsste man entweder
-Probleme mit Under-fetching und Over-fetching in Kauf nehmen, oder für jeden Client eine eigene Route definieren. GraphQL ist in diesem Szenario deshalb als besser zu
-erachten, weil man sich mit der einmaligen Implementierung des Schemas zusätzliche
-Routendefinitionen erspart. Dadurch hat man automatisch weniger Entwicklungsaufwand und generell weniger Komplexität.
-\newline
-
-
-Verfolgt man aber das Ziel ein System zu entwickeln, welches keine komplexen Daten enthält und beispielsweise nur mit einem Web-Client kommuniziert, ist eine REST-API die bessere Wahl.
+Dieses Problem kann bei GraphQL nicht auftreten, da der Client in seiner Anfrage genau jene Daten definiert, die er benötigt.

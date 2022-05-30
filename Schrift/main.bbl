@@ -1,4 +1,4 @@
-\begin{thebibliography}{7}
+\begin{thebibliography}{8}
 % this bibliography was produced with the style dinat.bst v2.5
 \makeatletter
 \newcommand{\dinatlabel}[1]%
@@ -16,7 +16,7 @@
 \bibitem[Cotton und Greatorex~Jr(1968)]{cotton1968data}
 \dinatlabel{Cotton und Greatorex~Jr 1968} \textsc{Cotton}, Ira~W.~;
   \textsc{Greatorex~Jr}, Frank~S.:
-\newblock Data structures and techniques for remote computer graphics.
+\newblock Data Structures and Techniques for Remote Computer Graphics.
 \newblock In: \emph{Proceedings of the December 9-11, 1968, fall joint computer
   conference, part I}, 1968, S.~533--544
 
@@ -25,6 +25,18 @@
 \newblock \emph{Graphql}. --
 \newblock URL \url{http://spec.graphql.org/June2018/}. -- Zugriffsdatum:
   2021-11-15
+
+\bibitem[Fielding(2000)]{fielding2000architectural}
+\dinatlabel{Fielding 2000} \textsc{Fielding}, Roy~T.:
+\newblock \emph{Architectural styles and the design of network-based software
+  architectures}.
+\newblock University of California, Irvine, 2000
+
+\bibitem[Ganatra()]{graphcms}
+\dinatlabel{Ganatra } \textsc{Ganatra}, Ronak:
+\newblock \emph{GraphQL Vs. REST APIs}. --
+\newblock URL \url{https://graphcms.com/blog/graphql-vs-rest-apis}. --
+  Zugriffsdatum: 2022-05-27
 
 \bibitem[Kress(2020)]{kress2020graphql}
 \dinatlabel{Kress 2020} \textsc{Kress}, Dominik:
@@ -35,12 +47,6 @@
 \dinatlabel{Rakuten } \textsc{Rakuten}:
 \newblock \emph{Graphql vs Rest}. --
 \newblock URL \url{https://blog.api.rakuten.net/graphql-vs-rest/}. --
-  Zugriffsdatum: 2021-11-15
-
-\bibitem[Sakib()]{dgraphOnline}
-\dinatlabel{Sakib } \textsc{Sakib}, Abu:
-\newblock \emph{Graphql vs Rest}. --
-\newblock URL \url{https://dgraph.io/blog/post/graphql-rest/}. --
   Zugriffsdatum: 2021-11-15
 
 \bibitem[Wheeler(1952)]{wheeler1952use}

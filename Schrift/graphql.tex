@@ -226,7 +226,7 @@ query {
 \end{JsCode}
 
 
-\section{Schema}
+\section{Schema}\label{test}
 Im Schema welches mittels der \textit{SDL} definiert wird, werden alle Objekt-Typen des GraphQL-Services definiert.
 Durch das Schema werden die verwalteten Entitäten durch Objekt-Typen definiert.
 Weiters werden auch die vom GraphQL zur Verfügung gestellten Interfaces, Unions, Fragments, Direktiven, Enums und Input-Typen definiert.
@@ -248,127 +248,7 @@ Query muss aber zwingend definiert werden. Mutations und Subscriptions sind opti
 Desweiteren müssen die Objekt-Typen der Wurzel-Operationen unterscheiden und dürfen nicht diesselben sein. 
 \newline
 
-
-\subsection{Schema Definition}
-
-% \begin{figure}[H]
-%     \includegraphics[width=\textwidth]{pics/schema.png}
-%     \caption{Schemadefinition}
-% \end{figure}
-
-\begin{JsCode}
-type Book {
-    id: Int!
-    title: String
-    authors: [Author]
-}
-    
-type Author {
-    id: Int!
-    firstName: String
-    lastName: String
-    books: [Book]
-}
-    
-type Review {
-    userId: Int!
-    user: User!
-    bookId: Int!
-    book: Book!
-    rating: Int!
-    id: Int!
-}
-    
-type User {
-    firstName: String!
-    lastName: String!
-    email: String!
-    roles: [Role!]!
-    reviews: [Review!]!
-    id: Int!
-}
-    
-input AuthorUpdateInput {
-    id: Int!
-    firstName: String
-    lastName: String
-    books: [Int!]
-}
-    
-input AuthorCreateInput {
-    firstName: String
-    lastName: String
-    books: [Int!]
-}
-    
-input BookUpdateInput {
-    id: Int!
-    title: String
-    authors: [Int!]
-}
-    
-input BookCreateInput {
-    title: String
-    authors: [Int!]
-}
-    
-input LoginInput {
-    email: String
-    password: String
-}
-    
-input ReviewUpdateInput {
-    id: Int!
-    userId: Int!
-    bookId: Int!
-    rating: Int!
-}
-    
-input ReviewCreateInput {
-    userId: Int!
-    bookId: Int!
-    rating: Int!
-}
-    
-input LoginDataInput {
-    email: String!
-    password: String!
-}
-    
-input UserInput {
-    firstName: String!
-    lastName: String!
-    email: String!
-    password: String!
-    id: Int!
-}
-    
-type Query {
-    books(where: BookFilterInput, order: [BookSortInput!]): [Book!]!
-    book(where: BookFilterInput, order: [BookSortInput!]): Book
-    authors(where: AuthorFilterInput, order: [AuthorSortInput!]): [Author!]!
-    author(where: AuthorFilterInput, order: [AuthorSortInput!]): Author
-    reviews(where: ReviewFilterInput, order: [ReviewSortInput!]): [Review!]!
-    author(where: ReviewFilterInput, order: [ReviewSortInput!]): Review
-}
-    
-type Mutation {
-    register(input: UserInput): User
-    login(input: LoginDataInput): String
-    createBook(input: BookCreateInput!): Book!
-    updateBook(input: BookUpdateInput!): Book!
-    createAuthor(input: AuthorCreateInput!): Author!
-    updateAuthor(input: AuthorUpdateInput!): Author!
-    createReview(input: ReviewCreateInput!): Review!
-    updateReview(input: ReviewUpdateInput!): Review!
-}
-    
-type Subscription {
-    bookAdded: Book
-}
-\end{JsCode}
-
-In Abbildung 3.1 ist eine Schemadefinition zu sehen welche Objekt-Typen, Input-Typen und die Wurzeloperationen beinhaltet.
+Eine ausführliche Schema-Definition erfolgt im Abschnitt 4.7.
 
 \subsection{Parameter}
 Felder können zusätzlich noch Parameter halten.
@@ -555,57 +435,18 @@ Die Resolver schreiten somit den Baum der angeforderten Entitäten bis zu den Bl
 \section{Mutationen}
 APIs benötigen neben dem lesenden Zugriff auf Daten auch einen schreibenden.
 Dieser wird in GraphQL mittels Mutationen umgesetzt.
-Mutationen kapseln die Implementierungen der Geschäftslogik in ein Interface welches die Möglichkeiten zur Manipulation der Daten vorgibt.
-Manipulierende Anfragen können Daten dadurch nur auf jene Art und Weise ändern, wie es in der Applikation vorgesehen ist.
-% Kress 54
-\cite[S. 54]{kress2020graphql}
-
-In der folgenden Abbildung ist eine Mutation zum hinzufügen einer Bewertung abgebildet:
+Mutationen kapseln die Implementierungen der Geschäftslogik in ein Interface, welches die Möglichkeiten zur Manipulation der Daten vorgibt.
+Manipulierende Anfragen können Daten dadurch nur auf jene Art und Weise ändern, wie es in der Applikation vorgesehen ist \cite[S. 54]{kress2020graphql}.
+Das Ergebnis einer Mutation wird genauso behandelt wie das Ergebnis einer Query.
+\newline
+In der folgenden Abbildung ist eine Mutation zum Hinzufügen einer Bewertung abgebildet:
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{pics/createReviewMutation.png}
     \caption{Anfrage eines Buches mit ID=2.}
 \end{figure}
 
-Um eine Bewertung zu erstellen wird ein Input-Objekt \textit{ReviewCreateInput} und eine Mutation \textit{createReview} welches ein solches Objekt entgegennimmt benötigt.
-
-\begin{JsCode}
-input ReviewCreateInput {
-    userId: Int!
-    bookId: Int!
-    rating: Int!
-}
-
-type mutation {
-    createReview(input: ReviewCreateInput!): Review!
-}
-\end{JsCode}
-
-\begin{JsCode}
-{
-    "operationName": "createReview",
-    "query": "mutation createReview($input: ReviewCreateInput!){
-        createReview(input: $input){
-            id
-            rating
-            user {
-                firstName
-                lastName
-            }
-            book{
-                title
-            }
-        }
-    }",
-    "variables": {
-        "input": {
-        "bookId": 8,
-        "userId": 4,
-        "rating": 7
-        }
-    }
-}
-\end{JsCode}
+Um eine Bewertung zu erstellen, wird ein Input-Objekt \textit{ReviewCreateInput} und eine Mutation \textit{createReview}, welche ein solches Objekt entgegennimmt, benötigt.
 
 Der oben angegebene Request-Body der Anfrage ist wie bei der Query wieder in die drei Teile \textit{operationName}, \textit{query}, \textit{variables} aufgeteilt.
 Diese werden wieder durch den GraphQL-Service an den verantwortlichen Resolver weitergeleitet.
@@ -615,21 +456,13 @@ Diese werden wieder durch den GraphQL-Service an den verantwortlichen Resolver w
 % Diese Events werden meist durch das Erzeugen, ändern oder löschen von Daten ausgelöst.
 
 Subscriptions sind eine spezielle Form von Query.
-Sie werden verwendet um den Client vom Server aus über Events zu notifizieren.
-Notifizierungen werden in der Regel durch Hinzufügen, Ändern oder Löschen von Datenbankobjekten ausgelöst.
+Sie werden verwendet, um den Client vom Server aus über Events zu notifizieren.
+Notifizierungen werden in der Regel durch Hinzufügen, Ändern oder Löschen von Datenobjekten ausgelöst.
 Subscriptions halten eine aktive Verbindung zwischen dem GraphQL-Service und dem Client offen.
 Diese Verbindung wird meistens mit WebSockets umgesetzt.
-Mit Subscriptions ist es zum Beispiel möglich den aktuellen Bestand von Produkten immer direkt am Client verfügbar zu haben.
+Mit Subscriptions ist es zum Beispiel möglich, den aktuellen Bestand von Produkten immer direkt am Client verfügbar zu haben.
 Mit dieser Information kann auf der Client-Seite gewährleistet werden, dass ein Benutzer nur ein Produkt kaufen kann, welches noch verügbar ist.
 \newline
-
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{pics/SubscriptionWebSocket.png}
-    \caption{Subscription die auf das Erstellen eines Buches wartet.}
-\end{figure}
-
-In der obigen Abbildung
-
 Im folgenden Codebeispiel ist die Definition einer Subscription im Schema ersichtlich.
 
 \begin{JsCode}
@@ -638,8 +471,48 @@ type Subscription {
 }
 \end{JsCode}
 
-% Weil sich der Server die Clients merken muss, ändert sich der Status des Systems von einem \textit{statless} zu einem \textit{stateful} API.
-% Dadurch wird wiederum die Komplexität des Systems erhöht und die Skalierbarkeit erschwert.
+Die folgende Abbildung beschreibt die Verbindung eines Clients mittels einer Subscription zum GraphQL-Service.
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{pics/SubscriptionWebSocket.png}
+    \caption{Subscription, die auf das Erstellen eines Buches wartet.}
+\end{figure}
 
-\section{Bekannte Probleme}
+\section{1 + n Problem}
+Das klassische Beispiel für Probleme mit Bezug auf die Performanz in GraphQL ist das 1 + n Problem.
+In GraphQL sind Relationen einzelner Objekte zueinander in Graphen angeordnet.
+Das bedeutet, dass jedes Kindelement sein Elternelement kennt, jedoch keine weiteren.
+Gleichzeitig kennt jedes Elternelement nur die jeweiligen Kindelemente, nicht jedoch die Kinder der anderen Knoten auf der gleichen Ebene \cite[S. 104-105]{kress2020graphql}.
+\newline
 
+In einem Beispiel ausgedrückt: Ein GraphQl-Service bietet den Zugriff auf eine Liste von Büchern.
+Diese Bücher halten wiederum jeweils eine Liste von Bewertungen.
+Möchte ein Client nun alle Bücher und dessen Bewertungen ausgeben, würden die auf der Datenbank ausgeführten SQL-Statements folgendermaßen aussehen:
+\begin{JsCode}
+SELECT * from Books;
+SELECT * from Rating WHERE BookId = 1;
+SELECT * from Rating WHERE BookId = 2;
+...
+SELECT * from Rating WHERE BookId = n;
+\end{JsCode}
+
+Es wird also zuerst ein Datenbankzugriff auf alle Bücher ausgeführt.
+Anschließend werden n zusätzliche Datenbankzugriffe auf die referenzierten Bewertungen ausgeführt, dies resultiert in 1 + n Abfragen.
+Wobei n der Anzahl der Bewertungen entspricht.
+
+\myparagraph{DataLoader}
+Die Lösung für das 1 + n Problem in GraphQL lautet DataLoader.
+DataLoader ist eine Zusatzbibliothek von GraphQl und wurde ebenfalls von Facebook entwickelt \cite[S. 105]{kress2020graphql}.
+Diese Bibliothek ist offiziell für die Performanceoptimierung von GraphQl-Services empfohlen.
+Sie ermöglicht das Batching und Caching von Resolver-Aufrufen innerhalb einer einzelnen Anfrage.
+Der DataLoader generiert bei jeder Anfrage auf den GraphQL-Endpunkt eine Liste an Schlüssel-Wert-Paaren und löst die Anfragen darin auf \cite[S. 105]{kress2020graphql}.
+Die in der Liste enthaltenen Schlüssel sind dabei eindeutige IDs der Elemente.
+In einem ersten Resolver sammelt der DataLoader die IDs aller Bücher.
+Anschließend werden in einer Sammelanfrage die Liste an IDs mit entsprechenden Werten befüllt.
+Auf der Datenbank würde die Anfrage dabei wie folgt aussehen:
+
+\begin{JsCode}
+SELECT * from Books;
+SELECT * from Rating WHERE BookId in (1, 2, n);
+\end{JsCode}
+
+Der 1 + n malige Datenbankzugriff kann durch DataLoader auf 2 Datenbankzugriffe reduziert werden.
