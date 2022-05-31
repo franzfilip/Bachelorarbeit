@@ -1,0 +1,86 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {chapter}{\numberline {1}Einleitung}{3}{}%
+\contentsline {section}{\numberline {1.1}Motivation}{3}{}%
+\contentsline {section}{\numberline {1.2}Zielsetzung}{4}{}%
+\contentsline {chapter}{\numberline {2}Grundlagen}{5}{}%
+\contentsline {section}{\numberline {2.1}API}{5}{}%
+\contentsline {section}{\numberline {2.2}REST-API}{5}{}%
+\contentsline {subsection}{\numberline {2.2.1}REST-Bedingungen}{6}{}%
+\contentsline {paragraph}{Einheitliche Schnittstelle}{6}{}%
+\contentsline {paragraph}{Client-Server-Architektur}{6}{}%
+\contentsline {paragraph}{Zustandslosigkeit}{7}{}%
+\contentsline {paragraph}{Schichtenarchitektur}{7}{}%
+\contentsline {paragraph}{Zwischenspeicher}{7}{}%
+\contentsline {paragraph}{Code auf Anfrage}{7}{}%
+\contentsline {subsection}{\numberline {2.2.2}Kommunikation mit dem Server}{7}{}%
+\contentsline {subsection}{\numberline {2.2.3}Antwort des Servers auf eine Anfrage}{8}{}%
+\contentsline {section}{\numberline {2.3}GraphQL}{8}{}%
+\contentsline {subsection}{\numberline {2.3.1}Entwurfsprinzipien}{9}{}%
+\contentsline {paragraph}{Produktzentriert}{9}{}%
+\contentsline {paragraph}{Hierarchisch}{9}{}%
+\contentsline {paragraph}{Strenge Typisierung}{10}{}%
+\contentsline {paragraph}{Benutzerdefinierte Antwort}{10}{}%
+\contentsline {paragraph}{Introspektion}{10}{}%
+\contentsline {section}{\numberline {2.4}GraphQL vs. REST}{10}{}%
+\contentsline {subsection}{\numberline {2.4.1}Endpunkte}{10}{}%
+\contentsline {subsection}{\numberline {2.4.2}Over-fetching und Under-fetching}{10}{}%
+\contentsline {chapter}{\numberline {3}GraphQL}{12}{}%
+\contentsline {section}{\numberline {3.1}Typ-System}{12}{}%
+\contentsline {section}{\numberline {3.2}Schema-Definitions-Sprache SDL}{12}{}%
+\contentsline {paragraph}{Skalare}{12}{}%
+\contentsline {paragraph}{Enum}{13}{}%
+\contentsline {paragraph}{Objekt}{13}{}%
+\contentsline {paragraph}{Interface}{14}{}%
+\contentsline {paragraph}{Input-Objekt}{15}{}%
+\contentsline {paragraph}{Fragementierung}{15}{}%
+\contentsline {paragraph}{Union}{16}{}%
+\contentsline {paragraph}{Direktive}{16}{}%
+\contentsline {section}{\numberline {3.3}Schema}{16}{}%
+\contentsline {subsection}{\numberline {3.3.1}Wurzel Operationen}{17}{}%
+\contentsline {subsection}{\numberline {3.3.2}Parameter}{17}{}%
+\contentsline {subsection}{\numberline {3.3.3}Variablen}{17}{}%
+\contentsline {section}{\numberline {3.4}Zugriff auf den GraphQL-Service}{18}{}%
+\contentsline {section}{\numberline {3.5}Querys}{19}{}%
+\contentsline {section}{\numberline {3.6}Mutationen}{22}{}%
+\contentsline {section}{\numberline {3.7}Subscriptions}{22}{}%
+\contentsline {section}{\numberline {3.8}1 + n Problem}{23}{}%
+\contentsline {paragraph}{DataLoader}{24}{}%
+\contentsline {chapter}{\numberline {4}Entwicklung eines GraphQL-Service in .NET mit HotChocolate}{25}{}%
+\contentsline {section}{\numberline {4.1}Anwendungsszenario}{25}{}%
+\contentsline {section}{\numberline {4.2}Design der Schnittstelle}{25}{}%
+\contentsline {section}{\numberline {4.3}HotChocolate}{27}{}%
+\contentsline {paragraph}{HotChocolate allgemein}{27}{}%
+\contentsline {paragraph}{Schema-Erstellung in HotChocolate}{27}{}%
+\contentsline {paragraph}{Abhängigkeitsinjektion}{27}{}%
+\contentsline {section}{\numberline {4.4}Architektur}{28}{}%
+\contentsline {subsection}{\numberline {4.4.1}API:}{29}{}%
+\contentsline {subsection}{\numberline {4.4.2}Geschäftslogik}{29}{}%
+\contentsline {subsection}{\numberline {4.4.3}Datenbankzugriff}{29}{}%
+\contentsline {section}{\numberline {4.5}Resolver}{31}{}%
+\contentsline {paragraph}{Umsetzung Resolver}{31}{}%
+\contentsline {section}{\numberline {4.6}Field Middleware}{32}{}%
+\contentsline {paragraph}{Reihenfolge Exekution Middleware}{32}{}%
+\contentsline {paragraph}{Ausführung Middleware}{33}{}%
+\contentsline {section}{\numberline {4.7}Querys}{33}{}%
+\contentsline {paragraph}{Generierung Schema}{33}{}%
+\contentsline {paragraph}{Authorize}{35}{}%
+\contentsline {paragraph}{Projektionen}{35}{}%
+\contentsline {paragraph}{Filtering}{35}{}%
+\contentsline {paragraph}{Sorting}{36}{}%
+\contentsline {paragraph}{Zugriff auf Daten}{36}{}%
+\contentsline {paragraph}{Ausführung Query und Ergebnis}{37}{}%
+\contentsline {section}{\numberline {4.8}Mutations}{38}{}%
+\contentsline {paragraph}{Generierung Schema}{38}{}%
+\contentsline {paragraph}{Ausführung und Ergebnis}{41}{}%
+\contentsline {section}{\numberline {4.9}Subscriptions}{41}{}%
+\contentsline {paragraph}{Subscription über Event benachrichtigen}{41}{}%
+\contentsline {paragraph}{Schemagenerierung}{42}{}%
+\contentsline {paragraph}{Ausführung und Ergebnis}{43}{}%
+\contentsline {section}{\numberline {4.10}Authentifizierung und Autorisierung}{43}{}%
+\contentsline {paragraph}{Generierung JWT-Token}{45}{}%
+\contentsline {paragraph}{Verwendung Authentifizierung und Autorisierung}{47}{}%
+\contentsline {section}{\numberline {4.11}1 + n Problem}{47}{}%
+\contentsline {paragraph}{Implementierung DataLoader}{48}{}%
+\contentsline {chapter}{\numberline {5}Zusammenfassung und Ausblick}{50}{}%
+\contentsline {section}{\numberline {5.1}Zusammenfassung}{50}{}%
+\contentsline {section}{\numberline {5.2}Ausblick}{51}{}%
