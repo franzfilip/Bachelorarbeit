@@ -1,0 +1,46 @@
+\chapter{Einleitung}
+
+Die Kommunikation von verteilten Systemen über ein Netzwerk ist in der heutigen Zeit von enormer Bedeutung.
+Daten werden zwischen den Systemen zur visuellen Präsentation und zur maschinellen Weiterverarbeitung ausgetauscht.
+Es ist üblich, diese Systeme mittels einer Client-Server Architektur umzusetzen.
+Der Server stellt dem Client Ressourcen zur Verfügung, welche je nach Bedarf abgefragt werden können.
+Heutzutage erreichen den Server Anfragen von vielen unterschiedlichen Clients.
+Ein Client kann dabei beispielsweise eine mobile Applikation als auch eine Webapplikation sein.
+% In heutigen Anwendungsszenarien greifen mehrere Arten von Clients auf die Ressourcen eines Servers zu.
+% Heutzutage ist besonders relevant, dass mehrere Arten von Clients Ressourcen vom Server abfragen.
+Clients haben wiederum verschiedene Anforderungen an die Ressourcen welcher der Server bereitstellt. 
+
+\section{Motivation}
+Verteilte Systeme beschränken sich meist nicht nur auf einen einzigen Client.
+Ein Client kann biespielsweise eine Webanwendung in Form einer Single-Page-Webapplikation oder eine mobile Applikation sein.
+Momentan werden überwiegend REST-APIs für den Datenaustausch zwischen Client und Server verwendet.
+Eine REST-API bietet einem Client Ressourcen in unterschiedlichen Repräsentationen an.
+Diese Ressourcen werden dem Client mittels Uniform Resource Identifiers (URIs) zur Verfügung gestellt.
+Da nun unterschiedliche Clients, unterschiedliche Anforderungen an die Ressourcen haben, führt dies unweigerlich zu einer höheren Komplexität der REST-API.
+% Weiters wird die Übersichtlichkeit der REST-Schnittstelle, durch eine höhere Komplexität, negativ beeinflusst.
+% Die höhere Komplexität der REST-API mündet in einer Unübersichtlichkeit der REST-Schnittstelle.
+Die Unübersichtlichkeit der REST-Schnittstelle folgt aus den vielen verschiedenen Anforderungen der verschiedenen Clients.
+Weiters wird die REST-Schnittstelle bei vielen verschiedenen Anforderungen schnell sehr umfangreich.
+Ein Client hat keine Möglichkeit die Struktur der Daten, welche er benötigt, genauer zu spezifizieren.
+Dadurch kann der Client entweder zu wenig Daten oder zu viele Daten erhalten.
+In beiden Fällen führt dies zu einem erhöhten Netzwerkverkehr.
+Da der Client entweder Daten nachladen muss oder Daten verwirft, da er sie garnicht benötigt.
+% Denn entweder muss der Client anschließend erneut Anfragen an den Server schicken muss um den Rest der benötigten Daten zu erhalten.
+% Erhält der Client nicht alle Daten die er benötigt, so muss er erneut Abfragen an den Server schicken, um die restlichen benötigten Daten zu erhalten, dies führt zu einem erhöhten Netzwerkverkehr.
+% Bekommt der Client aber Daten die er garnicht benötigt, führt dies ebenfalls zu einem höheren Netzwerkverkehr, da der Client nichts mit den überschüssigen Daten machen kann.
+Besonders bei mobilen Clients führt dies zu Performanz-Einbußen.
+Um diesen Problemen entgegenzuwirken, wurde von Facebook GraphQL entwickelt.
+GraphQL ist eine Datenabfragesprache, welche es Clients ermöglicht die Struktur, der abgefragten Daten, genau festzulegen.
+Die Struktur der Daten wird in der Abfrage festgelegt und anschließend in genau dieser Form vom Server retourniert.
+GraphQL bietet, anders als REST-APIs, genau einen Endpunkt.
+An diesen Endpunkt kann der Client lesende und schreibende Zugriffe senden.
+Weiters bietet GraphQL die Möglichkeit, bidirektionale Kommunikation zwischen dem Client und dem Server für Echtzeitdaten zu schaffen.
+% An diesen Endpunkt können für einen lesenden Zugriff Querys oder Mutations für einen schreibenden Zugriff senden. 
+% Dadurch muss der Client, wenn er nicht alle erforderlichen Daten mit einer Anfrage erhält, mehrere Abfragen an den Server schicken um alle daten zu erhalten.
+% Dies resultiert in einem erhöhten Netzwerkverkehr, welcher sich negativ auf die Performanz des Clients auswirkt.
+
+\section{Zielsetzung}
+Das Ziel dieser Arbeit ist es, dem Leser die konzeptionellen Grundlagen und Basiswissen von GraphQL zu vermitteln.
+Weiters wird dem Leser eine konkrete Umsetzung eines GraphQL-Service in .NET und unter Zuhilfenahme der Bibilothek HotChocolate vermittelt.
+Dabei bietet der entwickelte Prototyp Lösungen für bekannte Probleme, etwa dem 1 + n Problem oder Over- und Underfetching.
+Weiters dient die Arbeit dazu, die Vorteile von GraphQL gegenüber REST aufzuzeigen.

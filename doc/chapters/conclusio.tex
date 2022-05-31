@@ -1,0 +1,45 @@
+\chapter{Zusammenfassung und Ausblick}
+In diesem Kapitel werden die behandelten Themen und dich wichtigsten Erkenntnisse zusammengefasst.
+Weiters wird ein Ausblick auf weitere zu behandelnde Themen gegeben.
+
+\section{Zusammenfassung}
+% GraphQL ist sprachunabhängig, deshalb werden in der Spezifikation keine Implementierungsdetails definiert sondern nur Entwurfsprinzipien.
+Die Spezifikation von GraphQL liefert keine Implementierungsdetails sondern lediglich Entwurfsprinzipien.
+GraphQL beschreibt eine konkrete Architektur, REST wiederum beschreibt laut Fielding einen Architekturstil.
+\newline
+
+Wenn es darum geht komplexe Daten zu verwalten, schneidet GraphQL besser ab.
+Beim Verwalten von komplexen Daten liefert GraphQL den Vorteil, Over- und Underfetching per Design zu verhindern.
+% Denn GraphQL lagert die Komplexität, die Struktur der Daten festzulegen, an den Client aus.
+GraphQL gibt, anders als REST-APIs, die Struktur der Daten nicht selbst vor, sondern lässt den Client die Struktur der benötigten Daten festlegen. 
+Dadurch bekommt der Client immer genau die Daten die er benötigt.
+Weiters beeinflusst GraphQL die Performanz des Clients positiv, indem der Netzwerkverkehr auf das Notwendigste reduziert wird.
+Davon profitieren vorallem mobile Applikationen.
+% Umso mehr verschiedene Clients verschiedene Anforderungen an die Struktur der Daten haben, desto gravierender tritt das Over- und Underfetching Problem bei REST-APIs auf.
+% Dadurch beeinflusst GraphQL die Performanz des Clients positiv durch die Reduktion an notwendigen Netzwerkverkehr.
+\newline
+
+% GraphQL beschreibt mit dem Schema die Operationen welche am GraphQL-Service ausgeführt werden können
+Die Zugriffsmöglichkeiten (Query, Mutation, Subscription) und die von GraphQL verwalteten Objekte werden in einem Schema definiert.
+% Über die Geschäftslogik, welche für die Generierung der Daten notwendig ist, weiß das Schema
+Aus dem Schema ist, weder die Generierung der Daten noch die Manipulation dieser abbildbar.
+Die Generierung und Manipulation der Daten übernehmen in GraphQL Resolver, diese verwenden die Geschäftslogik.
+Dadurch ist es möglich, einen GraphQL-Service neben einem bereits bestehenden REST-Service zu betreiben.
+Die Resolver verwenden dabei die bereits bestehende Geschäftslogik.
+\newline
+% GraphQL zu bestehenden REST-Service Hinzufügen
+% Dataloader löst 1 + n Problem
+
+Es konnte ein prototypischer GraphQL-Service in .NET 6 mittels dem Framework HotChocolate erfolgreich umgesetzt werden.
+Dieser Prototyp bietet Clients die Möglichkeit lesend als auch schreibend auf die verwalteten Daten zuzugreifen.
+Weiters bietet der Prototyp bidirektionale Kommunikation zwischen Client und Server mittels Subscriptions.
+Der Endpunkt des GraphQL-Client wurde gegen unbefugte Zugriffe mit einem JWT-Token abgesichert.
+Dabei wurde auch die Autorisierung mittels Rollen, die im JWT-Token gespeichert werden, realisiert.
+Der Prototyp implementiert eine Lösung für das 1 + n Problem mittels Dataloader.
+
+\section{Ausblick}
+Die vorliegende Arbeit gibt einen Einblick über die konzeptionellen Grundlagen von GraphQL.
+Weiters liefert sie einen Einblick über die konkrete Umsetzung eines GraphQL-Service.
+Außerdem wird dem Leser ein Überblick über die grundlegenden Unterschiede zwischen REST und GraphQL geboten.
+Weiterführend könnte erforscht werden, wie man REST und GraphQL vergleichen könnte.
+Dafür müsste eine Basis geschaffen werden, mittels derer man diese Konzepte vergleichen kann.

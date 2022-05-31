@@ -1,0 +1,54 @@
+%%% Dateikodierung: UTF-8
+%%% äöüÄÖÜß  <-- keine deutschen Umlaute hier? UTF-faehigen Editor verwenden!
+
+%%% Magic Comments zum Setzen der korrekten Parameter in kompatiblen IDEs
+% !TeX encoding = utf8
+% !TeX program = pdflatex
+% !TeX spellcheck = de_DE
+% !BIB program = biber
+
+\documentclass[bachelor,german]{hgbthesis}
+\usepackage{pdfpages}
+\usepackage{parskip}
+
+\setlength{\parindent}{0em}
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+
+\graphicspath{{images/}}  % Verzeichnis mit Bildern und Grafiken
+\bibliography{references} % Biblatex-Literaturdatei (references.bib)
+
+\begin{document}
+
+    %%%-----------------------------------------------------------------------------
+    \frontmatter                                       % Titelei (röm. Seitenzahlen)
+    %%%-----------------------------------------------------------------------------
+
+    \includepdf[pages=-]{Titelblatt.pdf}
+    \include{front/kurzfassung}
+    \include{front/abstract}
+    \tableofcontents
+
+    %%%-----------------------------------------------------------------------------
+    \mainmatter                             % Hauptteil (ab hier arab. Seitenzahlen)
+    %%%-----------------------------------------------------------------------------
+
+    \include{chapters/einleitung.tex}
+    \include{chapters/grundlagen.tex}
+    \include{chapters/graphql.tex}
+    \include{chapters/entwicklung.tex}
+    \include{chapters/conclusio.tex}
+
+    %%%-----------------------------------------------------------------------------
+    \appendix                                                               % Anhang
+    %%%-----------------------------------------------------------------------------
+
+
+    %%%-----------------------------------------------------------------------------
+    \backmatter                          % Schlussteil (Quellenverzeichnis und dgl.)
+    %%%-----------------------------------------------------------------------------
+
+    \MakeBibliography % Quellenverzeichnis
+
+\end{document}
+
+

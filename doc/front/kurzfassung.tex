@@ -1,0 +1,20 @@
+\chapter{Kurzfassung}
+\label{ch:kurzfassung}
+
+Für die Realisierung Ressourcen-orientierter Kommunikation sind REST-Services oftmals das Mittel der Wahl.
+Dabei kommuniziert das Frontend mit dem Backend, um die für die Visualisierung benötigen Daten abzufragen.
+Dabei ist die Datenabfrage mittels REST jedoch sehr unflexibel.
+Bei komplexeren Datenstrukturen reicht eine einzelne Abfrage oftmals nicht aus, um alle für den Client relevanten Daten bereitzustellen.
+Weiters können Probleme auftreten, die auf die Unflexibilität von REST zurückzuführen sind.
+Um der Unflexibilität von REST und den auftretenden Problemen entegenzuwirken, wurde von Facebook GraphQL entwickelt.
+GraphQL bietet eine alternative Möglichkeit, Web-APIs zu realiseren und dabei die Probleme von REST zu minimieren.
+Weiters bietet GraphQL eine flexiblere und effizientere Möglichkeit, Daten abzufragen.
+\newline
+
+In dieser Arbeit werden die konzeptionellen Grundlagen von GraphQL aufgearbeitet.
+Weiters wird der Entwicklungsprozess eines GraphQL-Service beschrieben.
+Der aus der Entwicklung resultierende Prototyp wird mit .NET 6 unter Zuhilfenahme des Frameworks HotChocolate umgesetzt.
+Für den Datenbankzugriff wird das Entity Framework herangezogen.
+Die Umsetzung beschäftigt sich zudem mit der Lösung von bekannten Problemen bei der Implementierung von GraphQL-Services wie dem \glqq1+n Problem\grqq{} oder dem Verhindern von Underfetching und Overfetching.
+Weiters wird die Absicherung vom GraphQL-Service behandelt.
+Zudem wird auf die bidirektionale Kommunikation zwischen Backend und Frontend mittels Subscriptions eingegangen.
