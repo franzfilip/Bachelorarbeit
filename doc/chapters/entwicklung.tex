@@ -135,7 +135,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         this.context = contextFactory.CreateDbContext();
     }
 
-    public async Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes) {
+    public async Task<IQueryable<TEntity>> GetAsync(
+        Expression<Func<TEntity, bool>> filter = null,
+        params Expression<Func<TEntity, object>>[] includes)
+    {
         IQueryable<TEntity> query = context.Set<TEntity>();
 
         foreach (var include in includes) {
@@ -231,8 +234,12 @@ Der \textit{BaseService} implementiert dabei das Interface \textit{IBaseService}
 
 \begin{JsCode}
 public interface IBaseService<TEntity> where TEntity: BaseEntity {
-    public Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes);
-    public Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes);
+    public Task<IQueryable<TEntity>> GetAsync(
+        Expression<Func<TEntity, bool>> filter = null,
+        params Expression<Func<TEntity, object>>[] includes);
+    public Task<TEntity> GetFirstAsync(
+        Expression<Func<TEntity, bool>> filter = null,
+        params Expression<Func<TEntity, object>>[] includes);
     public Task<TEntity> AddAsync(TEntity entity);
     public Task<TEntity> UpdateAsync(TEntity entity);
     public Task<bool> ExistsAsync(int id);
@@ -244,17 +251,24 @@ Im obigen Quelltextausschnitt ist das generische Interface \textit{IBaseService}
 Es bietet Schnittstellen für die CRUD-Operationen jeder Entität.
 
 \begin{JsCode}
-public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : BaseEntity {
+public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : BaseEntity
+{
     protected readonly IRepository<TEntity> repository;
 
     public BaseService(IRepository<TEntity> repository) {
         this.repository = repository;
     }
-    public virtual async Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes) {
+    public virtual async Task<IQueryable<TEntity>> GetAsync(
+        Expression<Func<TEntity, bool>> filter = null,
+        params Expression<Func<TEntity, object>>[] includes)
+    {
         return await repository.GetAsync(filter, includes);
     }
 
-    public virtual async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes) {
+    public virtual async Task<TEntity> GetFirstAsync(
+        Expression<Func<TEntity, bool>> filter = null,
+        params Expression<Func<TEntity, object>>[] includes)
+    {
         return await repository.GetFirstAsync(filter, includes);
     }
 
@@ -528,7 +542,9 @@ Der Resolver BookResolver kümmert sich dabei um Ausführung der Operation.
 
 \begin{JsCode}
 public class BookUpdateInput: InputObjectType<BookUpdate> {
-    protected override void Configure(IInputObjectTypeDescriptor<BookUpdate> descriptor) {
+    protected override void Configure(
+        IInputObjectTypeDescriptor<BookUpdate> descriptor)
+    {
         descriptor.Field(f => f.Authors).Type<ListType<NonNullType<IntType>>>();
     }
 }
@@ -604,8 +620,9 @@ Weiters wurde das Input-Objekt \textit{BookUpdateInput} generiert.
 Das Input-Objekt \textit{BookUpateInput} wurde wie folgt deklariert:
 \begin{JsCode}
 public class BookUpdateInput: InputObjectType<BookUpdate> {
-
-    protected override void Configure(IInputObjectTypeDescriptor<BookUpdate> descriptor) {
+    protected override void Configure(
+        IInputObjectTypeDescriptor<BookUpdate> descriptor)
+    {
         descriptor.Field(f => f.Authors).Type<ListType<NonNullType<IntType>>>();
     }
 }
@@ -633,7 +650,9 @@ public class BookProfile : Profile {
         CreateMap<BookUpdate, Book>()
             .ForMember(
             dest => dest.Authors,
-            opt => opt.MapFrom(src => src.Authors.Select(id => new Author { Id = id })));
+            opt => opt.MapFrom(
+                    src => src.Authors.Select(
+                        id => new Author { Id = id })));
     }
 
 }
@@ -674,7 +693,11 @@ Diese Interfaces sind Abstraktionen der Funktionalitäten des Subscription-Provi
 Diese Abstraktion ermöglicht es dem Entwickler, den Subscription-Provider je nach Bedarf, zu einem späteren Zeitpunkt beliebig auszutauschen.
 Um nun eine Subscription von einem Event zu benachrichtigen, muss folgende Methode implementiert werden:
 \begin{JsCode}
-public async Task<Book> CreateBook([Service] IBookService bookService, BookCreate input,[Service] ITopicEventSender sender) {
+public async Task<Book> CreateBook(
+    [Service] IBookService bookService,
+    BookCreate input,
+    [Service] ITopicEventSender sender)
+{
     var book = await bookService.AddAsync(mapper.Map<Book>(input));
     await sender.SendAsync("bookAdded", book);
     return book;
@@ -691,7 +714,9 @@ Die Umsetzung ist dabei in folgendem Quelltextausschnitt ersichtlich:
 
 \begin{JsCode}
 public class BookSubscription: ObjectTypeExtension<Subscription> {
-    protected override void Configure(IObjectTypeDescriptor<Subscription> descriptor) {
+    protected override void Configure(
+        IObjectTypeDescriptor<Subscription> descriptor)
+    {
         descriptor
         .Field("bookAdded")
         .Type<BookType>()
@@ -824,11 +849,14 @@ Im folgenden Quelltextausschnitt wird ein JWT-Token, bei übereinstimmenden User
 
 \begin{JsCode}
 public async Task<string> Login(string email, string password) {
-   var user = await userRepository.GetFirstAsync(user => user.Email.Equals(email), user => user.Roles);
+   var user = await userRepository
+            .GetFirstAsync(user => user.Email.Equals(email), user => user.Roles);
    if (user is not null&&BCrypt.Net.BCrypt.Verify(password, user.Password)){
-       var securtityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.Key));
+       var securtityKey = new SymmetricSecurityKey(
+                                Encoding.UTF8.GetBytes(tokenSettings.Key));
    
-       var credentials = new SigningCredentials(securtityKey, SecurityAlgorithms.HmacSha256);
+       var credentials = new SigningCredentials(
+                                securtityKey, SecurityAlgorithms.HmacSha256);
    
        var claims = new List<Claim>();
    
@@ -933,8 +961,8 @@ public class AuthorByIdDataLoader : BatchDataLoader<int, Author> {
     }
 }
 \end{JsCode}
-In der Methode \textit{LoadBatchAsync} werden alle Autoren, anhand ihrer IDs, von der \textit{GetAsync}-Methode des \textit{AuthorService} selektiert.
-Die \textit{GetAsync}-Methode des \textit{AuthorService} erwartet dabei eine Expression.
+In der Methode \textit{LoadBatchAsync} werden alle Autoren anhand ihrer IDs von der \textit{GetAsync}-Methode des \textit{AuthorService} selektiert.
+Die \textit{GetAsync}-Methode des \textit{AuthorService} erwartet dabei einen LINQ-Ausdruck.
 \newline
 
 Zusätzlich muss im \textit{AuthorResolver} der DataLoader registriert werden:
@@ -959,7 +987,7 @@ descriptor.Field("authorByDataLoader")
 \end{JsCode}
 
 % Der DataLoader fügt, die in der oben angeführten Anfrage auf zwei Autoren zu einem Datenbankzugriff zusammen.
-Würde die oben angeführte Anfrage ohne DataLoader exekutiert werden, so würde sie in zwei seperaten Datenbankabfragen münden.
+Würde die oben angeführte Anfrage ohne DataLoader ausgeführt werden, so würde sie in zwei seperaten Datenbankabfragen münden.
 Der DataLoader kümmert sich darum, dass daraus eine einzelene Datenbankabfrage wird.
 Dafür werden die Daten, nicht wie in Abschnitt 4.7 direkt vom Resolver abgefragt, sondern vom DataLoader.
 Dieser kümmert sich darum, dass die einzeln abgefragten Autoren zu einer Liste aus Schlüssel-Wert-Paaren zusammengeführt werden.
